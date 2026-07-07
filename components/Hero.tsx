@@ -110,7 +110,7 @@ export default function Hero() {
 
           {/* Native SVG Instagram */}
           <a 
-            href="https://instagram.com/username_kamu" 
+            href="https://instagram.com/alfrbtt" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="hover:text-emerald-400 transition-colors" 
