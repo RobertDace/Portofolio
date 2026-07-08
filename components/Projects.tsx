@@ -12,10 +12,10 @@ export default function Projects() {
       isPrivate: false,
     },
     {
-      title: "SenKuni",
-      description: "Aplikasi web modern berbasis Next.js yang dikembangkan untuk memberikan pengalaman pengguna yang reaktif, cepat, dan intuitif.",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
-      link: "https://senkuni.vercel.app", // Ganti dengan link live SenKuni milikmu
+      title: "SenKuni — AI Chess Position Analyzer",
+      description: "Platform analisis posisi catur reaktif berbasis AI. Mengintegrasikan Engine Stockfish 10 lokal & Gemini AI Coach untuk kalkulasi taktik real-time, evaluasi FEN kustom, serta panduan naratif strategi catur.",
+      tags: ["Next.js", "TypeScript", "Stockfish AI", "Gemini API", "Chess.js", "Tailwind CSS"],
+      link: "https://senkuni.vercel.app", // Sesuaikan dengan URL Vercel SenKuni milikmu
       isPrivate: false,
     },
     {
