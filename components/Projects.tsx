@@ -8,25 +8,36 @@ export default function Projects() {
       title: "SheTI — Sakti Workspace (AI Automator)",
       description: "Platform otomatisasi administrasi perkantoran & HRD berbasis Next.js 16 dan Gemini API. Dilengkapi fitur Smart OCR kuitansi ke tabel, generator surat dinas A4, dan ekspor Word (.doc) instan.",
       tags: ["Next.js 16", "TypeScript", "Gemini API", "OCR", "Tailwind CSS"],
-      link: "https://she-ti.vercel.app/", // Ganti dengan URL Vercel SheTI milikmu jika beda
+      link: "https://sheti-workspace.vercel.app", // Sesuaikan dengan link Vercel SheTI milikmu
+      isPrivate: false,
+    },
+    {
+      title: "SenKuni",
+      description: "Aplikasi web modern berbasis Next.js yang dikembangkan untuk memberikan pengalaman pengguna yang reaktif, cepat, dan intuitif.",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+      link: "https://senkuni.vercel.app", // Ganti dengan link live SenKuni milikmu
+      isPrivate: false,
     },
     {
       title: "IT Support & Administration System",
       description: "Mengoptimalkan infrastruktur jaringan lokal, merawat hardware/software, serta mendigitalisasi manajemen dokumen internal perusahaan untuk efisiensi operasional tim.",
       tags: ["IT Support", "Network Management", "Sistem Administrasi"],
       link: "#",
+      isPrivate: true,
     },
     {
       title: "Digital Content Creation & Visual Design",
       description: "Memproduksi aset visual kreatif dan editing video profesional berskala tinggi menggunakan kombinasi Adobe Photoshop, Premiere Pro, Alight Motion, dan CapCut.",
       tags: ["Photoshop", "Premiere Pro", "Alight Motion", "CapCut"],
       link: "#",
+      isPrivate: true,
     },
     {
       title: "Fullstack Web App with Supabase Integration",
       description: "Membangun aplikasi web reaktif dan modern berbasis Next.js yang terintegrasi dengan Cloud Backend-as-a-Service menggunakan arsitektur database Supabase.",
       tags: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
       link: "#",
+      isPrivate: true,
     },
   ];
 
@@ -64,13 +75,13 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Grid Proyek (Disetting 2 Kolom untuk 4 Kartu) */}
+      {/* Grid Proyek */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {projectList.map((project, index) => (
           <motion.div
@@ -111,27 +122,45 @@ export default function Projects() {
                 ))}
               </div>
 
-              {/* Tautan Proyek */}
-              <a
-                href={project.link}
-                target={project.link !== "#" ? "_blank" : "_self"}
-                rel={project.link !== "#" ? "noopener noreferrer" : ""}
-                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-emerald-400 transition-colors group/link"
-              >
-                Selengkapnya
-                <svg
-                  className="w-4 h-4 transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 transition-transform"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* Tautan Proyek / Indicator Private */}
+              {!project.isPrivate ? (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-emerald-400 transition-colors group/link"
                 >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
-              </a>
+                  Selengkapnya
+                  <svg
+                    className="w-4 h-4 transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 transition-transform"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-slate-800/40 px-3 py-1.5 rounded-lg border border-slate-800 cursor-not-allowed select-none w-fit">
+                  <svg
+                    className="w-3.5 h-3.5 text-slate-500"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  Private
+                </span>
+              )}
             </div>
           </motion.div>
         ))}
