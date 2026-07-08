@@ -4,25 +4,31 @@ import { motion, Variants } from "framer-motion";
 
 export default function Projects() {
   const projectList = [
-  {
-    title: "IT Support & Administration System",
-    description: "Mengoptimalkan infrastruktur jaringan lokal, merawat hardware/software, serta mendigitalisasi manajemen dokumen internal perusahaan untuk efisiensi operasional tim.",
-    tags: ["IT Support", "Network Management", "Sistem Administrasi"],
-    link: "#",
-  },
-  {
-    title: "Digital Content Creation & Visual Design",
-    description: "Memproduksi aset visual kreatif dan editing video profesional berskala tinggi menggunakan kombinasi Adobe Photoshop, Premiere Pro, Alight Motion, dan CapCut.",
-    tags: ["Photoshop", "Premiere Pro", "Alight Motion", "CapCut"],
-    link: "#",
-  },
-  {
-    title: "Fullstack Web App with Supabase Integration",
-    description: "Membangun aplikasi web reaktif dan modern berbasis Next.js yang terintegrasi dengan Cloud Backend-as-a-Service menggunakan arsitektur database Supabase.",
-    tags: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
-    link: "#",
-  },
-];
+    {
+      title: "SheTI — Sakti Workspace (AI Automator)",
+      description: "Platform otomatisasi administrasi perkantoran & HRD berbasis Next.js 16 dan Gemini API. Dilengkapi fitur Smart OCR kuitansi ke tabel, generator surat dinas A4, dan ekspor Word (.doc) instan.",
+      tags: ["Next.js 16", "TypeScript", "Gemini API", "OCR", "Tailwind CSS"],
+      link: "https://she-ti.vercel.app/", // Ganti dengan URL Vercel SheTI milikmu jika beda
+    },
+    {
+      title: "IT Support & Administration System",
+      description: "Mengoptimalkan infrastruktur jaringan lokal, merawat hardware/software, serta mendigitalisasi manajemen dokumen internal perusahaan untuk efisiensi operasional tim.",
+      tags: ["IT Support", "Network Management", "Sistem Administrasi"],
+      link: "#",
+    },
+    {
+      title: "Digital Content Creation & Visual Design",
+      description: "Memproduksi aset visual kreatif dan editing video profesional berskala tinggi menggunakan kombinasi Adobe Photoshop, Premiere Pro, Alight Motion, dan CapCut.",
+      tags: ["Photoshop", "Premiere Pro", "Alight Motion", "CapCut"],
+      link: "#",
+    },
+    {
+      title: "Fullstack Web App with Supabase Integration",
+      description: "Membangun aplikasi web reaktif dan modern berbasis Next.js yang terintegrasi dengan Cloud Backend-as-a-Service menggunakan arsitektur database Supabase.",
+      tags: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
+      link: "#",
+    },
+  ];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -58,13 +64,13 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Grid Proyek */}
+      {/* Grid Proyek (Disetting 2 Kolom untuk 4 Kartu) */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
         {projectList.map((project, index) => (
           <motion.div
@@ -85,7 +91,7 @@ export default function Projects() {
             </div>
 
             <div>
-              {/* Kumpulan Badge / Tag Teknologi yang SEKARANG REAKTIF */}
+              {/* Kumpulan Badge / Tag Teknologi */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tags.map((tag, tagIdx) => (
                   <motion.span
@@ -108,6 +114,8 @@ export default function Projects() {
               {/* Tautan Proyek */}
               <a
                 href={project.link}
+                target={project.link !== "#" ? "_blank" : "_self"}
+                rel={project.link !== "#" ? "noopener noreferrer" : ""}
                 className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-emerald-400 transition-colors group/link"
               >
                 Selengkapnya
