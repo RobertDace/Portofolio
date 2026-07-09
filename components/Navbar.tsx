@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Home, FolderGit2, Cpu, Mail } from "lucide-react";
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
 
   const navItems = [
-    { id: "hero", label: "Beranda", icon: "" },
-    { id: "projects", label: "Proyek", icon: "" },
-    { id: "skills", label: "Keahlian", icon: "" },
-    { id: "contact", label: "Kontak", icon: "" },
+    { id: "hero", label: "Beranda", icon: Home },
+    { id: "projects", label: "Proyek", icon: FolderGit2 },
+    { id: "skills", label: "Keahlian", icon: Cpu },
+    { id: "contact", label: "Kontak", icon: Mail },
   ];
 
   useEffect(() => {
@@ -43,13 +44,15 @@ export default function Navbar() {
     <div className="fixed top-5 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
       <nav className="pointer-events-auto flex items-center gap-1 p-1.5 bg-slate-900/80 border border-slate-800/80 backdrop-blur-md rounded-full shadow-2xl shadow-cyan-950/30">
         {/* Brand Badge */}
-        <span className="px-3 py-1.5 text-xs font-black tracking-widest text-cyan-400 border-r border-slate-800 mr-1 select-none">
+        <span className="px-3.5 py-1 text-xs font-black tracking-widest text-cyan-400 border-r border-slate-800/80 mr-1 select-none">
           2OB1T™
         </span>
 
         {/* Nav Links */}
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
+          const IconComponent = item.icon;
+
           return (
             <button
               key={item.id}
@@ -65,8 +68,8 @@ export default function Navbar() {
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-              <span className="relative z-10 flex items-center gap-1.5">
-                <span>{item.icon}</span>
+              <span className="relative z-10 flex items-center gap-2">
+                <IconComponent className={`w-3.5 h-3.5 ${isActive ? "text-slate-950" : "text-slate-400"}`} />
                 <span>{item.label}</span>
               </span>
             </button>
