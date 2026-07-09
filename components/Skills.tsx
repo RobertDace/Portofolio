@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-// Data Skills Baris 1 (Link Gambar Asli Kamu)
+// Data Skills Baris 1
 const row1Skills = [
   {
     name: "Adobe Photoshop",
@@ -31,7 +31,7 @@ const row1Skills = [
   },
 ];
 
-// Data Skills Baris 2 (Link Gambar Asli Kamu)
+// Data Skills Baris 2
 const row2Skills = [
   {
     name: "Alight Motion",
@@ -64,16 +64,18 @@ export default function Skills() {
   const [isRow2Hovered, setIsRow2Hovered] = useState(false);
 
   return (
-    <section className="py-20 bg-[#0b0f19] text-white overflow-hidden select-none relative">
+    <section
+      id="skills"
+      className="py-20 bg-[#0b0f19] text-white overflow-hidden select-none relative scroll-mt-20"
+    >
       {/* Header Judul */}
       <div className="max-w-7xl mx-auto px-4 mb-14 text-center">
         <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white inline-flex items-center gap-2">
-  Keahlian{" "}
-  <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent">
-    Teknis
-  </span>
-  .
-</h2>
+          Keahlian{" "}
+          <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent">
+            Teknis
+          </span>
+        </h2>
       </div>
 
       {/* Outer Container dengan Masking Fade Halus di Kiri & Kanan */}
