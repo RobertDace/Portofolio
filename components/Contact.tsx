@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Send, MessageSquare, Copy, Check, Sparkles } from "lucide-react";
+import { Mail, Send, MessageSquare, Copy, Check, Sparkles, Phone } from "lucide-react";
 
 // Inline SVG untuk Ikon Brand yang tidak ada di Lucide React
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -48,23 +48,23 @@ export default function Contact() {
   const socialLinks = [
     {
       name: "Instagram",
-      handle: "@2ob1t",
+      handle: "@alfrbtt",
       icon: InstagramIcon,
-      url: "https://instagram.com",
+      url: "https://instagram.com/alfrbtt",
       accent: "hover:border-pink-500/40 hover:text-pink-400",
     },
     {
       name: "GitHub",
-      handle: "2OB1T",
+      handle: "RobertDace",
       icon: GithubIcon,
-      url: "https://github.com",
+      url: "https://github.com/RobertDace",
       accent: "hover:border-slate-500/40 hover:text-slate-100",
     },
     {
-      name: "Discord",
-      handle: "2OB1T Community",
-      icon: MessageSquare,
-      url: "https://discord.com",
+      name: "Whatsapp",
+      handle: "+62 822-3281-3197",
+      icon: Phone,
+      url: "https://wa.me/6282232813197",
       accent: "hover:border-indigo-500/40 hover:text-indigo-400",
     },
   ];
@@ -77,7 +77,7 @@ export default function Contact() {
           <Sparkles className="w-3.5 h-3.5" />
           Get In Touch
         </span>
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100">
+        <h2 className="text-5xl md:text-5xl font-extrabold tracking-tight text-slate-100">
           Mari{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
             Berkolaborasi

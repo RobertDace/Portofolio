@@ -76,7 +76,7 @@ export default function Hero() {
           >
             <MagneticButton>
               <a
-                href="https://github.com"
+                href="https://github.com/RobertDace"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-colors block"
@@ -87,7 +87,7 @@ export default function Hero() {
 
             <MagneticButton>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/alfrbtt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-pink-400 hover:border-pink-500/50 transition-colors block"
@@ -142,39 +142,41 @@ export default function Hero() {
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-emerald-500 to-purple-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-60 transition duration-700" />
 
             {/* Frame Kartu Foto Utama */}
-            <div className="relative rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden shadow-2xl p-3">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
-                {/* Ilustrasi Placeholder / Foto Profil */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent z-10" />
-                <div className="text-center p-6 z-0">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl font-black">
-                    2O
-                  </div>
-                  <p className="text-xs font-mono text-slate-400">2OB1T Profile Card</p>
-                </div>
-              </div>
+<div className="relative rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden shadow-2xl p-3">
+  <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+    
+    {/* Foto Profil Utama Hero Section */}
+    <img
+      src="Profile2.jpg"
+      alt="2OB1T Hero Profile"
+      className="w-full h-full object-cover rounded-2xl"
+    />
 
-              {/* Glassmorphism Badge Overlay (Bawah Kartu) */}
-              <div className="absolute bottom-6 inset-x-6 z-20 p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-md flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                  </div>
-                  <div>
-                    <h5 className="text-xs font-bold text-slate-100">@2ob1t</h5>
-                    <p className="text-[10px] font-mono text-emerald-400">Online & Available</p>
-                  </div>
-                </div>
+    {/* Gradient Overlay Bawah agar Teks Status Badge Tetap Terbaca Clear */}
+    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent z-10" />
+  </div>
 
-                <MagneticButton onClick={() => scrollToSection("contact")}>
-                  <div className="px-3 py-1.5 rounded-xl text-[11px] font-bold bg-slate-800 text-slate-200 border border-slate-700 flex items-center gap-1 hover:text-cyan-400 transition-colors">
-                    <span>Contact Me</span>
-                    <ArrowUpRight className="w-3 h-3" />
-                  </div>
-                </MagneticButton>
-              </div>
-            </div>
+  {/* Glassmorphism Badge Overlay (Status Online) */}
+  <div className="absolute bottom-6 inset-x-6 z-20 p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-md flex items-center justify-between">
+    <div className="flex items-center gap-2.5">
+      <div className="relative flex h-2.5 w-2.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+      </div>
+      <div>
+        <h5 className="text-xs font-bold text-slate-100">@alfrbtt</h5>
+        <p className="text-[10px] font-mono text-emerald-400">Online & Available</p>
+      </div>
+    </div>
+
+    <MagneticButton onClick={() => scrollToSection("contact")}>
+      <div className="px-3 py-1.5 rounded-xl text-[11px] font-bold bg-slate-800 text-slate-200 border border-slate-700 flex items-center gap-1 hover:text-cyan-400 transition-colors">
+        <span>Contact Me</span>
+        <ArrowUpRight className="w-3 h-3" />
+      </div>
+    </MagneticButton>
+  </div>
+</div>
           </motion.div>
         </div>
 

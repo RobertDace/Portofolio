@@ -7,8 +7,8 @@ export default function Experience() {
   const experiences = [
     {
       role: "Administrative & IT Staff",
-      company: "PT Noreen Surya Perdana",
-      period: "2023 — Sekarang",
+      company: "PT. Noreen Surya Perdana",
+      period: "2025 — 2026",
       location: "Samarinda, East Kalimantan",
       bullets: [
         "Mengelola & mengoptimalkan infrastruktur jaringan lokal, sistem administrasi internal, serta pemeliharaan hardware/software kantor.",
@@ -20,9 +20,9 @@ export default function Experience() {
     },
     {
       role: "Digital Content Creator & Visual Editor",
-      company: "Creative Production & Gaming Community",
-      period: "2022 — Sekarang",
-      location: "Hybrid / Remote",
+      company: "CEES GANK",
+      period: "2024 — Sekarang",
+      location: "Remote",
       bullets: [
         "Memproduksi aset visual kreatif berskala tinggi untuk kebutuhan branding, promosi digital, dan media sosial.",
         "Melakukan editing video profesional, motion graphic, dan visual effect menggunakan ekosistem software kreatif.",
@@ -54,7 +54,7 @@ export default function Experience() {
           <Briefcase className="w-3.5 h-3.5" />
           Career Journey
         </span>
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100">
+        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-100">
           Pengalaman{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
             Kerja

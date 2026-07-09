@@ -35,14 +35,14 @@ export default function Skills() {
         <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
           Tech Stack & Capabilities
         </span>
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100">
+        <h2 className="text-5xl md:text-5xl font-extrabold tracking-tight text-slate-100">
           Keahlian{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
             Teknis
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
-          Kumpulan teknologi, *tools*, dan ekosistem software yang biasa saya gunakan sehari-hari.
+          Kumpulan teknologi, tools, dan ekosistem software yang biasa saya gunakan sehari-hari.
         </p>
       </div>
 

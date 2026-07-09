@@ -11,7 +11,7 @@ export default function Projects() {
       subtitle: "FH UWGM Samarinda",
       description: "Smart E-Catalog & Repositori Pustaka Hukum Digital. Dilengkapi Hub IKN & Hukum Kaltim, Denah Rak 2D, AI Plagiarism Audit, serta SemarAI Legal Assistant.",
       tags: ["Next.js 16", "TypeScript", "Tailwind CSS", "Gemini API"],
-      link: "https://semarmaca.vercel.app",
+      link: "https://semar-maca.vercel.app",
     },
     {
       id: "sheti",
@@ -19,7 +19,7 @@ export default function Projects() {
       subtitle: "2OB1T Workspace",
       description: "Platform otomatisasi administrasi perkantoran & HRD berbasis Next.js 16 dan Gemini API. Fitur Smart OCR kuitansi ke tabel, generator surat dinas A4, dan ekspor Word (.doc).",
       tags: ["Next.js 16", "TypeScript", "Gemini API", "OCR", "Tailwind CSS"],
-      link: "https://sheti-workspace.vercel.app",
+      link: "https://she-ti.vercel.app",
     },
     {
       id: "senkuni",
@@ -37,17 +37,17 @@ export default function Projects() {
       <div className="text-center space-y-4 mb-16">
         <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
           <FolderGit2 className="w-3.5 h-3.5" />
-          Featured AI Applications
+          Featured Applications
         </span>
 
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100">
+        <h2 className="text-5xl md:text-5xl font-extrabold tracking-tight text-slate-100">
           Proyek{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
             Unggulan
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
-          Eksplorasi ekosistem aplikasi web reaktif dan integrasi kecerdasan buatan buatan **2OB1T**.
+          Eksplorasi ekosistem aplikasi web reaktif dan integrasi AI buatan 2OB1T.
         </p>
       </div>
 

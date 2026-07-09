@@ -27,7 +27,7 @@ export default function About() {
                 
                 {/* Gambar Profil dengan Animasi Zoom On Hover */}
                 <motion.img
-                  src="/profile.jpg" // Ganti file ini dengan foto kamu di folder public/profile.jpg
+                  src="Profile1.png" // Ganti file ini dengan foto kamu di folder public/profile.jpg
                   alt="2OB1T Profile"
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
@@ -37,14 +37,6 @@ export default function About() {
                     e.currentTarget.style.display = 'none';
                   }}
                 />
-
-                {/* Visual Placeholder (Tampil jika foto belum dipasang) */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center select-none pointer-events-none">
-                  <div className="w-28 h-28 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl font-black mb-3">
-                    2O
-                  </div>
-                  <span className="text-xs font-mono text-slate-400">Hover area ini untuk efek zoom</span>
-                </div>
               </div>
             </div>
           </motion.div>
@@ -54,7 +46,7 @@ export default function About() {
         <div className="lg:col-span-7 space-y-6">
           {/* Header Badges */}
           <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-2 text-2xl sm:text-4xl font-extrabold text-slate-100">
+            <div className="flex flex-wrap items-center gap-2 text-3xl sm:text-5xl font-extrabold text-slate-100">
               <span>SAYA</span>
               <span className="px-3.5 py-1 bg-cyan-400 text-slate-950 rounded-2xl font-black shadow-lg shadow-cyan-400/20">
                 2OB1T
@@ -82,7 +74,7 @@ export default function About() {
           <div className="pt-2">
             <MagneticButton>
               <a
-                href="/cv.pdf"
+                href="https://drive.google.com/file/d/1_nxG0NW8VHmwFDwsLMWEVERtDNi7ZAC9/view?usp=drive_link"
                 download
                 className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900 border border-slate-700 text-slate-100 hover:border-cyan-400 hover:text-cyan-300 flex items-center gap-2.5 shadow-xl transition-colors group"
               >
