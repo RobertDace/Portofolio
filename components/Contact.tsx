@@ -1,130 +1,205 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { useState } from "react";
+import { Mail, Send, MessageSquare, Copy, Check, Sparkles } from "lucide-react";
+
+// Inline SVG untuk Ikon Brand yang tidak ada di Lucide React
+const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+const InstagramIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 export default function Contact() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
+  const [copied, setCopied] = useState(false);
+  const myEmail = "alfiantu@gmail.com"; // Ganti dengan email utamamu
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(myEmail);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+  const socialLinks = [
+    {
+      name: "Instagram",
+      handle: "@2ob1t",
+      icon: InstagramIcon,
+      url: "https://instagram.com",
+      accent: "hover:border-pink-500/40 hover:text-pink-400",
     },
-  };
+    {
+      name: "GitHub",
+      handle: "2OB1T",
+      icon: GithubIcon,
+      url: "https://github.com",
+      accent: "hover:border-slate-500/40 hover:text-slate-100",
+    },
+    {
+      name: "Discord",
+      handle: "2OB1T Community",
+      icon: MessageSquare,
+      url: "https://discord.com",
+      accent: "hover:border-indigo-500/40 hover:text-indigo-400",
+    },
+  ];
 
   return (
     <section id="contact" className="py-24 px-6 max-w-5xl mx-auto scroll-mt-10">
       {/* Header Section */}
       <div className="text-center space-y-4 mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-100">
-          Get In{" "}
-          <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-            Touch
+        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          <Sparkles className="w-3.5 h-3.5" />
+          Get In Touch
+        </span>
+        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100">
+          Mari{" "}
+          <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
+            Berkolaborasi
           </span>
         </h2>
-        <p className="text-slate-400 max-w-md mx-auto text-sm md:text-base">
-          Tertarik untuk berkolaborasi atau sekadar berdiskusi? Hubungi saya langsung melalui platform di bawah ini!
+        <p className="text-slate-400 max-w-lg mx-auto text-sm md:text-base">
+          Punya ide project baru, tawaran kerja sama, atau sekadar mau diskusi teknis? Pintu komunikasi selalu terbuka!
         </p>
       </div>
 
-      {/* Grid Kontak 3 Kolom - Simetris & Responsif */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-      >
-        {/* Opsi 1: WhatsApp */}
-        <motion.a
-          variants={itemVariants}
-          whileHover={{ 
-            y: -6, 
-            scale: 1.02, 
-            borderColor: "rgba(34, 197, 94, 0.4)", 
-            backgroundColor: "rgba(34, 197, 94, 0.05)" 
-          }}
-          whileTap={{ scale: 0.98 }}
-          href="https://wa.me/6282232813197"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-2xl backdrop-blur-sm flex items-center gap-4 group transition-all"
-        >
-          <div className="p-3 bg-green-500/10 text-green-400 rounded-xl group-hover:bg-green-500/20 transition-colors">
-            {/* Native SVG WhatsApp */}
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">WhatsApp</h4>
-            <p className="text-sm font-bold text-slate-200 group-hover:text-green-400 transition-colors">+62 822-3281-3197</p>
-          </div>
-        </motion.a>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        {/* Left Side: Direct Contact Cards (2 Columns) */}
+        <div className="lg:col-span-2 space-y-4">
+          {/* Quick Email Copy Box */}
+          <div className="p-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl backdrop-blur-md relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-500 to-emerald-400" />
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <Mail className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">Email Utama</h4>
+                <p className="text-sm font-semibold text-slate-200">{myEmail}</p>
+              </div>
+            </div>
 
-        {/* Opsi 2: Instagram */}
-        <motion.a
-          variants={itemVariants}
-          whileHover={{ 
-            y: -6, 
-            scale: 1.02, 
-            borderColor: "rgba(244, 63, 94, 0.4)", 
-            backgroundColor: "rgba(244, 63, 94, 0.05)" 
-          }}
-          whileTap={{ scale: 0.98 }}
-          href="https://instagram.com/alfrbtt"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-2xl backdrop-blur-sm flex items-center gap-4 group transition-all"
-        >
-          <div className="p-3 bg-rose-500/10 text-rose-400 rounded-xl group-hover:bg-rose-500/20 transition-colors">
-            {/* Native SVG Instagram */}
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
+            <button
+              onClick={handleCopyEmail}
+              className="w-full mt-3 py-2 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all duration-200 active:scale-95"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                  <span className="text-emerald-400">Email Berhasil Disalin!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4 text-cyan-400" />
+                  <span>Salin Alamat Email</span>
+                </>
+              )}
+            </button>
           </div>
-          <div>
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Instagram</h4>
-            <p className="text-base font-bold text-slate-200 group-hover:text-rose-400 transition-colors">@alfrbtt</p>
-          </div>
-        </motion.a>
 
-        {/* Opsi 3: Email */}
-        <motion.a
-          variants={itemVariants}
-          whileHover={{ 
-            y: -6, 
-            scale: 1.02, 
-            borderColor: "rgba(56, 189, 248, 0.4)", 
-            backgroundColor: "rgba(56, 189, 248, 0.05)" 
-          }}
-          whileTap={{ scale: 0.98 }}
-          href="mailto:alfiantu@gmail.com"
-          className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-2xl backdrop-blur-sm flex items-center gap-4 group transition-all"
-        >
-          <div className="p-3 bg-sky-500/10 text-sky-400 rounded-xl group-hover:bg-sky-500/20 transition-colors">
-            {/* Native SVG Mail */}
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
+          {/* Social Links Cards */}
+          <div className="grid grid-cols-1 gap-3">
+            {socialLinks.map((social, idx) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={idx}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center justify-between p-4 bg-slate-900/40 border border-slate-800/80 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:bg-slate-900/80 group ${social.accent}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-slate-800/60 text-slate-400 group-hover:text-slate-100 transition-colors">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h5 className="text-xs font-bold text-slate-200">{social.name}</h5>
+                      <p className="text-[11px] font-mono text-slate-400">{social.handle}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-slate-500 group-hover:translate-x-1 transition-transform">→</span>
+                </a>
+              );
+            })}
           </div>
-          <div>
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Email</h4>
-            <p className="text-xs font-bold text-slate-200 group-hover:text-sky-400 transition-colors break-all">alfiantu@gmail.com</p>
-          </div>
-        </motion.a>
-      </motion.div>
+        </div>
+
+        {/* Right Side: Message Form (3 Columns) */}
+        <div className="lg:col-span-3 p-6 sm:p-8 bg-slate-900/60 border border-slate-800/80 rounded-2xl backdrop-blur-md relative">
+          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-300">Nama Lengkap</label>
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-300">Email Anda</label>
+                <input
+                  type="email"
+                  placeholder="nama@email.com"
+                  className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-300">Subjek</label>
+              <input
+                type="text"
+                placeholder="Diskusi Proyek Web / Penawaran Kerjasama"
+                className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-300">Pesan</label>
+              <textarea
+                rows={4}
+                placeholder="Tuliskan detail ide atau pertanyaanmu di sini..."
+                className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 px-6 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-300 text-slate-950 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-[0.99]"
+            >
+              <Send className="w-3.5 h-3.5" />
+              <span>Kirim Pesan</span>
+            </button>
+          </form>
+        </div>
+      </div>
     </section>
   );
 }
