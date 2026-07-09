@@ -49,10 +49,12 @@ export default function Hero() {
   transition={{ duration: 0.5, delay: 0.1 }}
   className="text-4xl sm:text-6xl font-black tracking-tight text-slate-100"
 >
-  2OB1T
+  ALFIAN{" "}
   <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
-    .
-  </span>
+    ROBIT
+  </span>{" "}
+  <br />
+  NADIFI MASYHUDI
 </motion.h1>
 
           {/* Sub-Judul Role */}
