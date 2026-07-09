@@ -17,15 +17,15 @@ export default function Home() {
       {/* Section 1: Hero (Beranda) */}
       <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
         <div className="text-center space-y-4">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight">
+            Halo Saya{" "}
+            <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
+              2OB1T Workspace
+            </span>
+          </h1>
           <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
             Full-Stack Developer & AI Integrator
           </span>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight">
-            Selamat Datang di{" "}
-            <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
-              2OB1T™ Workspace
-            </span>
-          </h1>
         </div>
       </section>
 

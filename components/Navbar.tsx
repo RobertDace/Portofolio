@@ -7,10 +7,10 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
 
   const navItems = [
-    { id: "hero", label: "Beranda", icon: "🏠" },
-    { id: "projects", label: "Proyek", icon: "📁" },
-    { id: "skills", label: "Keahlian", icon: "⚡" },
-    { id: "contact", label: "Kontak", icon: "✉️" },
+    { id: "hero", label: "Beranda", icon: "" },
+    { id: "projects", label: "Proyek", icon: "" },
+    { id: "skills", label: "Keahlian", icon: "" },
+    { id: "contact", label: "Kontak", icon: "" },
   ];
 
   useEffect(() => {

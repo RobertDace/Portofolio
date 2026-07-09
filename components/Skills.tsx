@@ -42,7 +42,7 @@ export default function Skills() {
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
-          Kumpulan teknologi, *tools*, dan ekosistem software yang biasa saya gunakan sehari-hari.
+          Kumpulan teknologi, tools, dan ekosistem software yang biasa saya gunakan sehari-hari.
         </p>
       </div>
 
