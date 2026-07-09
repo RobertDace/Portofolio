@@ -5,17 +5,24 @@ import { motion, Variants } from "framer-motion";
 export default function Projects() {
   const projectList = [
     {
+      title: "SemarMaca — Smart E-Catalog Hukum Digital",
+      description: "Smart E-Catalog & Repositori Pustaka Hukum Digital FH UWGM Samarinda. Dilengkapi fitur Hub IKN & Hukum Kaltim, Denah Rak Interaktif 2D, AI Plagiarism Audit, serta SemarAI Legal Assistant.",
+      tags: ["Next.js 16", "TypeScript", "Tailwind CSS", "Framer Motion", "Gemini API"],
+      link: "https://semar-maca.vercel.app/", // Ganti dengan URL Vercel SemarMaca milikmu
+      isPrivate: false,
+    },
+    {
       title: "SheTI — Sakti Workspace (AI Automator)",
       description: "Platform otomatisasi administrasi perkantoran & HRD berbasis Next.js 16 dan Gemini API. Dilengkapi fitur Smart OCR kuitansi ke tabel, generator surat dinas A4, dan ekspor Word (.doc) instan.",
       tags: ["Next.js 16", "TypeScript", "Gemini API", "OCR", "Tailwind CSS"],
-      link: "https://sheti-workspace.vercel.app", // Sesuaikan dengan link Vercel SheTI milikmu
+      link: "https://she-ti.vercel.app/",
       isPrivate: false,
     },
     {
       title: "SenKuni — AI Chess Position Analyzer",
       description: "Platform analisis posisi catur reaktif berbasis AI. Mengintegrasikan Engine Stockfish 10 lokal & Gemini AI Coach untuk kalkulasi taktik real-time, evaluasi FEN kustom, serta panduan naratif strategi catur.",
       tags: ["Next.js", "TypeScript", "Stockfish AI", "Gemini API", "Chess.js", "Tailwind CSS"],
-      link: "https://senkuni.vercel.app", // Sesuaikan dengan URL Vercel SenKuni milikmu
+      link: "https://senkuni.vercel.app",
       isPrivate: false,
     },
     {
@@ -75,7 +82,7 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Grid Proyek */}
+      {/* Grid Proyek (Sangat simetris 3 kolom di Desktop untuk 6 Kartu) */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
