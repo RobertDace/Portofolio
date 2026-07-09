@@ -3,20 +3,23 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Daftar sapaan dengan Aksara / Huruf Asli Negara masing-masing
+// Daftar sapaan, aksara, dan warna signature website
 const words = [
-  "Halo",         // Indonesia
-  "Hello",        // Inggris
-  "こんにちは",    // Jepang (Hiragana)
-  "안녕하세요",    // Korea (Hangul)
-  "你好",         // Tiongkok (Hanzi)
-  "مرحباً",       // Arab
-  "Привет",       // Rusia (Cyrillic)
-  "Bonjour",      // Prancis
-  "Hola",         // Spanyol
-  "नमस्ते",       // India (Devanagari)
-  "สวัสดี",       // Thailand (Thai)
-  "2OB1T™",       // Brand Signature
+  { text: "Halo", color: "text-cyan-400" },         // Indonesia (Cyan Signature)
+  { text: "Hello", color: "text-emerald-400" },      // Inggris (Emerald Accent)
+  { text: "こんにちは", color: "text-purple-400" },    // Jepang (Purple Accent)
+  { text: "안녕하세요", color: "text-blue-400" },      // Korea (Blue Accent)
+  { text: "你好", color: "text-amber-400" },         // Tiongkok (Amber/Gold Accent)
+  { text: "مرحباً", color: "text-teal-300" },       // Arab (Teal Accent)
+  { text: "Привет", color: "text-sky-400" },        // Rusia (Sky Blue)
+  { text: "Bonjour", color: "text-indigo-400" },    // Prancis (Indigo Accent)
+  { text: "Hola", color: "text-rose-400" },         // Spanyol (Rose Accent)
+  { text: "नमस्ते", color: "text-emerald-300" },     // India (Mint Emerald)
+  { text: "สวัสดี", color: "text-cyan-300" },        // Thailand (Light Cyan)
+  { 
+    text: "2OB1T™", 
+    color: "bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent font-black tracking-wider" 
+  }, // Brand Signature (Full Gradient)
 ];
 
 export default function Preloader() {
@@ -37,7 +40,7 @@ export default function Preloader() {
       return () => clearTimeout(timeout);
     }
 
-    // Interval pergantian kata (180ms per kata agar transisi aksara terasa makin cepat & reaktif)
+    // Interval pergantian kata (180ms per kata)
     const timer = setTimeout(() => {
       setIndex((prevIndex) => prevIndex + 1);
     }, 180);
@@ -63,16 +66,16 @@ export default function Preloader() {
             {/* Indikator titik cyan menyala */}
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
 
-            {/* Teks Animasi Berganti Aksara/Bahasa */}
+            {/* Teks Animasi Berganti Aksara & Warna */}
             <motion.h1
               key={index}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.1 }}
-              className="text-3xl sm:text-5xl font-bold tracking-tight font-sans text-slate-100"
+              className={`text-3xl sm:text-5xl font-bold tracking-tight font-sans transition-colors duration-150 ${words[index].color}`}
             >
-              {words[index]}
+              {words[index].text}
             </motion.h1>
           </div>
         </motion.div>
