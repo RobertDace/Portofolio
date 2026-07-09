@@ -1,125 +1,176 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
+// Data Skills Baris 1 (Link Gambar Asli Kamu)
+const row1Skills = [
+  {
+    name: "Adobe Photoshop",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg",
+  },
+  {
+    name: "Premiere Pro",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg",
+  },
+  {
+    name: "CapCut",
+    logo: "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBaQDG.nPeYqpMXSUQbV6ZbDqKB2cfxC8XGBuMMG2wnfQDreT0rlqZucFHBfMnKmf9jEjSzK_3h4euGl2PWZ9ggU-&format=source",
+  },
+  {
+    name: "Alight Motion",
+    logo: "https://play-lh.googleusercontent.com/LRjRXaVEtoeHyiFcnMLCHs1ZJV8Q4q70PggflRDAfgOkulzFTbJg65y0drg6Yapo22Xoos_XCbyh7EgycBhQ",
+  },
+  {
+    name: "After Effects",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg",
+  },
+  {
+    name: "Canva",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg",
+  },
+];
+
+// Data Skills Baris 2 (Link Gambar Asli Kamu)
+const row2Skills = [
+  {
+    name: "Alight Motion",
+    logo: "https://play-lh.googleusercontent.com/LRjRXaVEtoeHyiFcnMLCHs1ZJV8Q4q70PggflRDAfgOkulzFTbJg65y0drg6Yapo22Xoos_XCbyh7EgycBhQ",
+  },
+  {
+    name: "CapCut",
+    logo: "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBaQDG.nPeYqpMXSUQbV6ZbDqKB2cfxC8XGBuMMG2wnfQDreT0rlqZucFHBfMnKmf9jEjSzK_3h4euGl2PWZ9ggU-&format=source",
+  },
+  {
+    name: "Adobe Photoshop",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg",
+  },
+  {
+    name: "Premiere Pro",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg",
+  },
+  {
+    name: "Figma",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+  },
+  {
+    name: "DaVinci Resolve",
+    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/davinciresolve.svg",
+  },
+];
+
 export default function Skills() {
-  const skillsRow1 = [
-    { name: "Next.js 16", category: "Framework", icon: "https://cdn.simpleicons.org/nextdotjs/white" },
-    { name: "TypeScript", category: "Language", icon: "https://cdn.simpleicons.org/typescript/3178C6" },
-    { name: "ReactJS", category: "Frontend", icon: "https://cdn.simpleicons.org/react/61DAFB" },
-    { name: "Tailwind CSS", category: "Styling", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
-    { name: "Gemini AI API", category: "AI SDK", icon: "https://cdn.simpleicons.org/googlegemini/8E75B2" },
-    { name: "Stockfish AI", category: "Engine", icon: "https://cdn.simpleicons.org/chessdotcom/36B37E" },
-    { name: "Supabase", category: "Database", icon: "https://cdn.simpleicons.org/supabase/3ECF8E" },
-    { name: "Framer Motion", category: "Animation", icon: "https://cdn.simpleicons.org/framer/0055FF" },
-  ];
-
-  const skillsRow2 = [
-    { name: "Adobe Photoshop", category: "Design", icon: "https://cdn.simpleicons.org/adobephotoshop/31A8FF" },
-    { name: "Premiere Pro", category: "Video", icon: "https://cdn.simpleicons.org/adobepremierepro/9999FF" },
-    { name: "Alight Motion", category: "Editing", icon: "https://cdn.simpleicons.org/alightmotion/00D2FF" },
-    { name: "CapCut Pro", category: "Video", icon: "https://cdn.simpleicons.org/capcut/white" },
-    { name: "IT Support", category: "System", icon: "https://cdn.simpleicons.org/linux/FCC624" },
-    { name: "Git & GitHub", category: "Version Control", icon: "https://cdn.simpleicons.org/git/F05032" },
-    { name: "Figma", category: "UI/UX", icon: "https://cdn.simpleicons.org/figma/F24E1E" },
-    { name: "OCR Automation", category: "Automation", icon: "https://cdn.simpleicons.org/python/3776AB" },
-  ];
-
-  // Duplikasi array agar looping marquee bergerak terus tanpa celah kosong
-  const duplicatedRow1 = [...skillsRow1, ...skillsRow1, ...skillsRow1];
-  const duplicatedRow2 = [...skillsRow2, ...skillsRow2, ...skillsRow2];
+  const [isRow1Hovered, setIsRow1Hovered] = useState(false);
+  const [isRow2Hovered, setIsRow2Hovered] = useState(false);
 
   return (
-    <section id="skills" className="py-20 overflow-hidden scroll-mt-20">
-      <div className="max-w-6xl mx-auto px-6 text-center space-y-4 mb-14">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-          Tech Stack & Capabilities
-        </span>
-        <h2 className="text-5xl md:text-5xl font-extrabold tracking-tight text-slate-100">
-          Keahlian{" "}
-          <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
-            Teknis
-          </span>
-        </h2>
-        <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
-          Kumpulan teknologi, tools, dan ekosistem software yang biasa saya gunakan sehari-hari.
-        </p>
+    <section className="py-20 bg-[#0b0f19] text-white overflow-hidden select-none relative">
+      {/* Header Judul */}
+      <div className="max-w-7xl mx-auto px-4 mb-14 text-center">
+        <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white inline-flex items-center gap-2">
+  Keahlian{" "}
+  <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent">
+    Teknis
+  </span>
+  .
+</h2>
       </div>
 
-      {/* Wrapper Marquee dengan Fade Gradient Kiri-Kanan */}
-      <div className="relative flex flex-col gap-6 select-none">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 sm:w-48 bg-gradient-to-r from-[#0b0f19] to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 sm:w-48 bg-gradient-to-l from-[#0b0f19] to-transparent" />
+      {/* Outer Container dengan Masking Fade Halus di Kiri & Kanan */}
+      <div className="relative w-full flex flex-col gap-7">
+        {/* Gradient Mask Overlay Kiri & Kanan */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-44 bg-gradient-to-r from-[#0b0f19] to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-44 bg-gradient-to-l from-[#0b0f19] to-transparent z-20 pointer-events-none" />
 
-        {/* Baris 1: Berjalan Ke Kiri */}
-        <div className="flex overflow-hidden">
+        {/* BARIS 1: Marquee Jalan ke Kiri */}
+        <div
+          className="flex overflow-hidden py-3"
+          onMouseEnter={() => setIsRow1Hovered(true)}
+          onMouseLeave={() => setIsRow1Hovered(false)}
+        >
           <motion.div
-            className="flex gap-4 min-w-full flex-shrink-0"
-            animate={{ x: ["0%", "-33.333%"] }}
+            className="flex gap-6 items-center flex-nowrap whitespace-nowrap"
+            animate={{
+              x: isRow1Hovered ? undefined : ["0%", "-50%"],
+            }}
             transition={{
-              duration: 30,
-              ease: "linear",
-              repeat: Infinity,
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 22,
+                ease: "linear",
+              },
+            }}
+            style={{
+              animationPlayState: isRow1Hovered ? "paused" : "running",
             }}
           >
-            {duplicatedRow1.map((skill, index) => (
-              <div
-                key={index}
-                className="group flex items-center gap-3 px-5 py-3 bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:bg-slate-900/90 hover:scale-105"
-              >
-                {/* Logo Per Apps / Tools */}
-                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-full h-full object-contain filter group-hover:brightness-125 transition-all"
-                    loading="lazy"
-                  />
+            {[...row1Skills, ...row1Skills, ...row1Skills, ...row1Skills].map(
+              (skill, idx) => (
+                <div
+                  key={`row1-${idx}`}
+                  className="flex items-center gap-4 px-7 py-5 sm:py-6 rounded-[28px] bg-slate-900/90 border border-slate-800/80 hover:border-cyan-400/60 shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 cursor-pointer flex-shrink-0 group"
+                >
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <img
+                      src={skill.logo}
+                      alt={skill.name}
+                      className="w-full h-full object-contain filter drop-shadow"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="font-bold text-lg sm:text-xl text-slate-100 group-hover:text-cyan-400 transition-colors">
+                    {skill.name}
+                  </span>
                 </div>
-                <span className="text-sm font-semibold text-slate-200 group-hover:text-cyan-300 whitespace-nowrap">
-                  {skill.name}
-                </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400 whitespace-nowrap">
-                  {skill.category}
-                </span>
-              </div>
-            ))}
+              )
+            )}
           </motion.div>
         </div>
 
-        {/* Baris 2: Berjalan Ke Kanan */}
-        <div className="flex overflow-hidden">
+        {/* BARIS 2: Marquee Jalan ke Kanan */}
+        <div
+          className="flex overflow-hidden py-3"
+          onMouseEnter={() => setIsRow2Hovered(true)}
+          onMouseLeave={() => setIsRow2Hovered(false)}
+        >
           <motion.div
-            className="flex gap-4 min-w-full flex-shrink-0"
-            animate={{ x: ["-33.333%", "0%"] }}
+            className="flex gap-6 items-center flex-nowrap whitespace-nowrap"
+            animate={{
+              x: isRow2Hovered ? undefined : ["-50%", "0%"],
+            }}
             transition={{
-              duration: 32,
-              ease: "linear",
-              repeat: Infinity,
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 25,
+                ease: "linear",
+              },
+            }}
+            style={{
+              animationPlayState: isRow2Hovered ? "paused" : "running",
             }}
           >
-            {duplicatedRow2.map((skill, index) => (
-              <div
-                key={index}
-                className="group flex items-center gap-3 px-5 py-3 bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:border-emerald-400/50 hover:bg-slate-900/90 hover:scale-105"
-              >
-                {/* Logo Per Apps / Tools */}
-                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-full h-full object-contain filter group-hover:brightness-125 transition-all"
-                    loading="lazy"
-                  />
+            {[...row2Skills, ...row2Skills, ...row2Skills, ...row2Skills].map(
+              (skill, idx) => (
+                <div
+                  key={`row2-${idx}`}
+                  className="flex items-center gap-4 px-7 py-5 sm:py-6 rounded-[28px] bg-slate-900/90 border border-slate-800/80 hover:border-cyan-400/60 shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 cursor-pointer flex-shrink-0 group"
+                >
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <img
+                      src={skill.logo}
+                      alt={skill.name}
+                      className="w-full h-full object-contain filter drop-shadow"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="font-bold text-lg sm:text-xl text-slate-100 group-hover:text-cyan-400 transition-colors">
+                    {skill.name}
+                  </span>
                 </div>
-                <span className="text-sm font-semibold text-slate-200 group-hover:text-emerald-300 whitespace-nowrap">
-                  {skill.name}
-                </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400 whitespace-nowrap">
-                  {skill.category}
-                </span>
-              </div>
-            ))}
+              )
+            )}
           </motion.div>
         </div>
       </div>
