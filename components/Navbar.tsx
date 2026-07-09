@@ -45,7 +45,7 @@ export default function Navbar() {
       <nav className="pointer-events-auto flex items-center gap-1 p-1.5 bg-slate-900/80 border border-slate-800/80 backdrop-blur-md rounded-full shadow-2xl shadow-cyan-950/30">
         {/* Brand Badge */}
         <span className="px-3.5 py-1 text-xs font-black tracking-widest text-cyan-400 border-r border-slate-800/80 mr-1 select-none">
-          2OB1T™
+          2OB1T
         </span>
 
         {/* Nav Links */}

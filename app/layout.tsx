@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar"; // <-- Tetap aman menggunakan alias @/
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Konfigurasi Font Plus Jakarta Sans
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Modern & Reactive Web Portfolio",
+  title: "2OB1T™ — Full-Stack Developer & AI Integrator",
+  description: "Portofolio karya, sistem, dan proyek AI buatan 2OB1T™.",
 };
 
 export default function RootLayout({
@@ -24,9 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar /> {/* <-- Navbar melayang kamu */}
+    <html lang="id" className="scroll-smooth">
+      <body
+        className={`${plusJakartaSans.variable} font-sans bg-[#0b0f19] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-300`}
+      >
         {children}
       </body>
     </html>
