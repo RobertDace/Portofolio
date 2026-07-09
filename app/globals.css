@@ -2,7 +2,9 @@
 @theme {
   --font-sans: var(--font-plus-jakarta), sans-serif;
 }
-
+button, input, select, textarea {
+  font-family: inherit;
+}
 html {
   scroll-behavior: smooth;
 }
