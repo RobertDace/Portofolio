@@ -17,7 +17,7 @@ const words = [
   { text: "नमस्ते", color: "text-emerald-300" },     // India (Mint Emerald)
   { text: "สวัสดี", color: "text-cyan-300" },        // Thailand (Light Cyan)
   { 
-    text: "2OB1T™", 
+    text: "2OB1T", 
     color: "bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent font-black tracking-wider" 
   }, // Brand Signature (Full Gradient)
 ];

@@ -113,7 +113,7 @@ export default function Projects() {
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
-          Eksplorasi ekosistem aplikasi web reaktif, integrasi kecerdasan buatan, dan manajemen sistem buatan **2OB1T™**.
+          Eksplorasi ekosistem aplikasi web reaktif, integrasi kecerdasan buatan, dan manajemen sistem buatan 2OB1T.
         </p>
       </div>
 
