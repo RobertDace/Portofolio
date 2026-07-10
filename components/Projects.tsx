@@ -8,7 +8,7 @@ const projectsData = [
   {
     title: "SheTI - Sakti HRD Automator",
     description: "Alat otomatisasi administrasi perkantoran dan HRD berbasis AI dengan fitur utama pengolah dokumen cerdas, Smart OCR untuk konversi kuitansi ke tabel otomatis, serta generator surat dinas instan.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
+    image: "https://scontent-cgk2-1.xx.fbcdn.net/v/t39.30808-6/744820686_1695840611628333_3540360474667445548_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1080&ctp=s1920x1080&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEM0eqmvBQyhXudme40nmkEcKc27Eggql9wpzbsSCCqX4IJQvvmrV9n6y6bGpStjVLlxcqJOgNwk0sgMXBfCTKl&_nc_ohc=ngfPQRGE7CMQ7kNvwGEt2nm&_nc_oc=AdqNuXfUJGuOgETXHWRQ3IIIm4U6-s1uon7nEG0QwbpySm8tUPzoQbDmFnWKThN_HcI&_nc_zt=23&_nc_ht=scontent-cgk2-1.xx&_nc_gid=E7zt3aTrZVoFMregBwKKXw&_nc_ss=7b2a8&oh=00_AQBygtW3w8vAgDFD3THmWEHedpeUqc3ae-EOJWKIPEVt_Q&oe=6A568209",
     liveLink: "https://she-ti.vercel.app",
     githubLink: "https://github.com/RobertDace/SheTI",
     tools: [
@@ -20,7 +20,7 @@ const projectsData = [
   {
     title: "SenKuni - AI Chess Analyzer",
     description: "Platform analisis posisi catur reaktif yang mengintegrasikan mesin catur Stockfish dengan asisten pelatih berbasis Gemini AI untuk memberikan evaluasi real-time serta panduan strategi bidak secara akurat.",
-    image: "https://images.unsplash.com/photo-1611195974226-a6a9be9dd763?q=80&w=800&auto=format&fit=crop",
+    image: "https://scontent-cgk2-2.xx.fbcdn.net/v/t39.30808-6/742771010_1695840608295000_8862578769119856120_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1080&ctp=s1920x1080&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFxkVo4dI48X07pj9AaeVzVfWpk7ji6fOR9amTuOLp85MEL6mMFfReed0YEgprLbC0bKqXYpF2O11DC9rMEXx87&_nc_ohc=syqeYVgfd-kQ7kNvwGDCxpn&_nc_oc=AdrAqajN0U66_It-NAAdg55oVsMnhjixG9MxO02RENytaMqh6RuC1ILBt_jKLRV9YjI&_nc_zt=23&_nc_ht=scontent-cgk2-2.xx&_nc_gid=BjHQiPCt2WwRrrtQPtzoqg&_nc_ss=7b2a8&oh=00_AQC-1ZpnJqTMujuaBYsmtnEcHKTBjWQUhE8EnfqQqs0OXg&oe=6A568253",
     liveLink: "https://senkuni.vercel.app",
     githubLink: "https://github.com/RobertDace/SenKuni",
     tools: [
@@ -32,7 +32,7 @@ const projectsData = [
   {
     title: "SemarMaca - E-Catalog FH UWGM",
     description: "Platform smart e-catalog dan repositori hukum digital untuk FH UWGM yang dilengkapi dengan fitur AI legal assistant, sistem audit plagiarisme, pemetaan perpustakaan interaktif, dan QR ticketing.",
-    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=800&auto=format&fit=crop",
+    image: "https://scontent-cgk2-2.xx.fbcdn.net/v/t39.30808-6/742173119_1695840631628331_2677264832410221602_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1080&ctp=s1920x1080&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEaOhSFrxWyp8jI6ACgKMQwwAfAHJrWPW3AB8AcmtY9bXJeT7jcvA0DqWaLWuMot801hvms1JOOqaOoKTUoEIMf&_nc_ohc=Au7gNbH1sZsQ7kNvwG2UW8F&_nc_oc=AdqGJoFW8T_dh0atxM4EguSG_ql9ms5JxORqT728vb3a2jZTp9q0zv-RzZIGOU8a8IM&_nc_zt=23&_nc_ht=scontent-cgk2-2.xx&_nc_gid=Mhd8KRImts1a50Fij7KjVQ&_nc_ss=7b2a8&oh=00_AQC9W9ff8yqQc3m9pns8oWIIcvPkTfkJDpr9RyvZGbDVrQ&oe=6A5673C8",
     liveLink: "https://semar-maca.vercel.app",
     githubLink: "https://github.com/RobertDace/SemarMaca",
     tools: [
