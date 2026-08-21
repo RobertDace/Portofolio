@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
-import { useState, useRef, MouseEvent, ReactNode } from "react";
-import { motion } from "framer-motion";
+import { useRef, MouseEvent, ReactNode } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -15,8 +15,13 @@ export default function MagneticButton({
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isShaking, setIsShaking] = useState(false);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 15, stiffness: 200, mass: 0.1 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
@@ -25,18 +30,14 @@ export default function MagneticButton({
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
 
-    // Kekuatan daya tarik magnet (0.35)
-    setPosition({ x: middleX * 0.35, y: middleY * 0.35 });
+    // Daya tarik magnetik (0.35)
+    x.set(middleX * 0.35);
+    y.set(middleY * 0.35);
   };
 
   const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const handleClick = () => {
-    setIsShaking(true);
-    setTimeout(() => setIsShaking(false), 300);
-    if (onClick) onClick();
+    x.set(0);
+    y.set(0);
   };
 
   return (
@@ -44,16 +45,9 @@ export default function MagneticButton({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-      animate={{
-        x: isShaking ? [0, -6, 6, -4, 4, 0] : position.x,
-        y: position.y,
-      }}
-      transition={
-        isShaking
-          ? { duration: 0.3 }
-          : { type: "spring", stiffness: 200, damping: 15, mass: 0.1 }
-      }
+      onClick={onClick}
+      style={{ x: springX, y: springY }}
+      whileTap={{ scale: 0.96 }}
       className={`inline-block cursor-pointer ${className}`}
     >
       {children}

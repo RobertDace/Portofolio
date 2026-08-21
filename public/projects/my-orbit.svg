@@ -1,0 +1,125 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradOrbit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090214"/>
+      <stop offset="50%" stop-color="#120426"/>
+      <stop offset="100%" stop-color="#05010a"/>
+    </linearGradient>
+    <linearGradient id="cosmicPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <radialGradient id="nebula1" cx="30%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula2" cx="75%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#db2777" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bgGradOrbit)"/>
+  <circle cx="360" cy="270" r="400" fill="url(#nebula1)"/>
+  <circle cx="900" cy="405" r="400" fill="url(#nebula2)"/>
+
+  <!-- Stars Background -->
+  <circle cx="100" cy="120" r="1.5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="250" cy="80" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="450" cy="160" r="1" fill="#ffffff" opacity="0.6"/>
+  <circle cx="700" cy="90" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="850" cy="140" r="1.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="1050" cy="100" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="150" cy="550" r="1.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="580" cy="600" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="950" cy="580" r="1.5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="1100" cy="480" r="2" fill="#ffffff" opacity="0.6"/>
+
+  <!-- Window Header -->
+  <rect x="60" y="45" width="1080" height="44" rx="12" fill="#15062b" stroke="#3b1366" stroke-width="1.5"/>
+  <circle cx="90" cy="67" r="5" fill="#c084fc"/>
+  <circle cx="106" cy="67" r="5" fill="#f472b6"/>
+  <circle cx="122" cy="67" r="5" fill="#38bdf8"/>
+  <text x="145" y="72" fill="#e9d5ff" font-family="system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">MY ORBIT // COSMIC MEMORY JOURNEY &amp; ROMANTIC DECK</text>
+  <rect x="990" y="55" width="130" height="24" rx="6" fill="#9333ea" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+  <text x="1055" y="71" fill="#e9d5ff" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">🌌 COSMIC DECK</text>
+
+  <!-- Left Hero Countdown Showcase -->
+  <rect x="60" y="110" width="380" height="505" rx="20" fill="#140728" stroke="#3b1366" stroke-width="1.5"/>
+  
+  <!-- Orbit Ring Visual -->
+  <ellipse cx="250" cy="230" rx="140" ry="70" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.7"/>
+  <circle cx="250" cy="230" r="35" fill="url(#cosmicPurple)"/>
+  <circle cx="340" cy="190" r="10" fill="#38bdf8"/>
+  <circle cx="150" cy="260" r="8" fill="#f472b6"/>
+
+  <text x="250" y="340" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="900" text-anchor="middle">COUNTDOWN TO SPECIAL DAY</text>
+  <text x="250" y="365" fill="#c084fc" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Real-time Precision Chronometer</text>
+
+  <!-- Timer Grid Boxes -->
+  <rect x="90" y="390" width="65" height="75" rx="12" fill="#220b3e" stroke="#581c87" stroke-width="1"/>
+  <text x="122" y="430" fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle">142</text>
+  <text x="122" y="452" fill="#c084fc" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">DAYS</text>
+
+  <rect x="165" y="390" width="65" height="75" rx="12" fill="#220b3e" stroke="#581c87" stroke-width="1"/>
+  <text x="197" y="430" fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle">18</text>
+  <text x="197" y="452" fill="#c084fc" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">HOURS</text>
+
+  <rect x="240" y="390" width="65" height="75" rx="12" fill="#220b3e" stroke="#581c87" stroke-width="1"/>
+  <text x="272" y="430" fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle">45</text>
+  <text x="272" y="452" fill="#c084fc" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">MINS</text>
+
+  <rect x="315" y="390" width="65" height="75" rx="12" fill="#220b3e" stroke="#581c87" stroke-width="1"/>
+  <text x="347" y="430" fill="#f472b6" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle">30</text>
+  <text x="347" y="452" fill="#f472b6" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">SECS</text>
+
+  <!-- Interactive Gate Button -->
+  <rect x="90" y="490" width="290" height="50" rx="14" fill="url(#cosmicPurple)"/>
+  <text x="235" y="522" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="900" text-anchor="middle">✨ ENTER THE UNMAPPED ORBIT</text>
+
+  <rect x="90" y="555" width="290" height="40" rx="10" fill="#1b0933"/>
+  <text x="235" y="580" fill="#a855f7" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle">🎵 Background Cosmic Lo-Fi Playing</text>
+
+  <!-- Right Dashboard Content -->
+  <rect x="465" y="110" width="675" height="505" rx="20" fill="#140728" stroke="#3b1366" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="500" y="160" fill="url(#cosmicPurple)" font-family="system-ui, sans-serif" font-size="28" font-weight="900">THE UNMAPPED ORBIT</text>
+  <text x="500" y="185" fill="#e9d5ff" font-family="system-ui, sans-serif" font-size="13" font-weight="500">Interactive Memory Cards Deck &amp; Secret Letter Experience</text>
+
+  <!-- Romantic Deck Cards Showcase -->
+  <rect x="500" y="215" width="185" height="235" rx="16" fill="#240c42" stroke="#a855f7" stroke-width="1.5"/>
+  <rect x="515" y="230" width="155" height="110" rx="10" fill="#381366"/>
+  <text x="592" y="295" font-size="44" text-anchor="middle">🪐</text>
+  <text x="592" y="370" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle">Chapter I: Constellation</text>
+  <text x="592" y="392" fill="#c084fc" font-family="system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">"The First Stargaze"</text>
+  <text x="592" y="422" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">TAP TO FLIP ↺</text>
+
+  <rect x="710" y="215" width="185" height="235" rx="16" fill="#240c42" stroke="#ec4899" stroke-width="1.5"/>
+  <rect x="725" y="230" width="155" height="110" rx="10" fill="#381366"/>
+  <text x="802" y="295" font-size="44" text-anchor="middle">💌</text>
+  <text x="802" y="370" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle">Chapter II: Resonance</text>
+  <text x="802" y="392" fill="#f472b6" font-family="system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">"Echoes in the Galaxy"</text>
+  <text x="802" y="422" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">TAP TO FLIP ↺</text>
+
+  <rect x="920" y="215" width="185" height="235" rx="16" fill="#240c42" stroke="#a855f7" stroke-width="1.5"/>
+  <rect x="935" y="230" width="155" height="110" rx="10" fill="#381366"/>
+  <text x="1012" y="295" font-size="44" text-anchor="middle">✨</text>
+  <text x="1012" y="370" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle">Chapter III: Infinity</text>
+  <text x="1012" y="392" fill="#c084fc" font-family="system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">"Beyond the Nebula"</text>
+  <text x="1012" y="422" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">TAP TO FLIP ↺</text>
+
+  <!-- Interactive Features Bottom Bar -->
+  <rect x="500" y="475" width="605" height="115" rx="14" fill="#1b0933" stroke="#3b1366" stroke-width="1"/>
+  <text x="525" y="508" fill="#e9d5ff" font-family="system-ui, sans-serif" font-size="13" font-weight="800">🔮 LIVE INTERACTIVE FEATURES</text>
+
+  <rect x="525" y="525" width="175" height="42" rx="8" fill="#270f47"/>
+  <text x="545" y="551" fill="#c084fc" font-family="system-ui, sans-serif" font-size="11" font-weight="700">📜 Secret Letter Modal</text>
+
+  <rect x="715" y="525" width="175" height="42" rx="8" fill="#270f47"/>
+  <text x="735" y="551" fill="#f472b6" font-family="system-ui, sans-serif" font-size="11" font-weight="700">✨ Cosmic Canvas Cursor</text>
+
+  <rect x="905" y="525" width="180" height="42" rx="8" fill="#270f47"/>
+  <text x="925" y="551" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="11" font-weight="700">🌌 Parallax Starlight</text>
+</svg>

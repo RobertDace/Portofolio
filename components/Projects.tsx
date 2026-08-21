@@ -1,43 +1,98 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Data Proyek Unggulan AI dengan Link Demo & GitHub
+// Data Proyek Unggulan Terurut dari Build Terbaru (Klasim, TK Cahaya Hati, SenKuni, dst.)
 const projectsData = [
   {
-    title: "SheTI - Sakti HRD Automator",
-    description: "Alat otomatisasi administrasi perkantoran dan HRD berbasis AI dengan fitur utama pengolah dokumen cerdas, Smart OCR untuk konversi kuitansi ke tabel otomatis, serta generator surat dinas instan.",
-    image: "https://scontent-cgk2-1.xx.fbcdn.net/v/t39.30808-6/744820686_1695840611628333_3540360474667445548_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1080&ctp=s1920x1080&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEM0eqmvBQyhXudme40nmkEcKc27Eggql9wpzbsSCCqX4IJQvvmrV9n6y6bGpStjVLlxcqJOgNwk0sgMXBfCTKl&_nc_ohc=ngfPQRGE7CMQ7kNvwGEt2nm&_nc_oc=AdqNuXfUJGuOgETXHWRQ3IIIm4U6-s1uon7nEG0QwbpySm8tUPzoQbDmFnWKThN_HcI&_nc_zt=23&_nc_ht=scontent-cgk2-1.xx&_nc_gid=E7zt3aTrZVoFMregBwKKXw&_nc_ss=7b2a8&oh=00_AQBygtW3w8vAgDFD3THmWEHedpeUqc3ae-EOJWKIPEVt_Q&oe=6A568209",
-    liveLink: "https://she-ti.vercel.app",
-    githubLink: "https://github.com/RobertDace/SheTI",
+    title: "Klasim - Esports Telemetry & Scenario Modeler",
+    description: "Simulator klasemen esports deterministik dan pemodel skenario probabilitas turnamen kompetitif (MPL ID, PMWC, VCT Pacific) dengan generator export instan PDF & Excel.",
+    image: "/projects/klasim.svg",
+    liveLink: "https://klasim.vercel.app",
+    githubLink: "https://github.com/RobertDace/klasim",
     tools: [
       { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "PostgreSQL & Prisma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+    ],
+  },
+  {
+    title: "TK Cahaya Hati - Integrated Academic Portal",
+    description: "Portal sistem informasi akademik sekolah terpadu multi-perangkat untuk TK Cahaya Hati yang mencakup manajemen kesiswaan, monitoring absensi, tagihan SPP, dan otentikasi peran terintegrasi.",
+    image: "/projects/tk-cahaya-hati.svg",
+    liveLink: "https://tk-cahaya-hati.vercel.app",
+    githubLink: "https://github.com/RobertDace/Multi-Device-Web-For-School",
+    tools: [
+      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "PostgreSQL & Prisma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
     ],
   },
   {
     title: "SenKuni - AI Chess Analyzer",
     description: "Platform analisis posisi catur reaktif yang mengintegrasikan mesin catur Stockfish dengan asisten pelatih berbasis Gemini AI untuk memberikan evaluasi real-time serta panduan strategi bidak secara akurat.",
-    image: "https://scontent-cgk2-2.xx.fbcdn.net/v/t39.30808-6/742771010_1695840608295000_8862578769119856120_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1080&ctp=s1920x1080&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFxkVo4dI48X07pj9AaeVzVfWpk7ji6fOR9amTuOLp85MEL6mMFfReed0YEgprLbC0bKqXYpF2O11DC9rMEXx87&_nc_ohc=syqeYVgfd-kQ7kNvwGDCxpn&_nc_oc=AdrAqajN0U66_It-NAAdg55oVsMnhjixG9MxO02RENytaMqh6RuC1ILBt_jKLRV9YjI&_nc_zt=23&_nc_ht=scontent-cgk2-2.xx&_nc_gid=BjHQiPCt2WwRrrtQPtzoqg&_nc_ss=7b2a8&oh=00_AQC-1ZpnJqTMujuaBYsmtnEcHKTBjWQUhE8EnfqQqs0OXg&oe=6A568253",
+    image: "/projects/senkuni.jpg",
     liveLink: "https://senkuni.vercel.app",
     githubLink: "https://github.com/RobertDace/SenKuni",
     tools: [
       { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Stockfish 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
+    ],
+  },
+  {
+    title: "SheTI - Sakti HRD Automator",
+    description: "Alat otomatisasi administrasi perkantoran dan HRD berbasis AI dengan fitur utama pengolah dokumen cerdas, Smart OCR untuk konversi kuitansi ke tabel otomatis, serta generator surat dinas instan.",
+    image: "/projects/sheti.jpg",
+    liveLink: "https://she-ti.vercel.app",
+    githubLink: "https://github.com/RobertDace/SheTI",
+    tools: [
+      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
     ],
   },
   {
     title: "SemarMaca - E-Catalog FH UWGM",
     description: "Platform smart e-catalog dan repositori hukum digital untuk FH UWGM yang dilengkapi dengan fitur AI legal assistant, sistem audit plagiarisme, pemetaan perpustakaan interaktif, dan QR ticketing.",
-    image: "https://scontent-cgk2-2.xx.fbcdn.net/v/t39.30808-6/742173119_1695840631628331_2677264832410221602_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1080&ctp=s1920x1080&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEaOhSFrxWyp8jI6ACgKMQwwAfAHJrWPW3AB8AcmtY9bXJeT7jcvA0DqWaLWuMot801hvms1JOOqaOoKTUoEIMf&_nc_ohc=Au7gNbH1sZsQ7kNvwG2UW8F&_nc_oc=AdqGJoFW8T_dh0atxM4EguSG_ql9ms5JxORqT728vb3a2jZTp9q0zv-RzZIGOU8a8IM&_nc_zt=23&_nc_ht=scontent-cgk2-2.xx&_nc_gid=Mhd8KRImts1a50Fij7KjVQ&_nc_ss=7b2a8&oh=00_AQC9W9ff8yqQc3m9pns8oWIIcvPkTfkJDpr9RyvZGbDVrQ&oe=6A5673C8",
+    image: "/projects/semarmaca.jpg",
     liveLink: "https://semar-maca.vercel.app",
     githubLink: "https://github.com/RobertDace/SemarMaca",
     tools: [
       { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+    ],
+  },
+  {
+    title: "Snacky - Interactive Lo-Fi Audio & Creative Room",
+    description: "Ruang santai virtual dan pemutar audio lo-fi interaktif dengan rak vinyl berputar, kartu gacha kelinci koleksi, ambient soundscape generator, dan instrumen pad kreatif.",
+    image: "/projects/snacky.svg",
+    liveLink: "https://snacky-pi.vercel.app",
+    githubLink: "https://github.com/RobertDace/snacky",
+    tools: [
+      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Web Audio API", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+    ],
+  },
+  {
+    title: "My Orbit - Cosmic Memory Journey & Romantic Deck",
+    description: "Pengalaman web interaktif bertema kosmik dan perjalanan memori personal dengan latar bintang live, modul countdown real-time, dek kartu interaktif, dan pemutar musik terintegrasi.",
+    image: "/projects/my-orbit.svg",
+    liveLink: "https://myorbit-omega.vercel.app",
+    githubLink: "https://github.com/RobertDace/The-Unmapped-Orbit",
+    tools: [
+      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Framer Motion", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" },
     ],
@@ -47,46 +102,119 @@ const projectsData = [
 export default function Projects() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const isScrollingRef = useRef(false);
 
-  const scrollPrev = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -384, behavior: "smooth" });
+  // Lock body scroll & listen to Escape key when drawer is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setSelectedProject(null);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "auto";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [selectedProject]);
+
+  // Kalkulasi index kartu aktif secara presisi berdasarkan posisi scrollLeft container
+  const updateActiveCardIndex = useCallback(() => {
+    if (!carouselRef.current) return;
+    const container = carouselRef.current;
+    const scrollLeft = container.scrollLeft;
+    const cards = container.querySelectorAll<HTMLElement>(".carousel-card");
+    if (!cards.length) return;
+
+    let closestIdx = 0;
+    let minDiff = Infinity;
+
+    cards.forEach((card, idx) => {
+      const diff = Math.abs(card.offsetLeft - scrollLeft);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = idx;
+      }
+    });
+
+    setActiveIndex(closestIdx);
+    isScrollingRef.current = false;
+  }, []);
+
+  const handleScroll = () => {
+    if (!isScrollingRef.current) {
+      isScrollingRef.current = true;
+      requestAnimationFrame(updateActiveCardIndex);
     }
   };
 
-  const scrollNext = () => {
+  const scrollToIndex = (index: number) => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 384, behavior: "smooth" });
+      const cards = carouselRef.current.querySelectorAll<HTMLElement>(".carousel-card");
+      if (cards[index]) {
+        carouselRef.current.scrollTo({
+          left: cards[index].offsetLeft,
+          behavior: "smooth",
+        });
+        setActiveIndex(index);
+      }
     }
+  };
+
+  const scrollPrev = () => {
+    const targetIdx = Math.max(activeIndex - 1, 0);
+    scrollToIndex(targetIdx);
+  };
+
+  const scrollNext = () => {
+    const targetIdx = Math.min(activeIndex + 1, projectsData.length - 1);
+    scrollToIndex(targetIdx);
   };
 
   return (
     <section
       id="projects"
-      className="py-20 bg-[#0b0f19] text-white select-none relative scroll-mt-20 overflow-hidden"
+      className="py-24 bg-transparent text-white relative z-10 scroll-mt-20"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12">
-        
-        {/* HEADER SECTION */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
-          <div className="space-y-1.5">
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+      {/* HEADER CONTAINER */}
+      <motion.div
+        initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 mb-8"
+      >
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+          <div className="space-y-2">
+            <span className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase block mb-1">
+              Selected Works ({projectsData.length})
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
               Featured{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent animate-antigravity-shimmer inline-block">
                 Works.
               </span>
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm max-w-xl leading-relaxed">
-              Kumpulan aplikasi berbasis Artificial Intelligence (AI) inovatif yang dirancang untuk otomatisasi, analisis cerdas, dan efisiensi sistem modern.
+              Kumpulan aplikasi berbasis Artificial Intelligence (AI) dan arsitektur web modern yang dirancang untuk otomatisasi dan efisiensi sistem.
             </p>
           </div>
 
-          {/* Tombol Panah Navigasi */}
-          <div className="flex gap-2.5 self-end md:self-auto flex-shrink-0">
+          {/* Tombol Panah Navigasi Carousel */}
+          <div className="flex items-center gap-3 self-end md:self-auto flex-shrink-0">
             <button
               onClick={scrollPrev}
-              className="w-10 h-10 rounded-full border border-slate-800/80 flex items-center justify-center bg-slate-900/50 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all duration-300 backdrop-blur-sm active:scale-95 shadow-md"
-              aria-label="Previous Slide"
+              disabled={activeIndex === 0}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer ${
+                activeIndex === 0
+                  ? "border-slate-800/50 bg-slate-900/30 text-slate-600 cursor-not-allowed opacity-50"
+                  : "border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800"
+              }`}
+              aria-label="Previous Project"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
@@ -94,8 +222,13 @@ export default function Projects() {
             </button>
             <button
               onClick={scrollNext}
-              className="w-10 h-10 rounded-full border border-slate-800/80 flex items-center justify-center bg-slate-900/50 text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50 transition-all duration-300 backdrop-blur-sm active:scale-95 shadow-md"
-              aria-label="Next Slide"
+              disabled={activeIndex === projectsData.length - 1}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer ${
+                activeIndex === projectsData.length - 1
+                  ? "border-slate-800/50 bg-slate-900/30 text-slate-600 cursor-not-allowed opacity-50"
+                  : "border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800"
+              }`}
+              aria-label="Next Project"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -103,35 +236,38 @@ export default function Projects() {
             </button>
           </div>
         </div>
+      </motion.div>
 
-        {/* CAROUSEL TRACK */}
+      {/* CAROUSEL TRACK (LEPAS PEMBATAS KOTAK, SMOOTH CUSTOM SCROLLBAR) */}
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12">
         <div
           ref={carouselRef}
-          className="flex gap-6 overflow-x-auto pt-4 pb-6 px-4 snap-x snap-mandatory 
-                     [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-          style={{ scrollPaddingLeft: "1rem", scrollPaddingRight: "1rem" }}
+          onScroll={handleScroll}
+          className="custom-cyber-scrollbar flex gap-6 overflow-x-auto pt-2 pb-6 px-1 snap-x snap-mandatory"
+          style={{ scrollPaddingLeft: "0.5rem", scrollPaddingRight: "2rem" }}
         >
           {projectsData.map((project, idx) => (
-            <motion.div
+            <div
               key={idx}
               onClick={() => setSelectedProject(project)}
-              whileHover={{ y: -8, scale: 1.015 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="snap-start w-[85vw] sm:w-[360px] flex-shrink-0 bg-slate-900/40 border border-slate-800/70 hover:border-cyan-500/40 rounded-[24px] p-3.5 flex flex-col justify-between shadow-lg cursor-pointer transition-colors duration-300 group hover:shadow-[0_15px_30px_rgba(6,182,212,0.04)]"
+              className="carousel-card snap-start w-[85vw] sm:w-[380px] lg:w-[420px] flex-shrink-0 bg-slate-900/50 hover:bg-slate-900/80 border border-slate-800/80 hover:border-cyan-500/50 rounded-[28px] p-4 flex flex-col justify-between shadow-xl cursor-pointer transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(6,182,212,0.08)] group backdrop-blur-sm"
             >
               {/* Gambar Preview 16:9 */}
               <div className="space-y-4">
-                <div className="w-full aspect-video rounded-[16px] overflow-hidden bg-slate-950/80 relative border border-slate-800/50">
-                  <img
+                <div className="w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-slate-950 relative border border-slate-800/70">
+                  <Image
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
+                    fill
+                    unoptimized={project.image.endsWith(".svg")}
+                    sizes="(max-width: 640px) 85vw, 420px"
+                    className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 will-change-transform"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
 
                 {/* Deskripsi Teks */}
-                <div className="px-1 space-y-1.5">
+                <div className="px-1 space-y-2">
                   <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-100 group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>
@@ -142,26 +278,43 @@ export default function Projects() {
               </div>
 
               {/* Barisan Kapsul Tools INTERAKTIF (Luar Card) */}
-              <div className="flex flex-wrap gap-1.5 pt-4 px-1">
+              <div className="flex flex-wrap gap-1.5 pt-4 px-1 border-t border-slate-800/50 mt-4">
                 {project.tools.map((tool, tIdx) => (
-                  <motion.div
+                  <div
                     key={tIdx}
-                    onClick={(e) => e.stopPropagation()} // Mencegah drawer terbuka saat klik logo saja
-                    whileHover={{ scale: 1.06, backgroundColor: "rgba(6, 182, 212, 0.15)", borderColor: "rgba(6, 182, 212, 0.5)" }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/60 border border-slate-700/50 text-[10px] sm:text-xs font-semibold text-slate-300 hover:text-cyan-400 shadow-sm cursor-pointer transition-colors duration-200"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/70 border border-slate-700/50 text-[10px] sm:text-xs font-semibold text-slate-300 hover:text-cyan-400 hover:border-cyan-400/40 shadow-sm cursor-pointer transition-all duration-200 hover:scale-105"
                   >
-                    <img
+                    <Image
                       src={tool.logo}
                       alt={tool.name}
+                      width={14}
+                      height={14}
+                      unoptimized
                       className="w-3.5 h-3.5 object-contain"
                     />
                     <span>{tool.name}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
-            </motion.div>
+            </div>
+          ))}
+        </div>
+
+        {/* Carousel Pagination Dots (Disesuaikan per Card, Dinamis 7 Dots) */}
+        <div className="flex items-center justify-center gap-2 pt-6">
+          {projectsData.map((_, dotIdx) => (
+            <button
+              key={dotIdx}
+              onClick={() => scrollToIndex(dotIdx)}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                activeIndex === dotIdx
+                  ? "w-10 bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 shadow-[0_0_12px_rgba(6,182,212,0.8)]"
+                  : "w-2.5 bg-slate-800 hover:bg-slate-600 hover:w-4"
+              }`}
+              aria-label={`Go to project ${dotIdx + 1}`}
+            />
           ))}
         </div>
 
@@ -177,7 +330,7 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99] pointer-events-auto cursor-pointer"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[99] pointer-events-auto cursor-pointer"
             />
 
             {/* Panel Samping Meluncur dari Kanan */}
@@ -186,7 +339,10 @@ export default function Projects() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.35, ease: "easeInOut" }}
-              className="fixed right-0 top-0 bottom-0 h-full w-full sm:w-[500px] bg-[#0b0f19] border-l border-slate-800/90 z-[100] shadow-2xl flex flex-col justify-between pointer-events-auto font-sans"
+              className="fixed right-0 top-0 bottom-0 h-full w-full sm:w-[520px] bg-[#0b0f19] border-l border-slate-800/90 z-[100] shadow-2xl flex flex-col justify-between pointer-events-auto font-sans"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="drawer-title"
             >
               {/* Bagian Konten (Scrollable) */}
               <div className="overflow-y-auto no-scrollbar flex-1 relative">
@@ -194,7 +350,7 @@ export default function Projects() {
                 {/* Tombol Close Silang X */}
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all shadow-md"
+                  className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all shadow-md cursor-pointer"
                   aria-label="Close details"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -204,17 +360,21 @@ export default function Projects() {
 
                 {/* Banner Gambar Besar */}
                 <div className="w-full aspect-[16/10] bg-slate-950 relative border-b border-slate-800/60">
-                  <img
+                  <Image
                     src={selectedProject.image}
                     alt={selectedProject.title}
-                    className="w-full h-full object-cover object-center"
+                    fill
+                    unoptimized={selectedProject.image.endsWith(".svg")}
+                    sizes="(max-width: 640px) 100vw, 520px"
+                    className="object-cover object-center"
+                    priority
                   />
                 </div>
 
                 {/* Deskripsi Data Teks */}
                 <div className="p-6 sm:p-8 space-y-6">
                   <div className="space-y-3">
-                    <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+                    <h3 id="drawer-title" className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
                       {selectedProject.title}
                     </h3>
                     <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
@@ -222,22 +382,27 @@ export default function Projects() {
                     </p>
                   </div>
 
-                  {/* Bagian Label Teknologi INTERAKTIF (Sesuai image_193a3f.png) */}
+                  {/* Bagian Label Teknologi */}
                   <div className="space-y-3 pt-2">
-                    <h4 className="text-xs font-bold tracking-widest text-slate-400 uppercase flex items-center gap-2">
-                      <span>{"</>"}</span> TECHNOLOGIES USED
+                    <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase">
+                      Technologies &amp; Core Stack
                     </h4>
                     <div className="flex flex-wrap gap-2.5">
                       {selectedProject.tools.map((tool, idx) => (
-                        <motion.div
+                        <div
                           key={idx}
-                          whileHover={{ scale: 1.06, backgroundColor: "rgba(6, 182, 212, 0.15)", borderColor: "rgba(6, 182, 212, 0.5)" }}
-                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 hover:text-cyan-400 shadow-md cursor-pointer transition-colors duration-200"
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 hover:text-cyan-400 hover:border-cyan-400/40 shadow-md cursor-pointer transition-all duration-200"
                         >
-                          <img src={tool.logo} alt={tool.name} className="w-4 h-4 object-contain" />
+                          <Image
+                            src={tool.logo}
+                            alt={tool.name}
+                            width={16}
+                            height={16}
+                            unoptimized
+                            className="w-4 h-4 object-contain"
+                          />
                           <span>{tool.name}</span>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -246,7 +411,7 @@ export default function Projects() {
               </div>
 
               {/* Bagian Footer Tombol Aksi */}
-              <div className="p-5 sm:p-6 bg-slate-900/60 backdrop-blur-md border-t border-slate-800/80 flex items-center gap-3">
+              <div className="p-5 sm:p-6 bg-slate-900/70 backdrop-blur-md border-t border-slate-800/80 flex items-center gap-3">
                 <a
                   href={selectedProject.liveLink}
                   target="_blank"
@@ -265,6 +430,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-600 transition-all shadow-md flex-shrink-0 active:scale-95"
                   title="View Source on GitHub"
+                  aria-label="View Source on GitHub"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.008.069-.008 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />

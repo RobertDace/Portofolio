@@ -1,0 +1,93 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradTk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329"/>
+      <stop offset="50%" stop-color="#0f1d3e"/>
+      <stop offset="100%" stop-color="#070c1a"/>
+    </linearGradient>
+    <linearGradient id="blueEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <radialGradient id="glowTk" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bgGradTk)"/>
+  <circle cx="600" cy="337" r="500" fill="url(#glowTk)"/>
+
+  <!-- Window Header -->
+  <rect x="60" y="45" width="1080" height="44" rx="12" fill="#0d1933" stroke="#1e3a8a" stroke-width="1.5"/>
+  <circle cx="90" cy="67" r="5" fill="#38bdf8"/>
+  <circle cx="106" cy="67" r="5" fill="#34d399"/>
+  <circle cx="122" cy="67" r="5" fill="#f59e0b"/>
+  <text x="145" y="72" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">TK CAHAYA HATI // INTEGRATED ACADEMIC PORTAL</text>
+  <rect x="990" y="55" width="130" height="24" rx="6" fill="#10b981" fill-opacity="0.2" stroke="#34d399" stroke-width="1"/>
+  <text x="1055" y="71" fill="#34d399" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">CLERK AUTH ACTIVE</text>
+
+  <!-- Left Stats Panel -->
+  <rect x="60" y="110" width="300" height="505" rx="18" fill="#0d1933" stroke="#1e3a8a" stroke-width="1.5"/>
+  <text x="85" y="150" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="13" font-weight="800" letter-spacing="1">MODUL AKADEMIK</text>
+
+  <rect x="80" y="170" width="260" height="65" rx="12" fill="#172554" stroke="#38bdf8" stroke-width="1"/>
+  <text x="100" y="197" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="800">Manajemen Kesiswaan</text>
+  <text x="100" y="218" fill="#67e8f9" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Data Siswa &amp; Rekap Perkembangan</text>
+
+  <rect x="80" y="250" width="260" height="65" rx="12" fill="#111c38" stroke="#1e3a8a" stroke-width="1"/>
+  <text x="100" y="277" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="700">Presensi &amp; Absensi Harian</text>
+  <text x="100" y="298" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Scan QR Code &amp; Log Kehadiran</text>
+
+  <rect x="80" y="330" width="260" height="65" rx="12" fill="#111c38" stroke="#1e3a8a" stroke-width="1"/>
+  <text x="100" y="357" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="700">Billing &amp; SPP Gateway</text>
+  <text x="100" y="378" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Status Pembayaran &amp; Invoice</text>
+
+  <rect x="80" y="415" width="260" height="175" rx="14" fill="#080e1e" stroke="#1e3a8a" stroke-width="1"/>
+  <text x="100" y="445" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="800">ROLE-BASED ACCESS</text>
+  <text x="100" y="475" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="600">• Administrator &amp; Kepala Sekolah</text>
+  <text x="100" y="505" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="600">• Guru Kelas &amp; Pengajar</text>
+  <text x="100" y="535" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11" font-weight="600">• Portal Wali Murid</text>
+  <text x="100" y="565" fill="#34d399" font-family="system-ui, sans-serif" font-size="11" font-weight="700">🔒 Multi-Session Protected</text>
+
+  <!-- Right Dashboard Content -->
+  <rect x="380" y="110" width="760" height="505" rx="18" fill="#0d1933" stroke="#1e3a8a" stroke-width="1.5"/>
+  <text x="415" y="160" fill="url(#blueEmerald)" font-family="system-ui, sans-serif" font-size="28" font-weight="900">PORTAL TK CAHAYA HATI</text>
+  <text x="415" y="185" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13" font-weight="500">Sistem Informasi Akademik Multi-Perangkat Terintegrasi</text>
+
+  <!-- Metric Badges -->
+  <rect x="415" y="210" width="210" height="85" rx="12" fill="#172554" stroke="#38bdf8" stroke-width="1"/>
+  <text x="435" y="238" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="11" font-weight="700">TOTAL SISWA AKTIF</text>
+  <text x="435" y="275" fill="#ffffff" font-family="system-ui, sans-serif" font-size="26" font-weight="900">128 Anak</text>
+
+  <rect x="645" y="210" width="210" height="85" rx="12" fill="#172554" stroke="#34d399" stroke-width="1"/>
+  <text x="665" y="238" fill="#a7f3d0" font-family="system-ui, sans-serif" font-size="11" font-weight="700">PRESENSI HARI INI</text>
+  <text x="665" y="275" fill="#34d399" font-family="system-ui, sans-serif" font-size="26" font-weight="900">97.6% Hadir</text>
+
+  <rect x="875" y="210" width="230" height="85" rx="12" fill="#172554" stroke="#f59e0b" stroke-width="1"/>
+  <text x="895" y="238" fill="#fde68a" font-family="system-ui, sans-serif" font-size="11" font-weight="700">KELAS &amp; ROMBEL</text>
+  <text x="895" y="275" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="26" font-weight="900">6 Kelompok</text>
+
+  <!-- Classroom Table Preview -->
+  <rect x="415" y="315" width="690" height="270" rx="14" fill="#080e1e" stroke="#1e3a8a" stroke-width="1"/>
+  <text x="440" y="348" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="800">JADWAL &amp; LOG KEGIATAN PEMBELAJARAN</text>
+  
+  <rect x="440" y="370" width="640" height="42" rx="8" fill="#132347"/>
+  <text x="460" y="396" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="800">Kelas A1 (Bintang)</text>
+  <text x="650" y="396" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Pengenalan Huruf &amp; Mewarnai</text>
+  <text x="960" y="396" fill="#34d399" font-family="system-ui, sans-serif" font-size="12" font-weight="700">08:00 - 09:30</text>
+
+  <rect x="440" y="422" width="640" height="42" rx="8" fill="#0f1b36"/>
+  <text x="460" y="448" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="800">Kelas B2 (Matahari)</text>
+  <text x="650" y="448" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Latihan Berhitung &amp; Motorik</text>
+  <text x="960" y="448" fill="#34d399" font-family="system-ui, sans-serif" font-size="12" font-weight="700">09:45 - 11:15</text>
+
+  <rect x="440" y="474" width="640" height="42" rx="8" fill="#0f1b36"/>
+  <text x="460" y="500" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="800">Kelas PG (Pelangi)</text>
+  <text x="650" y="500" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Bermain Balok &amp; Sosialisasi</text>
+  <text x="960" y="500" fill="#34d399" font-family="system-ui, sans-serif" font-size="12" font-weight="700">08:00 - 10:00</text>
+
+  <rect x="440" y="528" width="640" height="38" rx="8" fill="#1e3a8a" fill-opacity="0.4"/>
+  <text x="760" y="552" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="11" font-weight="800" text-anchor="middle">✨ Terintegrasi Real-time Database Neon PostgreSQL</text>
+</svg>

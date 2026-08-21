@@ -1,60 +1,59 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-// 6 Menu Navigasi Lengkap
 const navItems = [
   {
     name: "Beranda",
-    href: "#hero",
+    id: "hero",
     icon: (
-      <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 00-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 00-1 1m-6 0h6" />
       </svg>
     ),
   },
   {
     name: "Tentang",
-    href: "#about",
+    id: "about",
     icon: (
-      <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
   },
   {
     name: "Pengalaman",
-    href: "#experience",
+    id: "experience",
     icon: (
-      <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
   },
   {
     name: "Proyek",
-    href: "#projects",
+    id: "projects",
     icon: (
-      <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
       </svg>
     ),
   },
   {
     name: "Keahlian",
-    href: "#skills",
+    id: "skills",
     icon: (
-      <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
       </svg>
     ),
   },
   {
     name: "Kontak",
-    href: "#contact",
+    id: "contact",
     icon: (
-      <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
@@ -65,78 +64,96 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["hero", "about", "experience", "projects", "skills", "contact"];
-      const scrollPosition = window.scrollY + 200;
+    let ticking = false;
 
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPos = window.scrollY + window.innerHeight * 0.35;
+          const sectionIds = ["contact", "skills", "projects", "experience", "about", "hero"];
+
+          for (const id of sectionIds) {
+            const el = document.getElementById(id);
+            if (el) {
+              const top = el.offsetTop;
+              if (scrollPos >= top) {
+                setActiveSection(id);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollTo = (id: string) => {
+    setActiveSection(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -20;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <motion.header
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="fixed z-50 left-1/2 -translate-x-1/2 
-                 bottom-4 md:bottom-auto md:top-6 
-                 max-w-[95vw] md:max-w-fit pointer-events-auto"
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed z-50 left-1/2 -translate-x-1/2 bottom-5 md:bottom-auto md:top-6 max-w-[94vw] md:max-w-fit pointer-events-auto select-none"
     >
-      <nav className="flex items-center gap-1 p-1.5 rounded-full bg-[#0b0f19]/90 backdrop-blur-xl border border-slate-800/80 shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
+      <nav className="flex items-center gap-1 px-2 py-1.5 rounded-full bg-[#0b0f19]/90 backdrop-blur-xl border border-slate-800/90 shadow-[0_12px_40px_rgba(0,0,0,0.7)]">
         
-        {/* Brand Logo 2OB1T */}
-        <a
-          href="#hero"
-          className="flex items-center pl-3 pr-2 py-1 text-cyan-400 font-black text-xs sm:text-sm tracking-wider border-r border-slate-800/80 mr-0.5 select-none flex-shrink-0"
+        {/* Brand Logo */}
+        <button
+          onClick={() => scrollTo("hero")}
+          className="flex items-center pl-2.5 pr-2 py-1 text-cyan-400 font-black text-xs sm:text-sm tracking-wider border-r border-slate-800 mr-1 cursor-pointer transition-transform active:scale-95 flex-shrink-0"
+          aria-label="Kembali ke atas"
         >
           2OB1T
-        </a>
+        </button>
 
-        {/* Menu Items (Di HP hanya Icon + Active Glow, Teks muncul di Layar Lebih Besar) */}
-        <div className="flex items-center gap-0.5 sm:gap-1">
+        {/* Navigation Items (Stable Fixed Touch Targets on Mobile) */}
+        <div className="flex items-center gap-1">
           {navItems.map((item) => {
-            const sectionId = item.href.replace("#", "");
-            const isActive = activeSection === sectionId;
+            const isActive = activeSection === item.id;
 
             return (
-              <a
-                key={item.name}
-                href={item.href}
-                title={item.name}
-                className={`relative flex items-center justify-center gap-1.5 px-2.5 py-2 sm:px-3.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-200 flex-shrink-0 ${
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className={`relative w-9 h-9 md:w-auto md:h-auto flex items-center justify-center gap-1.5 md:px-3.5 md:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-90 flex-shrink-0 ${
                   isActive
                     ? "text-slate-950 font-bold"
-                    : "text-slate-300 hover:text-white hover:bg-slate-800/30"
+                    : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/40"
                 }`}
+                aria-label={item.name}
+                title={item.name}
               >
                 {isActive && (
                   <motion.div
-                    layoutId="activeTabPill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400 shadow-[0_0_20px_rgba(6,182,212,0.6)] -z-10"
-                    transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 shadow-[0_0_15px_rgba(6,182,212,0.6)] -z-10 transform-gpu"
+                    transition={{ type: "spring", stiffness: 420, damping: 30 }}
                   />
                 )}
 
-                <span className={`${isActive ? "text-slate-950" : "text-slate-400"}`}>
+                <span className={`flex items-center justify-center ${isActive ? "text-slate-950" : "text-slate-400"}`}>
                   {item.icon}
                 </span>
 
-                {/* Nama Menu HANYA muncul di layar sm/md ke atas */}
+                {/* Menu Name shown only on desktop */}
                 <span className="hidden md:inline whitespace-nowrap">{item.name}</span>
-              </a>
+              </button>
             );
           })}
         </div>

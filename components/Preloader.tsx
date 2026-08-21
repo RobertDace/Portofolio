@@ -1,21 +1,21 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Array sapaan aksara dunia
+// Array sapaan aksara dunia dengan warna kontras yang berbeda-beda
 const greetings = [
-  { text: "Halo", color: "text-cyan-400" },         // Indonesia
-  { text: "Hello", color: "text-emerald-400" },      // Inggris
-  { text: "こんにちは", color: "text-blue-400" },      // Jepang
-  { text: "안녕하세요", color: "text-sky-400" },       // Korea
-  { text: "你好", color: "text-amber-400" },         // Tiongkok
-  { text: "مرحباً", color: "text-teal-300" },       // Arab
-  { text: "Bonjour", color: "text-indigo-400" },    // Prancis
-  { text: "नमस्ते", color: "text-emerald-300" },     // India
-  { text: "สวัสดี", color: "text-cyan-300" },        // Thailand
-  { text: "Hola", color: "text-rose-400" },         // Spanyol
-  { text: "Привет", color: "text-sky-400" },        // Rusia
+  { text: "Halo", color: "text-cyan-400", hex: "#22d3ee" },          // Indonesia (Cyan)
+  { text: "Hello", color: "text-amber-400", hex: "#fbbf24" },        // Inggris (Gold/Amber)
+  { text: "こんにちは", color: "text-rose-400", hex: "#fb7185" },        // Jepang (Rose Pink)
+  { text: "안녕하세요", color: "text-violet-400", hex: "#a78bfa" },       // Korea (Purple)
+  { text: "你好", color: "text-emerald-400", hex: "#34d399" },       // Tiongkok (Emerald)
+  { text: "مرحباً", color: "text-orange-400", hex: "#fb923c" },       // Arab (Orange)
+  { text: "Bonjour", color: "text-fuchsia-400", hex: "#e879f9" },    // Prancis (Magenta)
+  { text: "नमस्ते", color: "text-lime-400", hex: "#a3e635" },         // India (Lime)
+  { text: "สวัสดี", color: "text-sky-400", hex: "#38bdf8" },          // Thailand (Sky Blue)
+  { text: "Hola", color: "text-red-400", hex: "#f87171" },           // Spanyol (Coral Red)
+  { text: "Привет", color: "text-indigo-400", hex: "#818cf8" },      // Rusia (Electric Indigo)
 ];
 
 export default function Preloader() {
@@ -35,33 +35,33 @@ export default function Preloader() {
     };
   }, [isLoading]);
 
-  // 2. Loop Sapaan Aksara Berganti Cepat
+  // 2. Loop Sapaan Aksara Berganti (250ms per aksara)
   useEffect(() => {
-    if (showBranding) return;
+    if (!isLoading || showBranding) return;
 
     if (index < greetings.length - 1) {
       const timer = setTimeout(() => {
         setIndex((prev) => prev + 1);
-      }, 140);
+      }, 250);
       return () => clearTimeout(timer);
     } else {
       const timer = setTimeout(() => {
         setShowBranding(true);
-      }, 140);
+      }, 250);
       return () => clearTimeout(timer);
     }
-  }, [index, showBranding]);
+  }, [index, showBranding, isLoading]);
 
-  // 3. Durasi Tampil 2OB1T Meledak (1.1 Detik) Sebelum Preloader Fade Out
+  // 3. Durasi Tampil 2OB1T (1100ms) Sebelum Preloader Fade Out
   useEffect(() => {
-    if (!showBranding) return;
+    if (!isLoading || !showBranding) return;
 
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1100);
 
     return () => clearTimeout(timer);
-  }, [showBranding]);
+  }, [showBranding, isLoading]);
 
   return (
     <AnimatePresence>
@@ -70,10 +70,10 @@ export default function Preloader() {
           key="clean-fadeout-preloader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-[#0b0f19] text-white select-none pointer-events-none font-sans overflow-hidden"
+          transition={{ duration: 0.45, ease: "easeInOut" }}
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-[#0b0f19] select-none pointer-events-none font-sans overflow-hidden"
         >
-          {/* Light Explosion Flash Background (Cyan & Electric Blue) */}
+          {/* Light Explosion Flash Background */}
           {showBranding && (
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
@@ -92,23 +92,24 @@ export default function Preloader() {
 
           <div className="relative z-10 flex items-center justify-center text-center">
             {!showBranding ? (
-              /* FASE 1: Sapaan Aksara Meluncur Naik (Overflow Hidden khusus di sini saja) */
+              /* FASE 1: Sapaan Aksara Berwarna Warni Dinamis (250ms) */
               <div className="overflow-hidden py-4 px-6">
                 <AnimatePresence mode="wait">
                   <motion.h1
                     key={index}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.1, ease: "easeOut" }}
-                    className={`text-5xl sm:text-7xl md:text-8xl font-black tracking-tight ${greetings[index]?.color}`}
+                    exit={{ opacity: 0, y: -25 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    style={{ color: greetings[index]?.hex }}
+                    className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight drop-shadow-[0_0_35px_rgba(255,255,255,0.2)]"
                   >
                     {greetings[index]?.text}
                   </motion.h1>
                 </AnimatePresence>
               </div>
             ) : (
-              /* FASE 2: 2OB1T Meledak Bersinar (Bebas dari overflow-hidden agar tidak terpotong) */
+              /* FASE 2: 2OB1T Branding */
               <motion.h1
                 initial={{ opacity: 1, scale: 1.35 }}
                 animate={{
