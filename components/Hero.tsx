@@ -141,10 +141,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-2 text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase"
+            className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase"
           >
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping inline-block" />
-            <span>Hi, Saya</span>
+            Hi, Saya
           </motion.div>
 
           {/* Heading Nama Besar Berkarakter Tinggi */}

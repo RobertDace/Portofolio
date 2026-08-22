@@ -104,12 +104,12 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
               </h3>
               <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs sm:text-sm font-semibold text-slate-400">
                 <span className="text-slate-200">{exp.company}</span>
-                <span className="text-slate-600">•</span>
+                <span className="text-slate-600">/</span>
                 <span className="flex items-center gap-1.5 text-cyan-400/90 font-mono tabular-nums">
                   <Calendar className="w-3.5 h-3.5" />
                   <span>{exp.period}</span>
                 </span>
-                <span className="text-slate-600">•</span>
+                <span className="text-slate-600">/</span>
                 <span className="flex items-center gap-1.5 text-slate-400">
                   <MapPin className="w-3.5 h-3.5 text-slate-500" />
                   <span>{exp.location}</span>
@@ -155,11 +155,10 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                 <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
                   <div className="flex items-center gap-2">
                     <Activity className="w-4 h-4 text-cyan-400" />
-                    <span className="text-xs font-mono font-bold text-slate-300 uppercase">Network Topology Status</span>
+                    <span className="text-xs font-mono font-bold text-slate-300 uppercase">Network Topology</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
-                    ONLINE
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">
+                    ACTIVE
                   </span>
                 </div>
 
@@ -168,7 +167,7 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                   {/* Gateway Node */}
                   <div className="flex flex-col items-center gap-1.5 z-10">
                     <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                      <Radio className="w-5 h-5 animate-pulse" />
+                      <Radio className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-mono text-slate-400">Gateway</span>
                   </div>
@@ -211,8 +210,8 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                     <Radio className="w-4 h-4 text-pink-400" />
                     <span className="text-xs font-mono font-bold text-slate-300 uppercase">Multimedia Timeline</span>
                   </div>
-                  <span className="text-[10px] font-mono text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded-full">
-                    REC • ACTIVE
+                  <span className="text-[10px] font-mono text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded-md">
+                    REC ACTIVE
                   </span>
                 </div>
 
@@ -255,20 +254,20 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                     <Cpu className="w-4 h-4 text-emerald-400" />
                     <span className="text-xs font-mono font-bold text-slate-300 uppercase">Architecture Telemetry</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">
-                    READY • HYDRATED
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">
+                    READY
                   </span>
                 </div>
 
                 {/* Interactive Code Trace Preview */}
                 <div className="h-28 bg-slate-900/80 rounded-xl p-3 font-mono text-[11px] text-slate-400 space-y-1.5 overflow-hidden flex flex-col justify-center border border-slate-800/60">
                   <div className="flex items-center justify-between text-cyan-400">
-                    <span>⚡ next build (Turbopack)</span>
+                    <span>next build (Turbopack)</span>
                     <span className="text-slate-500 tabular-nums">0.32s</span>
                   </div>
-                  <div className="text-emerald-400">✓ Gemini AI 2.0 Flash Stream OK</div>
-                  <div className="text-slate-500">○ Serverless Edge Route /api/v1</div>
-                  <div className="text-cyan-300/80">λ Prerendered Static Routes (7/7)</div>
+                  <div className="text-emerald-400">Gemini 2.0 Flash Stream OK</div>
+                  <div className="text-slate-500">Serverless Edge Route /api/v1</div>
+                  <div className="text-cyan-300/80">Prerendered Static Routes (7/7)</div>
                 </div>
 
                 {/* Metrics Footer */}
