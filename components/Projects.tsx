@@ -4,8 +4,21 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Data Proyek Unggulan Terurut dari Build Terbaru (Klasim, TK Cahaya Hati, SenKuni, dst.)
+// Data Proyek Unggulan Terurut dari Build Terbaru (Jastip, Klasim, TK Cahaya Hati, SenKuni, dst.)
 const projectsData = [
+  {
+    title: "JastipPro - Overseas Personal Shopper & Logistic Suite",
+    description: "Sistem manajemen logistik dan pembelanjaan jastip luar negeri terpadu dengan multi-trip currency converter (JPY, KRW, SGD, USD), live in-store shopping checklist, kalkulator laba bersih, invoice generator WhatsApp instan, serta monitoring kuota bagasi koper.",
+    image: "/projects/jastip.svg",
+    liveLink: "https://jastip-beige.vercel.app/",
+    githubLink: "https://github.com/RobertDace/jastip",
+    tools: [
+      { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Prisma & Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
+    ],
+  },
   {
     title: "Klasim - Esports Telemetry & Scenario Modeler",
     description: "Simulator klasemen esports deterministik dan pemodel skenario probabilitas turnamen kompetitif (MPL ID, PMWC, VCT Pacific) dengan generator export instan PDF & Excel.",
