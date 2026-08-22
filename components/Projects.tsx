@@ -7,17 +7,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Laptop, 
   Smartphone, 
-  FileText, 
+  Layers, 
   ExternalLink, 
   RotateCw, 
   Lock, 
   X, 
   Sparkles, 
+  ChevronLeft,
   ChevronRight,
-  AlertTriangle
+  Maximize2
 } from "lucide-react";
 
-// Safe client-side mount hook for React 19 & Next.js 16 without cascading setState in useEffect
+// Safe client-side mount hook for React 19 & Next.js 16
 const emptySubscribe = () => () => {};
 function useIsMounted() {
   return useSyncExternalStore(
@@ -27,9 +28,11 @@ function useIsMounted() {
   );
 }
 
-// Data Proyek Unggulan Terurut dari Build Terbaru (Jastip, Klasim, TK Cahaya Hati, SenKuni, dst.)
+// Data Proyek Unggulan dengan Tech Stack Terupdate (Claude AI, Neon DB, Clerk Auth, Gemini AI, Supabase, Prisma)
 const projectsData = [
   {
+    index: "01",
+    category: "LOGISTICS & MULTI-CURRENCY",
     title: "JastipPro – Overseas Personal Shopper & Logistic Suite",
     description: "Sistem manajemen logistik dan pembelanjaan jastip luar negeri terpadu dengan multi-trip currency converter (JPY, KRW, SGD, USD), live in-store shopping checklist, kalkulator laba bersih, invoice generator WhatsApp instan, serta monitoring kuota bagasi koper.",
     image: "/projects/jastip.svg",
@@ -42,13 +45,16 @@ const projectsData = [
       "Monitoring berat bagasi koper maskapai (kg) & rekap profit real-time"
     ],
     tools: [
-      { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+      { name: "React 19", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "Prisma & Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
+      { name: "Prisma ORM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
+      { name: "Express API", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
     ],
   },
   {
+    index: "02",
+    category: "DETERMINISTIC SIMULATION",
     title: "Klasim – Esports Telemetry & Scenario Modeler",
     description: "Simulator klasemen esports deterministik dan pemodel skenario probabilitas turnamen kompetitif (MPL ID, PMWC, VCT Pacific) dengan generator export instan PDF & Excel.",
     image: "/projects/klasim.svg",
@@ -61,13 +67,16 @@ const projectsData = [
       "UI responsif dengan telemetry board ala broadcast esports internasional"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Neon DB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "Prisma ORM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "PostgreSQL & Prisma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
     ],
   },
   {
+    index: "03",
+    category: "ENTERPRISE ACADEMIC CLOUD",
     title: "TK Cahaya Hati – Integrated Academic Portal",
     description: "Portal sistem informasi akademik sekolah terpadu multi-perangkat untuk TK Cahaya Hati yang mencakup manajemen kesiswaan, monitoring absensi, tagihan SPP, dan otentikasi peran terintegrasi.",
     image: "/projects/tk-cahaya-hati.svg",
@@ -80,33 +89,39 @@ const projectsData = [
       "Portal multi-device terenkripsi dengan Clerk Auth"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "Neon DB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "Prisma ORM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "PostgreSQL & Prisma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
     ],
   },
   {
-    title: "SenKuni – AI Chess Analyzer",
-    description: "Platform analisis posisi catur reaktif yang mengintegrasikan mesin catur Stockfish dengan asisten pelatih berbasis Gemini AI untuk memberikan evaluasi real-time serta panduan strategi bidak secara akurat.",
+    index: "04",
+    category: "CHESS ENGINE & MULTI-LLM",
+    title: "SenKuni – AI Chess Analyzer & Coach",
+    description: "Platform analisis posisi catur reaktif yang mengintegrasikan mesin catur Stockfish dengan asisten pelatih berbasis Claude AI & Gemini AI untuk memberikan evaluasi real-time serta panduan strategi bidak secara akurat.",
     image: "/projects/senkuni.jpg",
     liveLink: "https://senkuni.vercel.app",
     githubLink: "https://github.com/RobertDace/SenKuni",
     highlights: [
       "Integrasi Stockfish 16 Engine untuk kalkulasi kedalaman evaluasi centipawn",
-      "Asisten AI Coach (Gemini AI) yang menjelaskan alasan blunder & taktik langkah",
+      "Asisten AI Coach (Claude & Gemini AI) yang menjelaskan alasan blunder & taktik langkah",
       "Papan catur interaktif dengan animasi gerak bidak mulus",
       "Analisis PGN & FEN instan dengan visualisasi keunggulan posisi"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Claude AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anthropic/anthropic-original.svg" },
+      { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
       { name: "Stockfish 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
     ],
   },
   {
-    title: "SheTI – Sakti HRD Automator",
+    index: "05",
+    category: "INTELLIGENT OCR AUTOMATION",
+    title: "SheTI – Sakti HRD & Smart Document OCR",
     description: "Alat otomatisasi administrasi perkantoran dan HRD berbasis AI dengan fitur utama pengolah dokumen cerdas, Smart OCR untuk konversi kuitansi ke tabel otomatis, serta generator surat dinas instan.",
     image: "/projects/sheti.jpg",
     liveLink: "https://she-ti.vercel.app",
@@ -115,17 +130,20 @@ const projectsData = [
       "Smart OCR: Ekstraksi kuitansi fisik menjadi tabel keuangan digital",
       "Generator Surat Dinas & Dokumen HRD otomatis dalam hitungan detik",
       "Otomatisasi pengarsipan dan validasi kelengkapan berkas karyawan",
-      "Integrasi Gemini AI untuk perangkum dokumen cerdas"
+      "Integrasi Claude AI & Gemini AI untuk perangkum dokumen cerdas"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Claude AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anthropic/anthropic-original.svg" },
       { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
+      { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
     ],
   },
   {
-    title: "SemarMaca – E-Catalog FH UWGM",
+    index: "06",
+    category: "LEGAL AI & REPOSITORY",
+    title: "SemarMaca – Smart Legal E-Catalog",
     description: "Platform smart e-catalog dan repositori hukum digital untuk FH UWGM yang dilengkapi dengan fitur AI legal assistant, sistem audit plagiarisme, pemetaan perpustakaan interaktif, dan QR ticketing.",
     image: "/projects/semarmaca.jpg",
     liveLink: "https://semar-maca.vercel.app",
@@ -137,13 +155,16 @@ const projectsData = [
       "Database repositori jurnal digital terenkripsi"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+      { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
+      { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
     ],
   },
   {
+    index: "07",
+    category: "WEB AUDIO LAB & LO-FI",
     title: "Snacky – Interactive Lo-Fi Audio & Creative Room",
     description: "Ruang santai virtual dan pemutar audio lo-fi interaktif dengan rak vinyl berputar, kartu gacha kelinci koleksi, ambient soundscape generator, dan instrumen pad kreatif.",
     image: "/projects/snacky.svg",
@@ -156,14 +177,16 @@ const projectsData = [
       "Sound pad kreatif untuk eksperimen nada langsung di web"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Web Audio API", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
     ],
   },
   {
-    title: "My Orbit – Cosmic Memory Journey & Romantic Deck",
+    index: "08",
+    category: "CREATIVE 3D EXPERIENCES",
+    title: "My Orbit – Cosmic Memory Journey & Deck",
     description: "Pengalaman web interaktif bertema kosmik dan perjalanan memori personal dengan latar bintang live, modul countdown real-time, dek kartu interaktif, dan pemutar musik terintegrasi.",
     image: "/projects/my-orbit.svg",
     liveLink: "https://myorbit-omega.vercel.app",
@@ -175,52 +198,37 @@ const projectsData = [
       "Audio player terintegrasi dengan pemutar lirik estetik"
     ],
     tools: [
-      { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
-      { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "React 19", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Framer Motion", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" },
     ],
   },
 ];
 
-type DrawerMode = "overview" | "desktop" | "mobile";
+type ModalTab = "preview" | "architecture" | "mobile";
 
 export default function Projects() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [drawerMode, setDrawerMode] = useState<DrawerMode>("overview");
+  const [modalTab, setModalTab] = useState<ModalTab>("preview");
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoading, setIsIframeLoading] = useState(true);
-  const [hasIframeTimeout, setHasIframeTimeout] = useState(false);
   const isMounted = useIsMounted();
   const isScrollingRef = useRef(false);
 
-  const handleSelectProject = (project: typeof projectsData[0]) => {
+  const handleOpenModal = (project: typeof projectsData[0], initialTab: ModalTab = "preview") => {
     setSelectedProject(project);
-    setDrawerMode("overview");
+    setModalTab(initialTab);
     setIsIframeLoading(true);
-    setHasIframeTimeout(false);
     setIframeKey((prev) => prev + 1);
   };
 
   const handleReloadIframe = () => {
     setIsIframeLoading(true);
-    setHasIframeTimeout(false);
     setIframeKey((prev) => prev + 1);
   };
-
-  // 7s fallback timeout detector for slow iframe connections
-  useEffect(() => {
-    if ((drawerMode === "desktop" || drawerMode === "mobile") && isIframeLoading) {
-      const timer = setTimeout(() => {
-        if (isIframeLoading) {
-          setHasIframeTimeout(true);
-        }
-      }, 7000);
-      return () => clearTimeout(timer);
-    }
-  }, [drawerMode, isIframeLoading, iframeKey]);
 
   useEffect(() => {
     if (selectedProject) {
@@ -315,7 +323,7 @@ export default function Projects() {
               </span>
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm max-w-xl leading-relaxed">
-              Kumpulan aplikasi berbasis Artificial Intelligence (AI), logistik internasional, dan arsitektur web modern yang dirancang untuk efisiensi sistem.
+              Aplikasi berbasis multi-LLM (Claude &amp; Gemini), serverless database, logistik internasional, dan arsitektur web modern.
             </p>
           </div>
 
@@ -330,9 +338,7 @@ export default function Projects() {
               }`}
               aria-label="Previous Project"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeft className="w-5 h-5" />
             </button>
 
             <button
@@ -345,15 +351,13 @@ export default function Projects() {
               }`}
               aria-label="Next Project"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-              </svg>
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
       </motion.div>
 
-      {/* HORIZONTAL CAROUSEL */}
+      {/* HORIZONTAL CAROUSEL DENGAN KARTU KREATIF & 0 LAG (GPU ACCELERATED) */}
       <div className="w-full space-y-6">
         <div
           ref={carouselRef}
@@ -364,50 +368,74 @@ export default function Projects() {
           {projectsData.map((project, idx) => (
             <div
               key={idx}
-              onClick={() => handleSelectProject(project)}
-              className="carousel-card snap-start w-[85vw] sm:w-[380px] lg:w-[420px] flex-shrink-0 bg-slate-900/50 hover:bg-slate-900/80 border border-slate-800/80 hover:border-cyan-500/50 rounded-[28px] p-4 flex flex-col justify-between shadow-xl cursor-pointer transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(6,182,212,0.08)] group backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
+              onClick={() => handleOpenModal(project, "preview")}
+              className="carousel-card snap-start w-[85vw] sm:w-[390px] lg:w-[430px] flex-shrink-0 bg-slate-900/50 hover:bg-slate-900/85 border border-slate-800/80 hover:border-cyan-500/60 rounded-[30px] p-4 sm:p-5 flex flex-col justify-between shadow-xl cursor-pointer transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(6,182,212,0.12)] group backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none select-none"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  handleSelectProject(project);
+                  handleOpenModal(project, "preview");
                 }
               }}
             >
               <div className="space-y-4">
-                <div className="w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-slate-950 relative border border-slate-800/70">
+                {/* Header Card: Category & Number Identifier */}
+                <div className="flex items-center justify-between px-1 text-[11px] font-mono">
+                  <span className="text-cyan-400 font-bold tracking-wider uppercase">
+                    {project.category}
+                  </span>
+                  <span className="text-slate-500 font-bold tabular-nums">
+                    [{project.index} / 08]
+                  </span>
+                </div>
+
+                {/* Banner Thumbnail dengan Overlay Tombol Antigravity Pop-up */}
+                <div className="w-full aspect-[16/10] rounded-[22px] overflow-hidden bg-slate-950 relative border border-slate-800/70">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     unoptimized={project.image.endsWith(".svg")}
-                    sizes="(max-width: 640px) 85vw, 420px"
+                    sizes="(max-width: 640px) 85vw, 430px"
                     className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 will-change-transform"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   
-                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-slate-900/90 border border-cyan-500/40 text-[10px] font-mono font-bold text-cyan-300 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1.5 shadow-lg">
+                  {/* Subtle vignette hover gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Floating Interactive Pop-up Pill (Antigravity Style Trigger) */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-100 scale-90 pointer-events-none">
+                    <div className="px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-400/60 text-xs font-bold text-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.4)] backdrop-blur-md flex items-center gap-2">
+                      <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Launch Interactive Theater</span>
+                    </div>
+                  </div>
+
+                  {/* Badge Live Simulator */}
+                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-slate-950/85 border border-slate-800 text-[10px] font-mono font-bold text-slate-300 backdrop-blur-md flex items-center gap-1.5 shadow-md">
                     <Laptop className="w-3 h-3 text-cyan-400" />
                     <span>Live Simulator</span>
                   </div>
                 </div>
 
+                {/* Info Proyek */}
                 <div className="px-1 space-y-2">
-                  <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-100 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-black tracking-tight text-slate-100 group-hover:text-cyan-300 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-medium line-clamp-3">
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal line-clamp-3">
                     {project.description}
                   </p>
                 </div>
               </div>
 
+              {/* Stack Pills Footer */}
               <div className="flex flex-wrap gap-1.5 pt-4 px-1 border-t border-slate-800/50 mt-4">
                 {project.tools.map((tool, tIdx) => (
                   <div
                     key={tIdx}
                     onClick={(e) => e.stopPropagation()}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/70 border border-slate-700/50 text-[10px] sm:text-xs font-semibold text-slate-300 hover:text-cyan-400 hover:border-cyan-400/40 shadow-sm cursor-pointer transition-all duration-200 hover:scale-105"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/60 border border-slate-700/50 text-[10px] sm:text-xs font-semibold text-slate-300 shadow-sm cursor-default"
                   >
                     <Image
                       src={tool.logo}
@@ -425,6 +453,7 @@ export default function Projects() {
           ))}
         </div>
 
+        {/* Pagination Indicators */}
         <div className="flex items-center justify-center gap-2 pt-6">
           {projectsData.map((_, dotIdx) => (
             <button
@@ -441,192 +470,246 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* JENDELA DRAWER & DEVICE MOCKUP SIMULATOR MODAL (VIA CREATEPORTAL DI ATAS SELURUH HALAMAN & NAVBAR) */}
+      {/* ANTIGRAVITY-STYLE THEATER POPUP MODAL (LIGHTBOX POPUP DI TENGAH LAYAR) */}
       {isMounted && createPortal(
         <AnimatePresence>
           {selectedProject && (
-            <>
-              {/* Backdrop Gelap Belakang yang Menutupi Seluruh Halaman termasuk Floating Navbar */}
+            <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto">
+              
+              {/* Cinematic Backdrop Blur yang Menutupi Seluruh Halaman Termasuk Navbar */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedProject(null)}
-                className="fixed inset-0 bg-black/85 backdrop-blur-md z-[99998] pointer-events-auto cursor-pointer"
+                className="fixed inset-0 bg-black/90 backdrop-blur-xl -z-10 cursor-pointer"
               />
 
-              {/* Panel Samping / Simulator Modal Meluncur dari Kanan (Di Atas Backdrop & Navbar) */}
+              {/* Theater Window Chassis */}
               <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "tween", duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed right-0 top-0 bottom-0 h-full w-full ${
-                  drawerMode === "overview" 
-                    ? "sm:w-[540px] lg:w-[600px]" 
-                    : "sm:w-[780px] lg:w-[940px] xl:w-[1020px]"
-                } bg-[#0b0f19] border-l border-slate-800/90 z-[99999] shadow-2xl flex flex-col justify-between pointer-events-auto font-sans transition-all duration-500`}
+                initial={{ opacity: 0, scale: 0.94, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: 15 }}
+                transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                className="w-full max-w-5xl max-h-[92vh] bg-[#070a12] border border-slate-800/90 rounded-[28px] shadow-[0_25px_70px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col font-sans relative select-none"
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="drawer-title"
               >
-                {/* Top Navigation Bar: Device Tabs & Close */}
-                <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-800/90 bg-slate-950/90 backdrop-blur-md z-20">
-                  <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800">
+                {/* Top Control Bar: Mode Tabs, SSL URL & Actions */}
+                <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md flex-shrink-0 gap-3">
+                  
+                  {/* Left: Interactive Mode Switcher */}
+                  <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-900/90 border border-slate-800">
                     <button
-                      onClick={() => setDrawerMode("overview")}
-                      className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
-                        drawerMode === "overview"
+                      onClick={() => setModalTab("preview")}
+                      className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+                        modalTab === "preview"
                           ? "text-slate-950"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
-                      {drawerMode === "overview" && (
+                      {modalTab === "preview" && (
                         <motion.div
-                          layoutId="drawerTabPill"
-                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                        />
-                      )}
-                      <FileText className="w-3.5 h-3.5" />
-                      <span>Overview</span>
-                    </button>
-
-                    <button
-                      onClick={() => setDrawerMode("desktop")}
-                      className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
-                        drawerMode === "desktop"
-                          ? "text-slate-950"
-                          : "text-slate-400 hover:text-slate-200"
-                      }`}
-                    >
-                      {drawerMode === "desktop" && (
-                        <motion.div
-                          layoutId="drawerTabPill"
+                          layoutId="theaterTabPill"
                           className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
                           transition={{ type: "spring", stiffness: 450, damping: 30 }}
                         />
                       )}
                       <Laptop className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Simulator Desktop</span>
-                      <span className="sm:hidden">Desktop</span>
+                      <span>Live Desktop</span>
                     </button>
 
                     <button
-                      onClick={() => setDrawerMode("mobile")}
-                      className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
-                        drawerMode === "mobile"
+                      onClick={() => setModalTab("mobile")}
+                      className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+                        modalTab === "mobile"
                           ? "text-slate-950"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
-                      {drawerMode === "mobile" && (
+                      {modalTab === "mobile" && (
                         <motion.div
-                          layoutId="drawerTabPill"
+                          layoutId="theaterTabPill"
                           className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
                           transition={{ type: "spring", stiffness: 450, damping: 30 }}
                         />
                       )}
                       <Smartphone className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Simulator Mobile</span>
-                      <span className="sm:hidden">Mobile</span>
+                      <span>Mobile</span>
+                    </button>
+
+                    <button
+                      onClick={() => setModalTab("architecture")}
+                      className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+                        modalTab === "architecture"
+                          ? "text-slate-950"
+                          : "text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      {modalTab === "architecture" && (
+                        <motion.div
+                          layoutId="theaterTabPill"
+                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
+                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                        />
+                      )}
+                      <Layers className="w-3.5 h-3.5" />
+                      <span>Architecture</span>
                     </button>
                   </div>
 
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all shadow-md cursor-pointer active:scale-95 flex-shrink-0 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
-                    aria-label="Tutup jendela"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+                  {/* Center: Live Domain URL Bar */}
+                  <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 max-w-sm truncate shadow-inner">
+                    <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                    <span className="truncate">{selectedProject.liveLink}</span>
+                    <button
+                      onClick={handleReloadIframe}
+                      className="ml-auto text-slate-500 hover:text-cyan-400 p-0.5 cursor-pointer"
+                      title="Reload Iframe"
+                    >
+                      <RotateCw className="w-3 h-3" />
+                    </button>
+                  </div>
+
+                  {/* Right Actions: External Link & Close */}
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={selectedProject.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400/50 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors flex items-center gap-1.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400"
+                    >
+                      <span className="hidden sm:inline">Open Tab</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all cursor-pointer active:scale-95 focus-visible:ring-2 focus-visible:ring-cyan-400"
+                      aria-label="Tutup jendela"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
                 </div>
 
-                {/* Main Content Area */}
-                <div className="overflow-y-auto no-scrollbar flex-1 relative p-4 sm:p-6 space-y-6">
+                {/* Main Theater Display Area */}
+                <div className="flex-1 overflow-y-auto no-scrollbar bg-slate-950 p-4 sm:p-6 min-h-[480px]">
                   
-                  {/* 1. OVERVIEW MODE */}
-                  {drawerMode === "overview" && (
+                  {/* TAB 1: LIVE DESKTOP SIMULATOR */}
+                  {modalTab === "preview" && (
+                    <div className="w-full h-[520px] sm:h-[620px] rounded-2xl bg-slate-950 border border-slate-800/80 shadow-2xl overflow-hidden relative">
+                      {isIframeLoading && (
+                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
+                          <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                          <span className="text-xs font-mono text-slate-400">Loading interactive sandbox...</span>
+                        </div>
+                      )}
+                      <iframe
+                        key={`desktop-${iframeKey}`}
+                        src={selectedProject.liveLink}
+                        title={`${selectedProject.title} Interactive Sandbox`}
+                        onLoad={() => setIsIframeLoading(false)}
+                        className="w-full h-full border-0 bg-slate-950"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      />
+                    </div>
+                  )}
+
+                  {/* TAB 2: MOBILE DEVICE FRAME */}
+                  {modalTab === "mobile" && (
+                    <div className="flex flex-col items-center justify-center py-2">
+                      <div className="w-[310px] sm:w-[350px] h-[580px] sm:h-[640px] rounded-[48px] border-[8px] border-slate-800/90 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
+                        {/* Dynamic Island Status Bar */}
+                        <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-2 select-none z-20">
+                          <span className="text-[11px] font-bold text-slate-200 tabular-nums font-mono">09:41</span>
+                          <div className="w-24 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
+                            <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
+                          </div>
+                          <span className="text-[10px] text-slate-300 font-mono">5G</span>
+                        </div>
+
+                        <div className="relative flex-1 w-full bg-slate-950 overflow-hidden">
+                          {isIframeLoading && (
+                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-sm">
+                              <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                              <span className="text-[11px] font-mono text-slate-400">Loading mobile view...</span>
+                            </div>
+                          )}
+                          <iframe
+                            key={`mobile-${iframeKey}`}
+                            src={selectedProject.liveLink}
+                            title={`${selectedProject.title} Mobile Simulator`}
+                            onLoad={() => setIsIframeLoading(false)}
+                            className="w-full h-full border-0 bg-slate-950"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                          />
+                        </div>
+
+                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20">
+                          <div className="w-32 h-1 rounded-full bg-slate-600" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 3: ARCHITECTURE & BLUEPRINT */}
+                  {modalTab === "architecture" && (
                     <motion.div
-                      initial={{ opacity: 0, y: 15 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="space-y-6"
+                      className="space-y-6 max-w-3xl mx-auto py-2"
                     >
-                      <div className="w-full aspect-[16/10] bg-slate-950 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl">
+                      <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
                         <Image
                           src={selectedProject.image}
                           alt={selectedProject.title}
                           fill
                           unoptimized={selectedProject.image.endsWith(".svg")}
-                          sizes="(max-width: 640px) 100vw, 600px"
+                          sizes="800px"
                           className="object-cover object-center"
-                          priority
                         />
                       </div>
 
                       <div className="space-y-3">
-                        <h3 id="drawer-title" className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+                        <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
+                          {selectedProject.category}
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl font-black text-white">
                           {selectedProject.title}
                         </h3>
-                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal max-w-prose">
+                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
                           {selectedProject.description}
                         </p>
                       </div>
 
-                      <div 
-                        onClick={() => setDrawerMode("desktop")}
-                        className="p-4 rounded-2xl bg-gradient-to-r from-cyan-950/60 via-slate-900 to-emerald-950/40 border border-cyan-500/30 hover:border-cyan-400/60 cursor-pointer transition-all flex items-center justify-between group focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setDrawerMode("desktop");
-                          }
-                        }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="p-2.5 rounded-xl bg-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform">
-                            <Laptop className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                              Coba Langsung di Simulator Interaktif
-                            </h4>
-                            <p className="text-[11px] text-slate-400">
-                              Uji live demo di layar laptop &amp; smartphone virtual
-                            </p>
-                          </div>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                      {/* Highlights */}
+                      <div className="space-y-3 pt-2">
+                        <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>Key Architecture &amp; System Design</span>
+                        </h4>
+                        <ul className="space-y-2.5">
+                          {selectedProject.highlights.map((h, hIdx) => (
+                            <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                              <span className="leading-relaxed">{h}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
 
-                      {selectedProject.highlights && (
-                        <div className="space-y-3 pt-2">
-                          <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            <span>Arsitektur &amp; Fitur Unggulan</span>
-                          </h4>
-                          <ul className="space-y-2.5">
-                            {selectedProject.highlights.map((highlight, hIdx) => (
-                              <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                                <span className="leading-relaxed">{highlight}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
+                      {/* Tech Stack */}
                       <div className="space-y-3 pt-2">
-                        <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase">
-                          Technologies &amp; Core Stack
+                        <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">
+                          Deployed Technologies
                         </h4>
-                        <div className="flex flex-wrap gap-2.5">
+                        <div className="flex flex-wrap gap-2">
                           {selectedProject.tools.map((tool, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 hover:text-cyan-400 hover:border-cyan-400/40 shadow-md cursor-pointer transition-all duration-200"
+                              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200 shadow-md"
                             >
                               <Image
                                 src={tool.logo}
@@ -644,191 +727,27 @@ export default function Projects() {
                     </motion.div>
                   )}
 
-                  {/* 2. DESKTOP SIMULATOR MODE */}
-                  {drawerMode === "desktop" && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                      className="space-y-4"
-                    >
-                      <div className="w-full rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden flex flex-col">
-                        <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800 select-none">
-                          <div className="flex items-center gap-2">
-                            <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                            <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                            <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                          </div>
-
-                          <div className="flex-1 max-w-md mx-4 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 flex items-center justify-between shadow-inner">
-                            <div className="flex items-center gap-1.5 truncate">
-                              <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-                              <span className="truncate">{selectedProject.liveLink}</span>
-                            </div>
-                            <button
-                              onClick={handleReloadIframe}
-                              className="text-slate-400 hover:text-cyan-400 transition-colors p-0.5 cursor-pointer focus-visible:ring-1 focus-visible:ring-cyan-400"
-                              title="Reload Simulator"
-                            >
-                              <RotateCw className="w-3 h-3" />
-                            </button>
-                          </div>
-
-                          <a
-                            href={selectedProject.liveLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-400 hover:text-cyan-400 transition-colors p-1 cursor-pointer focus-visible:ring-1 focus-visible:ring-cyan-400 rounded-sm"
-                            title="Buka di tab baru"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </div>
-
-                        <div className="relative w-full h-[520px] sm:h-[580px] bg-slate-950 overflow-hidden">
-                          {isIframeLoading && !hasIframeTimeout && (
-                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
-                              <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                              <span className="text-xs font-mono text-slate-400">Menghubungkan ke server aplikasi...</span>
-                            </div>
-                          )}
-
-                          {hasIframeTimeout && (
-                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/95 p-6 text-center">
-                              <div className="p-3 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-                                <AlertTriangle className="w-6 h-6" />
-                              </div>
-                              <h4 className="text-sm font-bold text-white">Memuat Membutuhkan Waktu Tambahan</h4>
-                              <p className="text-xs text-slate-400 max-w-sm">
-                                Server live mungkin sedang dalam proses cold start. Anda dapat membukanya langsung di tab baru untuk performa instan.
-                              </p>
-                              <div className="flex items-center gap-3 pt-2">
-                                <button
-                                  onClick={handleReloadIframe}
-                                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-all cursor-pointer"
-                                >
-                                  Coba Muat Ulang
-                                </button>
-                                <a
-                                  href={selectedProject.liveLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-xs font-bold text-slate-950 transition-all flex items-center gap-1.5"
-                                >
-                                  <span>Buka Tab Baru</span>
-                                  <ExternalLink className="w-3.5 h-3.5" />
-                                </a>
-                              </div>
-                            </div>
-                          )}
-
-                          <iframe
-                            key={`desktop-${iframeKey}`}
-                            src={selectedProject.liveLink}
-                            title={`${selectedProject.title} Desktop Simulator`}
-                            onLoad={() => setIsIframeLoading(false)}
-                            className="w-full h-full border-0 bg-slate-950"
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* 3. MOBILE SIMULATOR MODE */}
-                  {drawerMode === "mobile" && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex flex-col items-center justify-center py-4 space-y-4"
-                    >
-                      <div className="w-[300px] sm:w-[340px] h-[580px] sm:h-[640px] rounded-[48px] border-[8px] border-slate-800/90 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
-                        <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-2 select-none z-20">
-                          <span className="text-[11px] font-bold text-slate-200 tabular-nums font-mono">09:41</span>
-                          
-                          <div className="w-24 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
-                          </div>
-
-                          <div className="flex items-center gap-1.5 text-[10px] text-slate-300 font-mono">
-                            <span>5G</span>
-                            <span className="w-4 h-2 rounded-xs border border-slate-400 inline-block p-0.5">
-                              <span className="w-full h-full bg-emerald-400 block" />
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="relative flex-1 w-full bg-slate-950 overflow-hidden">
-                          {isIframeLoading && !hasIframeTimeout && (
-                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-sm p-4 text-center">
-                              <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                              <span className="text-[11px] font-mono text-slate-400">Memuat tampilan mobile...</span>
-                            </div>
-                          )}
-
-                          {hasIframeTimeout && (
-                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/95 p-4 text-center">
-                              <AlertTriangle className="w-5 h-5 text-cyan-400" />
-                              <span className="text-xs font-bold text-white">Koneksi Lambat</span>
-                              <a
-                                href={selectedProject.liveLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-3 py-1.5 rounded-lg bg-cyan-400 text-[11px] font-bold text-slate-950 mt-1 inline-flex items-center gap-1"
-                              >
-                                <span>Buka Tab Baru</span>
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            </div>
-                          )}
-
-                          <iframe
-                            key={`mobile-${iframeKey}`}
-                            src={selectedProject.liveLink}
-                            title={`${selectedProject.title} Mobile Simulator`}
-                            onLoad={() => setIsIframeLoading(false)}
-                            className="w-full h-full border-0 bg-slate-950"
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                          />
-                        </div>
-
-                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20">
-                          <div className="w-32 h-1 rounded-full bg-slate-600" />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
                 </div>
 
-                {/* Footer Actions */}
-                <div className="p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 flex items-center gap-3 z-20">
-                  <a
-                    href={selectedProject.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(6,182,212,0.3)] transition-all transform active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Buka Live Website</span>
-                  </a>
-
-                  <a
-                    href={selectedProject.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-600 transition-all shadow-md flex-shrink-0 active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
-                    title="Lihat Source Code di GitHub"
-                    aria-label="Lihat Source Code di GitHub"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.008.069-.008 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                    </svg>
-                  </a>
+                {/* Footer Bar: Quick Links */}
+                <div className="px-4 sm:px-6 py-3 bg-slate-950 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={selectedProject.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors flex items-center gap-1.5"
+                    >
+                      <span>Repository Code</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                  <span className="text-slate-500 hidden sm:inline">Press ESC to dismiss</span>
                 </div>
+
               </motion.div>
-            </>
+
+            </div>
           )}
         </AnimatePresence>,
         document.body

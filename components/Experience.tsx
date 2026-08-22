@@ -162,8 +162,8 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                   </span>
                 </div>
 
-                {/* Animated Topology Nodes */}
-                <div className="h-28 relative flex items-center justify-between px-4">
+                {/* Animated Topology Nodes with full span 0% to 100% packet travel */}
+                <div className="h-28 relative flex items-center justify-between px-2 sm:px-4">
                   {/* Gateway Node */}
                   <div className="flex flex-col items-center gap-1.5 z-10">
                     <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
@@ -172,12 +172,21 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                     <span className="text-[10px] font-mono text-slate-400">Gateway</span>
                   </div>
 
-                  {/* Connecting Line with flowing particle */}
-                  <div className="flex-1 h-0.5 bg-gradient-to-r from-cyan-500/40 via-sky-500/20 to-emerald-500/40 mx-2 relative">
+                  {/* Connecting Line with seamless flowing particle across entire line */}
+                  <div className="flex-1 h-1 bg-slate-800 rounded-full mx-3 relative overflow-visible">
+                    {/* Glowing progress rail */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/50 via-sky-400/40 to-emerald-400/50 rounded-full" />
+                    
+                    {/* Moving Data Packet */}
                     <motion.div
-                      animate={{ x: ["0%", "100%"] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      className="w-3 h-3 rounded-full bg-cyan-400 -top-1.5 absolute shadow-[0_0_8px_#06b6d4]"
+                      animate={{ left: ["0%", "100%"] }}
+                      transition={{ 
+                        duration: 2.2, 
+                        repeat: Infinity, 
+                        ease: "easeInOut"
+                      }}
+                      style={{ position: "absolute", top: "-4px" }}
+                      className="w-3 h-3 rounded-full bg-cyan-300 -translate-x-1/2 shadow-[0_0_10px_#22d3ee,0_0_20px_#06b6d4]"
                     />
                   </div>
 

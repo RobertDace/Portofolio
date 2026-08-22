@@ -3,14 +3,73 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-// Data Keahlian Nyata Fullstack & AI Engineer
-const skills = [
+// Custom SVG Icons for stacks that need crisp high-resolution rendering
+const ClaudeIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M16.5 4.5C15.8 4.1 14.8 4 13.7 4.2C12.4 4.5 11.3 5.4 10.8 6.6L4.5 19.5H8.2L9.6 16.5H16.4L17.8 19.5H21.5L16.5 4.5ZM11.1 13.5L13.5 8.2L15.9 13.5H11.1Z"
+      fill="#D97706"
+    />
+    <path
+      d="M13.5 8.2L15.9 13.5H11.1L13.5 8.2Z"
+      fill="#F59E0B"
+    />
+  </svg>
+);
+
+const NeonIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M12 2L3 7V17L12 22L21 17V7L12 2Z"
+      stroke="#00E599"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12 6L7 9V15L12 18L17 15V9L12 6Z"
+      fill="#00E599"
+      fillOpacity="0.25"
+      stroke="#00E599"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M12 10L9.5 11.5V14.5L12 16L14.5 14.5V11.5L12 10Z"
+      fill="#00E599"
+    />
+  </svg>
+);
+
+const ClerkIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M6 8C6 5.79086 7.79086 4 10 4H14C16.2091 4 18 5.79086 18 8V16C18 18.2091 16.2091 20 14 20H10C7.79086 20 6 18.2091 6 16V8Z"
+      stroke="#6C47FF"
+      strokeWidth="2"
+    />
+    <path
+      d="M10 9L14 15M14 9L10 15"
+      stroke="#6C47FF"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+interface SkillItem {
+  name: string;
+  logo?: string;
+  customIcon?: React.ReactNode;
+}
+
+// Tech stack yang dianalisis dari seluruh proyek nyata (Jastip, Klasim, TK Cahaya Hati, SenKuni, SheTI, SemarMaca, Snacky, My Orbit)
+const skillsRow1: SkillItem[] = [
   {
-    name: "Next.js",
+    name: "Next.js 16",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
   },
   {
-    name: "React",
+    name: "React 19",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   },
   {
@@ -18,36 +77,47 @@ const skills = [
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
   },
   {
-    name: "Tailwind CSS",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    name: "Python",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  },
-  {
-    name: "PostgreSQL",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "Supabase",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
-  },
-  {
-    name: "Prisma",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
+    name: "Claude AI",
+    customIcon: <ClaudeIcon />,
   },
   {
     name: "Gemini AI",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg",
   },
   {
-    name: "Node.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+    name: "Neon DB",
+    customIcon: <NeonIcon />,
   },
   {
-    name: "Git",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+    name: "Supabase",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
+  },
+  {
+    name: "Tailwind CSS",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+  },
+];
+
+const skillsRow2: SkillItem[] = [
+  {
+    name: "Prisma ORM",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
+  },
+  {
+    name: "PostgreSQL",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+  },
+  {
+    name: "Clerk Auth",
+    customIcon: <ClerkIcon />,
+  },
+  {
+    name: "Python",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  {
+    name: "Node.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
   },
   {
     name: "Docker",
@@ -58,18 +128,14 @@ const skills = [
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
   },
   {
-    name: "Figma",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    name: "Git & GitHub",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
   },
 ];
 
 export default function Skills() {
-  const row1 = skills.slice(0, 7);
-  const row2 = skills.slice(7, 14);
-
-  // Duplikasi 2x sudah cukup untuk perputaran infinite translate3d(-50%)
-  const doubleRow1 = [...row1, ...row1];
-  const doubleRow2 = [...row2, ...row2];
+  const doubleRow1 = [...skillsRow1, ...skillsRow1];
+  const doubleRow2 = [...skillsRow2, ...skillsRow2];
 
   return (
     <section
@@ -95,7 +161,7 @@ export default function Skills() {
           </span>
         </h2>
         <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Teknologi, bahasa pemrograman, dan ekosistem AI modern yang saya gunakan untuk merancang dan mendeploy aplikasi web berperforma tinggi.
+          Teknologi, serverless database, dan ekosistem AI modern yang saya gunakan untuk merancang dan mendeploy aplikasi web berperforma tinggi.
         </p>
       </motion.div>
 
@@ -113,15 +179,19 @@ export default function Skills() {
                 key={`row1-${idx}`}
                 className="group/item flex items-center gap-3.5 px-6 py-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-slate-900/90 transition-colors duration-200 shadow-md flex-shrink-0 cursor-default backdrop-blur-sm"
               >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 transition-transform duration-200 group-hover/item:scale-110">
-                  <Image
-                    src={skill.logo}
-                    alt={skill.name}
-                    width={32}
-                    height={32}
-                    unoptimized
-                    className="w-full h-full object-contain"
-                  />
+                <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 transition-transform duration-200 group-hover/item:scale-110 flex items-center justify-center">
+                  {skill.customIcon ? (
+                    skill.customIcon
+                  ) : (
+                    <Image
+                      src={skill.logo!}
+                      alt={skill.name}
+                      width={32}
+                      height={32}
+                      unoptimized
+                      className="w-full h-full object-contain"
+                    />
+                  )}
                 </div>
                 <span className="font-bold text-base sm:text-lg text-slate-100 group-hover/item:text-cyan-400 transition-colors">
                   {skill.name}
@@ -139,15 +209,19 @@ export default function Skills() {
                 key={`row2-${idx}`}
                 className="group/item flex items-center gap-3.5 px-6 py-3.5 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-slate-900/90 transition-colors duration-200 shadow-md flex-shrink-0 cursor-default backdrop-blur-sm"
               >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 transition-transform duration-200 group-hover/item:scale-110">
-                  <Image
-                    src={skill.logo}
-                    alt={skill.name}
-                    width={32}
-                    height={32}
-                    unoptimized
-                    className="w-full h-full object-contain"
-                  />
+                <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 transition-transform duration-200 group-hover/item:scale-110 flex items-center justify-center">
+                  {skill.customIcon ? (
+                    skill.customIcon
+                  ) : (
+                    <Image
+                      src={skill.logo!}
+                      alt={skill.name}
+                      width={32}
+                      height={32}
+                      unoptimized
+                      className="w-full h-full object-contain"
+                    />
+                  )}
                 </div>
                 <span className="font-bold text-base sm:text-lg text-slate-100 group-hover/item:text-cyan-400 transition-colors">
                   {skill.name}
