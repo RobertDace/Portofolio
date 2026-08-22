@@ -66,10 +66,10 @@ export default function About() {
 
           {/* Text Box dengan Angled 3D Perspective Glass Panel */}
           <div className="border-l-4 border-cyan-400 bg-slate-900/40 backdrop-blur-md rounded-r-3xl p-6 sm:p-7 space-y-4 shadow-2xl [transform:perspective(900px)_rotateY(-2deg)] hover:[transform:perspective(900px)_rotateY(0deg)] transition-all duration-500 border-y border-r border-slate-800/80">
-            <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-medium">
+            <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-medium max-w-prose">
               Sebagai Full-Stack Developer dan AI Integrator, saya berfokus mengubah kebutuhan sistem dan alur kerja yang kompleks menjadi aplikasi web yang efisien, reaktif, dan modern.
             </p>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-prose">
               Dari digitalisasi administrasi operasional, integrasi kecerdasan buatan, hingga perancangan arsitektur frontend reaktif, saya menikmati proses membangun solusi digital skala tinggi dari nol yang terukur dan memberikan dampak nyata.
             </p>
           </div>
@@ -80,7 +80,7 @@ export default function About() {
               <a
                 href="https://drive.google.com/file/d/1_nxG0NW8VHmwFDwsLMWEVERtDNi7ZAC9/view?usp=drive_link"
                 download
-                className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900 border border-slate-700 text-slate-100 hover:border-cyan-400 hover:text-cyan-300 flex items-center gap-2.5 shadow-xl transition-colors group"
+                className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900 border border-slate-700 text-slate-100 hover:border-cyan-400 hover:text-cyan-300 flex items-center gap-2.5 shadow-xl transition-colors group focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
               >
                 <Download className="w-4 h-4 text-cyan-400 group-hover:translate-y-0.5 transition-transform" />
                 <span>UNDUH CV</span>

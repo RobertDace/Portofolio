@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -116,7 +116,7 @@ export default function Navbar() {
         {/* Brand Logo */}
         <button
           onClick={() => scrollTo("hero")}
-          className="flex items-center pl-2.5 pr-2 py-1 text-cyan-400 font-black text-xs sm:text-sm tracking-wider border-r border-slate-800 mr-1 cursor-pointer transition-transform active:scale-95 flex-shrink-0"
+          className="flex items-center pl-2.5 pr-2 py-1 text-cyan-400 font-black text-xs sm:text-sm tracking-wider border-r border-slate-800 mr-1 cursor-pointer transition-transform active:scale-95 flex-shrink-0 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none rounded-lg"
           aria-label="Kembali ke atas"
         >
           2OB1T
@@ -131,7 +131,7 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`relative w-9 h-9 md:w-auto md:h-auto flex items-center justify-center gap-1.5 md:px-3.5 md:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-90 flex-shrink-0 ${
+                className={`relative w-9 h-9 md:w-auto md:h-auto flex items-center justify-center gap-1.5 md:px-3.5 md:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-90 flex-shrink-0 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
                   isActive
                     ? "text-slate-950 font-bold"
                     : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/40"

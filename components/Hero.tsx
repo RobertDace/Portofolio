@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -89,62 +89,70 @@ export default function Hero() {
     }, 30);
   };
 
-  // Antigravity Typewriter Text Loop Effect
   useEffect(() => {
-    const currentRole = roles[roleIndex];
-    let timer: NodeJS.Timeout;
+    const currentFullRole = roles[roleIndex];
+    let timeout: NodeJS.Timeout;
 
-    if (!isDeleting && displayText.length < currentRole.length) {
-      timer = setTimeout(() => {
-        setDisplayText(currentRole.substring(0, displayText.length + 1));
-      }, 70);
-    } else if (!isDeleting && displayText.length === currentRole.length) {
-      timer = setTimeout(() => {
-        setIsDeleting(true);
-      }, 2200);
-    } else if (isDeleting && displayText.length > 0) {
-      timer = setTimeout(() => {
-        setDisplayText(currentRole.substring(0, displayText.length - 1));
-      }, 35);
-    } else if (isDeleting && displayText.length === 0) {
-      timer = setTimeout(() => {
+    if (!isDeleting && displayText === currentFullRole) {
+      // Pause saat teks selesai diketik
+      timeout = setTimeout(() => setIsDeleting(true), 2400);
+    } else if (isDeleting && displayText === "") {
+      // Pindah ke role berikutnya secara asinkron
+      timeout = setTimeout(() => {
         setIsDeleting(false);
         setRoleIndex((prev) => (prev + 1) % roles.length);
-      }, 300);
+      }, 400);
+    } else {
+      // Kecepatan mengetik dan menghapus
+      const speed = isDeleting ? 30 : 65;
+      timeout = setTimeout(() => {
+        setDisplayText(
+          isDeleting
+            ? currentFullRole.substring(0, displayText.length - 1)
+            : currentFullRole.substring(0, displayText.length + 1)
+        );
+      }, speed);
     }
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timeout);
   }, [displayText, isDeleting, roleIndex]);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (el) {
+      const yOffset = -20;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   return (
-    <section id="hero" className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-28 pb-16 max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto relative z-10 scroll-mt-20 overflow-hidden"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
         
-        {/* Sisi Kiri: Informasi Utama (7 Kolom) */}
+        {/* Sisi Kiri: Teks Tipografi Editorial & CTA (7 Kolom) */}
         <div className="lg:col-span-7 space-y-6 text-left">
           
-          {/* Label Pembuka "Hi, Saya" */}
+          {/* Label Editorial Sub-header */}
           <motion.div
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-2 text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase"
           >
-            <span className="text-sm sm:text-base font-mono font-semibold tracking-widest text-cyan-400 uppercase block">
-              Hi, Saya
-            </span>
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping inline-block" />
+            <span>Hi, Saya</span>
           </motion.div>
 
-          {/* Nama Utama: Font & Ukuran 100% Selaras & Sejajar */}
+          {/* Heading Nama Besar Berkarakter Tinggi */}
           <motion.h1
-            initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
+            initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-100 leading-[1.08]"
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl sm:text-6xl xl:text-7xl font-black tracking-tight text-white leading-[1.08] font-sans"
           >
             ALFIAN{" "}
             <span
@@ -184,7 +192,7 @@ export default function Hero() {
                 href="https://github.com/RobertDace"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all block shadow-md"
+                className="p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all block shadow-md focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
                 aria-label="GitHub"
               >
                 <GithubIcon />
@@ -196,7 +204,7 @@ export default function Hero() {
                 href="https://instagram.com/alfrbtt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-pink-400 hover:border-pink-500/50 transition-all block shadow-md"
+                className="p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-pink-400 hover:border-pink-500/50 transition-all block shadow-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:outline-none"
                 aria-label="Instagram"
               >
                 <InstagramIcon />
@@ -209,7 +217,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-lg"
+            className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-prose font-normal"
           >
             Membangun aplikasi web reaktif yang presisi, interaktif, dan berpusat pada pengalaman pengguna modern serta integrasi sistem kecerdasan buatan cerdas.
           </motion.p>
@@ -222,14 +230,14 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-4 pt-4"
           >
             <MagneticButton onClick={() => scrollToSection("projects")}>
-              <div className="px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-300 text-slate-950 flex items-center gap-2 shadow-lg shadow-cyan-950/40 hover:opacity-95 transition-all">
+              <div className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-300 text-slate-950 flex items-center gap-2 shadow-lg shadow-cyan-950/40 hover:opacity-95 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none">
                 <FolderGit2 className="w-4 h-4" />
                 <span>Lihat Proyek</span>
               </div>
             </MagneticButton>
 
             <MagneticButton onClick={() => scrollToSection("contact")}>
-              <div className="px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900/80 border border-slate-800 text-slate-200 flex items-center gap-2 hover:border-slate-700 hover:text-cyan-400 transition-all">
+              <div className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900/80 border border-slate-800 text-slate-200 flex items-center gap-2 hover:border-slate-700 hover:text-cyan-400 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none">
                 <Mail className="w-4 h-4 text-cyan-400" />
                 <span>Hubungi Saya</span>
               </div>

@@ -42,7 +42,6 @@ export default function Contact() {
       return;
     }
 
-    // Validasi format email sederhana
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus("error");
@@ -97,7 +96,7 @@ export default function Contact() {
                   Touch.
                 </span>
               </h2>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium">
+              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium max-w-prose">
                 Punya ide proyek, pertanyaan, atau ingin mendiskusikan peluang kolaborasi sistem AI dan web? Silakan kirimkan pesan langsung melalui form atau kontak di bawah ini.
               </p>
             </div>
@@ -105,22 +104,22 @@ export default function Contact() {
             {/* Info Kontak Ramping */}
             <div className="space-y-3">
               {/* Email Info */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 shadow-sm">
+              <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-900/40 border border-slate-800/60 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
-                    <span className="text-[9px] font-bold tracking-wider text-slate-500 block uppercase">EMAIL</span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-500 block uppercase font-mono">EMAIL</span>
                     <span className="text-xs sm:text-sm font-bold text-slate-200 break-all">{emailAddress}</span>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="ml-2 px-2.5 py-1.5 rounded-md bg-slate-800/60 hover:bg-slate-800 text-[10px] font-bold text-cyan-400 transition-colors flex-shrink-0 border border-slate-700/50"
+                  className="ml-2 px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-[10px] font-mono font-bold text-cyan-400 transition-colors flex-shrink-0 border border-slate-700/50 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
                   aria-label="Salin email"
                 >
                   {copied ? "Disalin!" : "Salin"}
@@ -128,15 +127,15 @@ export default function Contact() {
               </div>
 
               {/* Lokasi Info */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 shadow-sm">
-                <div className="w-9 h-9 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 flex-shrink-0">
+              <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-900/40 border border-slate-800/60 shadow-sm">
+                <div className="w-9 h-9 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 flex-shrink-0">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
-                  <span className="text-[9px] font-bold tracking-wider text-slate-500 block uppercase">LOKASI</span>
+                  <span className="text-[9px] font-bold tracking-wider text-slate-500 block uppercase font-mono">LOKASI</span>
                   <span className="text-xs sm:text-sm font-bold text-slate-200">Probolinggo, Jawa Timur</span>
                 </div>
               </div>
@@ -151,8 +150,8 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -3, scale: 1.02, borderColor: "rgba(219, 39, 119, 0.4)" }}
                 whileTap={{ scale: 0.97 }}
-                className="py-3 rounded-xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center justify-center gap-1.5 shadow-md text-slate-400 hover:text-pink-400 transition-colors duration-200"
-                title="Instagram"
+                className="py-3 rounded-2xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center justify-center gap-1.5 shadow-md text-slate-400 hover:text-pink-400 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:outline-none"
+                title="Instagram @alfrbtt"
                 aria-label="Kunjungi Instagram @alfrbtt"
               >
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,8 +168,8 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -3, scale: 1.02, borderColor: "rgba(255, 255, 255, 0.2)" }}
                 whileTap={{ scale: 0.97 }}
-                className="py-3 rounded-xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center justify-center gap-1.5 shadow-md text-slate-400 hover:text-white transition-colors duration-200"
-                title="GitHub"
+                className="py-3 rounded-2xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center justify-center gap-1.5 shadow-md text-slate-400 hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
+                title="GitHub RobertDace"
                 aria-label="Kunjungi GitHub RobertDace"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -186,8 +185,8 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -3, scale: 1.02, borderColor: "rgba(34, 197, 94, 0.4)" }}
                 whileTap={{ scale: 0.97 }}
-                className="py-3 rounded-xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center justify-center gap-1.5 shadow-md text-slate-400 hover:text-emerald-400 transition-colors duration-200"
-                title="WhatsApp"
+                className="py-3 rounded-2xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center justify-center gap-1.5 shadow-md text-slate-400 hover:text-emerald-400 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none"
+                title="Hubungi via WhatsApp"
                 aria-label="Hubungi via WhatsApp"
               >
                 <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -209,19 +208,18 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="p-5 sm:p-7 rounded-[24px] bg-slate-900/40 border border-slate-800/80 shadow-xl space-y-4"
+              className="p-5 sm:p-7 rounded-[28px] bg-slate-900/40 border border-slate-800/80 shadow-2xl space-y-4"
             >
-              
               {/* Notifikasi Status */}
               {status === "success" && (
-                <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2.5 text-emerald-400 text-xs sm:text-sm font-medium">
+                <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2.5 text-emerald-400 text-xs sm:text-sm font-medium">
                   <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
                   <span>{statusMessage}</span>
                 </div>
               )}
 
               {status === "error" && (
-                <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-2.5 text-rose-400 text-xs sm:text-sm font-medium">
+                <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-2.5 text-rose-400 text-xs sm:text-sm font-medium">
                   <AlertCircle className="w-5 h-5 flex-shrink-0" />
                   <span>{statusMessage}</span>
                 </div>
@@ -240,7 +238,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="John Doe"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-colors duration-200"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 transition-all duration-200"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -255,7 +253,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="nama@email.com"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-colors duration-200"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 transition-all duration-200"
                   />
                 </div>
               </div>
@@ -271,7 +269,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Diskusi Proyek Web / Penawaran Kerjasama"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-colors duration-200"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 transition-all duration-200"
                 />
               </div>
 
@@ -286,8 +284,8 @@ export default function Contact() {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tuliskan detail ide atau pertanyaanmu di sini..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-colors duration-200 resize-none"
+                  placeholder="Tuliskan detail ide atau pertanyaan Anda di sini..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 transition-all duration-200 resize-none"
                 />
               </div>
 
@@ -297,12 +295,12 @@ export default function Contact() {
                 disabled={status === "loading"}
                 whileHover={{ scale: 1.01, boxShadow: "0 0 15px rgba(6, 182, 212, 0.25)" }}
                 whileTap={{ scale: 0.99 }}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-500 hover:to-emerald-500 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 hover:from-cyan-500 hover:to-emerald-500 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
               >
                 {status === "loading" ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Memproses...</span>
+                    <span>Memproses Pengiriman...</span>
                   </>
                 ) : (
                   <>
@@ -311,6 +309,10 @@ export default function Contact() {
                   </>
                 )}
               </motion.button>
+
+              <p className="text-[11px] text-slate-400 text-center pt-1 font-medium">
+                Membuka aplikasi email default Anda atau hubungi langsung via WhatsApp di samping.
+              </p>
 
             </form>
           </motion.div>
