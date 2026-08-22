@@ -15,7 +15,7 @@ import {
   Sparkles, 
   ChevronLeft,
   ChevronRight,
-  Maximize2
+  Eye
 } from "lucide-react";
 
 // Safe client-side mount hook for React 19 & Next.js 16
@@ -28,7 +28,7 @@ function useIsMounted() {
   );
 }
 
-// Data Proyek Unggulan dengan Tech Stack Terupdate (Claude AI, Neon DB, Clerk Auth, Gemini AI, Supabase, Prisma)
+// Data Proyek Unggulan Terurut dari Build Terbaru
 const projectsData = [
   {
     index: "01",
@@ -206,19 +206,19 @@ const projectsData = [
   },
 ];
 
-type ModalTab = "preview" | "architecture" | "mobile";
+type ModalTab = "desktop" | "mobile" | "architecture";
 
 export default function Projects() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [modalTab, setModalTab] = useState<ModalTab>("preview");
+  const [modalTab, setModalTab] = useState<ModalTab>("desktop");
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoading, setIsIframeLoading] = useState(true);
   const isMounted = useIsMounted();
   const isScrollingRef = useRef(false);
 
-  const handleOpenModal = (project: typeof projectsData[0], initialTab: ModalTab = "preview") => {
+  const handleOpenModal = (project: typeof projectsData[0], initialTab: ModalTab = "desktop") => {
     setSelectedProject(project);
     setModalTab(initialTab);
     setIsIframeLoading(true);
@@ -331,138 +331,125 @@ export default function Projects() {
             <button
               onClick={scrollPrev}
               disabled={activeIndex === 0}
-              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
                 activeIndex === 0
                   ? "border-slate-800/50 bg-slate-900/30 text-slate-600 cursor-not-allowed opacity-50"
                   : "border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800"
               }`}
               aria-label="Previous Project"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
 
             <button
               onClick={scrollNext}
               disabled={activeIndex === projectsData.length - 1}
-              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
                 activeIndex === projectsData.length - 1
                   ? "border-slate-800/50 bg-slate-900/30 text-slate-600 cursor-not-allowed opacity-50"
                   : "border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800"
               }`}
               aria-label="Next Project"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       </motion.div>
 
-      {/* HORIZONTAL CAROUSEL DENGAN KARTU KREATIF & 0 LAG (GPU ACCELERATED) */}
+      {/* HORIZONTAL CAROUSEL - KOMPAK, RAMPING, DAN 0 LAG */}
       <div className="w-full space-y-6">
         <div
           ref={carouselRef}
           onScroll={handleScroll}
-          className="flex overflow-x-auto gap-6 sm:gap-8 pb-8 pt-4 no-scrollbar snap-x snap-mandatory px-4 sm:px-8 md:px-12 w-full touch-pan-x"
+          className="flex overflow-x-auto gap-5 sm:gap-6 pb-6 pt-2 no-scrollbar snap-x snap-mandatory px-4 sm:px-8 md:px-12 w-full touch-pan-x"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {projectsData.map((project, idx) => (
             <div
               key={idx}
-              onClick={() => handleOpenModal(project, "preview")}
-              className="carousel-card snap-start w-[85vw] sm:w-[390px] lg:w-[430px] flex-shrink-0 bg-slate-900/50 hover:bg-slate-900/85 border border-slate-800/80 hover:border-cyan-500/60 rounded-[30px] p-4 sm:p-5 flex flex-col justify-between shadow-xl cursor-pointer transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(6,182,212,0.12)] group backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none select-none"
+              onClick={() => handleOpenModal(project, "desktop")}
+              className="carousel-card snap-start w-[78vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 bg-slate-900/50 hover:bg-slate-900/90 border border-slate-800/80 hover:border-cyan-500/60 rounded-[24px] p-3.5 sm:p-4 flex flex-col justify-between shadow-lg cursor-pointer transition-all duration-200 transform-gpu hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(6,182,212,0.12)] group backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none select-none"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  handleOpenModal(project, "preview");
+                  handleOpenModal(project, "desktop");
                 }
               }}
             >
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Header Card: Category & Number Identifier */}
-                <div className="flex items-center justify-between px-1 text-[11px] font-mono">
-                  <span className="text-cyan-400 font-bold tracking-wider uppercase">
+                <div className="flex items-center justify-between px-0.5 text-[10px] font-mono">
+                  <span className="text-cyan-400 font-bold tracking-wider uppercase truncate max-w-[200px]">
                     {project.category}
                   </span>
-                  <span className="text-slate-500 font-bold tabular-nums">
+                  <span className="text-slate-500 font-bold tabular-nums flex-shrink-0">
                     [{project.index} / 08]
                   </span>
                 </div>
 
-                {/* Banner Thumbnail dengan Overlay Tombol Antigravity Pop-up */}
-                <div className="w-full aspect-[16/10] rounded-[22px] overflow-hidden bg-slate-950 relative border border-slate-800/70">
+                {/* Banner Thumbnail Kompak & Proporsional */}
+                <div className="w-full aspect-[16/10] rounded-[16px] overflow-hidden bg-slate-950 relative border border-slate-800/80">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     unoptimized={project.image.endsWith(".svg")}
-                    sizes="(max-width: 640px) 85vw, 430px"
-                    className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 will-change-transform"
+                    sizes="(max-width: 640px) 78vw, 350px"
+                    className="object-cover object-center transform group-hover:scale-105 transition-transform duration-300 will-change-transform"
                   />
                   
-                  {/* Subtle vignette hover gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Floating Interactive Pop-up Pill (Antigravity Style Trigger) */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-100 scale-90 pointer-events-none">
-                    <div className="px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-400/60 text-xs font-bold text-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.4)] backdrop-blur-md flex items-center gap-2">
-                      <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>Launch Interactive Theater</span>
+                  {/* Subtle hover overlay */}
+                  <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                    <div className="px-3.5 py-1.5 rounded-full bg-cyan-400 text-slate-950 text-xs font-bold shadow-lg flex items-center gap-1.5 transform scale-90 group-hover:scale-100 transition-transform">
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Preview Proyek</span>
                     </div>
-                  </div>
-
-                  {/* Badge Live Simulator */}
-                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-slate-950/85 border border-slate-800 text-[10px] font-mono font-bold text-slate-300 backdrop-blur-md flex items-center gap-1.5 shadow-md">
-                    <Laptop className="w-3 h-3 text-cyan-400" />
-                    <span>Live Simulator</span>
                   </div>
                 </div>
 
                 {/* Info Proyek */}
-                <div className="px-1 space-y-2">
-                  <h3 className="text-lg sm:text-xl font-black tracking-tight text-slate-100 group-hover:text-cyan-300 transition-colors">
+                <div className="px-0.5 space-y-1.5">
+                  <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-100 group-hover:text-cyan-300 transition-colors line-clamp-1">
                     {project.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal line-clamp-3">
+                  <p className="text-xs text-slate-400 leading-relaxed font-normal line-clamp-2">
                     {project.description}
                   </p>
                 </div>
               </div>
 
               {/* Stack Pills Footer */}
-              <div className="flex flex-wrap gap-1.5 pt-4 px-1 border-t border-slate-800/50 mt-4">
-                {project.tools.map((tool, tIdx) => (
-                  <div
+              <div className="flex flex-wrap gap-1 pt-3 px-0.5 border-t border-slate-800/60 mt-3">
+                {project.tools.slice(0, 3).map((tool, tIdx) => (
+                  <span
                     key={tIdx}
-                    onClick={(e) => e.stopPropagation()}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/60 border border-slate-700/50 text-[10px] sm:text-xs font-semibold text-slate-300 shadow-sm cursor-default"
+                    className="px-2 py-0.5 rounded-md bg-slate-800/80 border border-slate-700/50 text-[10px] font-mono text-slate-300"
                   >
-                    <Image
-                      src={tool.logo}
-                      alt={tool.name}
-                      width={14}
-                      height={14}
-                      unoptimized
-                      className="w-3.5 h-3.5 object-contain"
-                    />
-                    <span>{tool.name}</span>
-                  </div>
+                    {tool.name}
+                  </span>
                 ))}
+                {project.tools.length > 3 && (
+                  <span className="px-1.5 py-0.5 rounded-md bg-slate-800/50 text-[10px] font-mono text-slate-400">
+                    +{project.tools.length - 3}
+                  </span>
+                )}
               </div>
             </div>
           ))}
         </div>
 
         {/* Pagination Indicators */}
-        <div className="flex items-center justify-center gap-2 pt-6">
+        <div className="flex items-center justify-center gap-2 pt-2">
           {projectsData.map((_, dotIdx) => (
             <button
               key={dotIdx}
               onClick={() => scrollToIndex(dotIdx)}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+              className={`h-2 rounded-full transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
                 activeIndex === dotIdx
-                  ? "w-10 bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 shadow-[0_0_12px_rgba(6,182,212,0.8)]"
-                  : "w-2.5 bg-slate-800 hover:bg-slate-600 hover:w-4"
+                  ? "w-8 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]"
+                  : "w-2 bg-slate-800 hover:bg-slate-600"
               }`}
               aria-label={`Go to project ${dotIdx + 1}`}
             />
@@ -470,123 +457,115 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ANTIGRAVITY-STYLE THEATER POPUP MODAL (LIGHTBOX POPUP DI TENGAH LAYAR) */}
+      {/* POPUP MODAL VIEWPORT-PERFECT (SELALU FIT DI LAYAR DENGAN HEADER & TOMBOL CLOSE YANG STICKY/FIXED) */}
       {isMounted && createPortal(
         <AnimatePresence>
           {selectedProject && (
-            <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto">
+            <div className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 md:p-6 select-none font-sans">
               
-              {/* Cinematic Backdrop Blur yang Menutupi Seluruh Halaman Termasuk Navbar */}
+              {/* Backdrop Gelap Penutup Halaman */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedProject(null)}
-                className="fixed inset-0 bg-black/90 backdrop-blur-xl -z-10 cursor-pointer"
+                className="fixed inset-0 bg-black/90 backdrop-blur-md cursor-pointer"
               />
 
-              {/* Theater Window Chassis */}
+              {/* Floating Emergency Close Button di Pojok Kanan Atas Viewport (Selalu Terlihat & Bisa Diklik) */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="fixed top-3 right-3 sm:top-5 sm:right-5 z-[100000] px-3.5 py-2 rounded-full bg-slate-900/95 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-300 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-1.5 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
+                aria-label="Tutup Preview"
+              >
+                <X className="w-4 h-4 text-rose-400" />
+                <span className="hidden sm:inline">Tutup Preview [ESC]</span>
+                <span className="sm:hidden">Tutup</span>
+              </button>
+
+              {/* Main Popup Window Chassis (Tinggi Dibatasi Agar Selalu Pas di Layar Laptop) */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.94, y: 15 }}
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.94, y: 15 }}
-                transition={{ type: "spring", stiffness: 350, damping: 28 }}
-                className="w-full max-w-5xl max-h-[92vh] bg-[#070a12] border border-slate-800/90 rounded-[28px] shadow-[0_25px_70px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col font-sans relative select-none"
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className="w-full max-w-5xl h-[88vh] max-h-[780px] bg-[#070a12] border border-slate-800 rounded-[24px] shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col relative z-10"
                 role="dialog"
                 aria-modal="true"
               >
-                {/* Top Control Bar: Mode Tabs, SSL URL & Actions */}
-                <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md flex-shrink-0 gap-3">
+                {/* STICKY TOP CONTROL BAR (TIDAK PERNAH HILANG / TERGESER) */}
+                <div className="sticky top-0 z-30 flex items-center justify-between px-3 sm:px-5 py-2.5 border-b border-slate-800 bg-[#0b0f19] flex-shrink-0 gap-2">
                   
-                  {/* Left: Interactive Mode Switcher */}
-                  <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-900/90 border border-slate-800">
+                  {/* Pilihan Mode Switcher Tampilan (PC Desktop / HP Mobile / Arsitektur) */}
+                  <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-950 border border-slate-800/80">
                     <button
-                      onClick={() => setModalTab("preview")}
-                      className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
-                        modalTab === "preview"
-                          ? "text-slate-950"
+                      onClick={() => setModalTab("desktop")}
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        modalTab === "desktop"
+                          ? "bg-cyan-400 text-slate-950 shadow-sm"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
-                      {modalTab === "preview" && (
-                        <motion.div
-                          layoutId="theaterTabPill"
-                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                        />
-                      )}
                       <Laptop className="w-3.5 h-3.5" />
-                      <span>Live Desktop</span>
+                      <span>Tampilan PC</span>
                     </button>
 
                     <button
                       onClick={() => setModalTab("mobile")}
-                      className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         modalTab === "mobile"
-                          ? "text-slate-950"
+                          ? "bg-cyan-400 text-slate-950 shadow-sm"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
-                      {modalTab === "mobile" && (
-                        <motion.div
-                          layoutId="theaterTabPill"
-                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                        />
-                      )}
                       <Smartphone className="w-3.5 h-3.5" />
-                      <span>Mobile</span>
+                      <span>Tampilan HP</span>
                     </button>
 
                     <button
                       onClick={() => setModalTab("architecture")}
-                      className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         modalTab === "architecture"
-                          ? "text-slate-950"
+                          ? "bg-cyan-400 text-slate-950 shadow-sm"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
-                      {modalTab === "architecture" && (
-                        <motion.div
-                          layoutId="theaterTabPill"
-                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                        />
-                      )}
                       <Layers className="w-3.5 h-3.5" />
-                      <span>Architecture</span>
+                      <span className="hidden sm:inline">Info Detail</span>
+                      <span className="sm:hidden">Info</span>
                     </button>
                   </div>
 
-                  {/* Center: Live Domain URL Bar */}
-                  <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 max-w-sm truncate shadow-inner">
+                  {/* Domain Live URL & Reload */}
+                  <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 max-w-xs truncate">
                     <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
                     <span className="truncate">{selectedProject.liveLink}</span>
                     <button
                       onClick={handleReloadIframe}
-                      className="ml-auto text-slate-500 hover:text-cyan-400 p-0.5 cursor-pointer"
+                      className="ml-1 text-slate-500 hover:text-cyan-400 p-0.5 cursor-pointer"
                       title="Reload Iframe"
                     >
                       <RotateCw className="w-3 h-3" />
                     </button>
                   </div>
 
-                  {/* Right Actions: External Link & Close */}
+                  {/* Tombol Buka Tab Baru & Tombol Tutup Silang Merah Jelas */}
                   <div className="flex items-center gap-2">
                     <a
                       href={selectedProject.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400/50 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors flex items-center gap-1.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400"
+                      className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-400 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
-                      <span className="hidden sm:inline">Open Tab</span>
+                      <span className="hidden sm:inline">Buka Web</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
 
                     <button
                       onClick={() => setSelectedProject(null)}
-                      className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all cursor-pointer active:scale-95 focus-visible:ring-2 focus-visible:ring-cyan-400"
-                      aria-label="Tutup jendela"
+                      className="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500 border border-rose-500/30 hover:border-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
+                      title="Tutup Jendela"
+                      aria-label="Tutup Jendela"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -594,106 +573,106 @@ export default function Projects() {
 
                 </div>
 
-                {/* Main Theater Display Area */}
-                <div className="flex-1 overflow-y-auto no-scrollbar bg-slate-950 p-4 sm:p-6 min-h-[480px]">
+                {/* AREA TAMPILAN KONTEN UTAMA (FLEX-1 DENGAN OVERFLOW-Y AUTO AGAR HEADER TIDAK TERTUTUP) */}
+                <div className="flex-1 overflow-y-auto no-scrollbar bg-slate-950 p-3 sm:p-5 flex flex-col justify-center">
                   
-                  {/* TAB 1: LIVE DESKTOP SIMULATOR */}
-                  {modalTab === "preview" && (
-                    <div className="w-full h-[520px] sm:h-[620px] rounded-2xl bg-slate-950 border border-slate-800/80 shadow-2xl overflow-hidden relative">
+                  {/* 1. TAMPILAN PC / DESKTOP */}
+                  {modalTab === "desktop" && (
+                    <div className="w-full h-full min-h-[380px] rounded-xl bg-slate-950 border border-slate-800 shadow-xl overflow-hidden relative flex flex-col">
                       {isIframeLoading && (
-                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
-                          <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                          <span className="text-xs font-mono text-slate-400">Loading interactive sandbox...</span>
+                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-sm">
+                          <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                          <span className="text-xs font-mono text-slate-400">Menghubungkan ke server aplikasi...</span>
                         </div>
                       )}
                       <iframe
                         key={`desktop-${iframeKey}`}
                         src={selectedProject.liveLink}
-                        title={`${selectedProject.title} Interactive Sandbox`}
+                        title={`${selectedProject.title} Desktop View`}
                         onLoad={() => setIsIframeLoading(false)}
-                        className="w-full h-full border-0 bg-slate-950"
+                        className="w-full h-full border-0 bg-slate-950 flex-1"
                         sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                       />
                     </div>
                   )}
 
-                  {/* TAB 2: MOBILE DEVICE FRAME */}
+                  {/* 2. TAMPILAN HP / MOBILE (TINGGI PROPORSIONAL & TIDAK OFFSCREEN) */}
                   {modalTab === "mobile" && (
-                    <div className="flex flex-col items-center justify-center py-2">
-                      <div className="w-[310px] sm:w-[350px] h-[580px] sm:h-[640px] rounded-[48px] border-[8px] border-slate-800/90 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
+                    <div className="w-full h-full flex items-center justify-center py-1">
+                      <div className="w-[280px] sm:w-[320px] h-[480px] sm:h-[540px] max-h-[80vh] rounded-[40px] border-[6px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
                         {/* Dynamic Island Status Bar */}
-                        <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-2 select-none z-20">
-                          <span className="text-[11px] font-bold text-slate-200 tabular-nums font-mono">09:41</span>
-                          <div className="w-24 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
+                        <div className="w-full h-8 bg-slate-950 flex items-center justify-between px-5 pt-1 select-none z-20">
+                          <span className="text-[10px] font-bold text-slate-200 font-mono">09:41</span>
+                          <div className="w-20 h-4 rounded-full bg-black border border-slate-800 flex items-center justify-end px-1.5">
+                            <div className="w-2 h-2 rounded-full bg-slate-900 border border-slate-800" />
                           </div>
-                          <span className="text-[10px] text-slate-300 font-mono">5G</span>
+                          <span className="text-[9px] text-slate-300 font-mono">5G</span>
                         </div>
 
                         <div className="relative flex-1 w-full bg-slate-950 overflow-hidden">
                           {isIframeLoading && (
-                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-sm">
-                              <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                              <span className="text-[11px] font-mono text-slate-400">Loading mobile view...</span>
+                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
+                              <div className="w-6 h-6 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                              <span className="text-[10px] font-mono text-slate-400">Memuat tampilan HP...</span>
                             </div>
                           )}
                           <iframe
                             key={`mobile-${iframeKey}`}
                             src={selectedProject.liveLink}
-                            title={`${selectedProject.title} Mobile Simulator`}
+                            title={`${selectedProject.title} Mobile View`}
                             onLoad={() => setIsIframeLoading(false)}
                             className="w-full h-full border-0 bg-slate-950"
                             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                           />
                         </div>
 
-                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20">
-                          <div className="w-32 h-1 rounded-full bg-slate-600" />
+                        <div className="w-full py-1.5 bg-slate-950 flex justify-center z-20">
+                          <div className="w-28 h-1 rounded-full bg-slate-600" />
                         </div>
                       </div>
                     </div>
                   )}
 
-                  {/* TAB 3: ARCHITECTURE & BLUEPRINT */}
+                  {/* 3. TAMPILAN DETAIL ARSITEKTUR */}
                   {modalTab === "architecture" && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="space-y-6 max-w-3xl mx-auto py-2"
+                      className="space-y-4 max-w-2xl mx-auto py-2"
                     >
-                      <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
+                      <div className="w-full aspect-[16/9] rounded-xl overflow-hidden relative border border-slate-800 shadow-md bg-slate-950">
                         <Image
                           src={selectedProject.image}
                           alt={selectedProject.title}
                           fill
                           unoptimized={selectedProject.image.endsWith(".svg")}
-                          sizes="800px"
+                          sizes="600px"
                           className="object-cover object-center"
                         />
                       </div>
 
-                      <div className="space-y-3">
-                        <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
+                      <div className="space-y-2">
+                        <div className="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
                           {selectedProject.category}
                         </div>
-                        <h3 className="text-2xl sm:text-3xl font-black text-white">
+                        <h3 className="text-xl sm:text-2xl font-black text-white">
                           {selectedProject.title}
                         </h3>
-                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                           {selectedProject.description}
                         </p>
                       </div>
 
                       {/* Highlights */}
-                      <div className="space-y-3 pt-2">
+                      <div className="space-y-2 pt-1">
                         <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
                           <Sparkles className="w-3.5 h-3.5" />
-                          <span>Key Architecture &amp; System Design</span>
+                          <span>Fitur Unggulan</span>
                         </h4>
-                        <ul className="space-y-2.5">
+                        <ul className="space-y-1.5">
                           {selectedProject.highlights.map((h, hIdx) => (
-                            <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                            <li key={hIdx} className="flex items-start gap-2 text-xs text-slate-300">
+                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 flex-shrink-0" />
                               <span className="leading-relaxed">{h}</span>
                             </li>
                           ))}
@@ -701,23 +680,23 @@ export default function Projects() {
                       </div>
 
                       {/* Tech Stack */}
-                      <div className="space-y-3 pt-2">
+                      <div className="space-y-2 pt-1">
                         <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">
-                          Deployed Technologies
+                          Tech Stack
                         </h4>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1.5">
                           {selectedProject.tools.map((tool, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200 shadow-md"
+                              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-medium text-slate-200"
                             >
                               <Image
                                 src={tool.logo}
                                 alt={tool.name}
-                                width={16}
-                                height={16}
+                                width={14}
+                                height={14}
                                 unoptimized
-                                className="w-4 h-4 object-contain"
+                                className="w-3.5 h-3.5 object-contain"
                               />
                               <span>{tool.name}</span>
                             </div>
@@ -729,20 +708,18 @@ export default function Projects() {
 
                 </div>
 
-                {/* Footer Bar: Quick Links */}
-                <div className="px-4 sm:px-6 py-3 bg-slate-950 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
-                  <div className="flex items-center gap-4">
-                    <a
-                      href={selectedProject.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-white transition-colors flex items-center gap-1.5"
-                    >
-                      <span>Repository Code</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                  <span className="text-slate-500 hidden sm:inline">Press ESC to dismiss</span>
+                {/* FOOTER BAR */}
+                <div className="px-4 py-2.5 bg-[#0b0f19] border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono flex-shrink-0">
+                  <a
+                    href={selectedProject.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors flex items-center gap-1.5 text-[11px]"
+                  >
+                    <span>Source Code di GitHub</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                  <span className="text-slate-500 text-[10px]">Tekan ESC untuk menutup</span>
                 </div>
 
               </motion.div>
