@@ -149,54 +149,89 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
           {/* Kolom Kanan: Visual Telemetry Hub (5 Kolom) */}
           <div className="lg:col-span-5 h-full flex flex-col justify-center">
             
-            {/* Visual 1: Network Topology Mesh */}
+            {/* Visual 1: Full-Length SVG Network Circuit Topology Mesh */}
             {exp.type === "network" && (
               <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/80 border border-slate-800/90 space-y-4 shadow-xl">
                 <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
                   <div className="flex items-center gap-2">
                     <Activity className="w-4 h-4 text-cyan-400" />
-                    <span className="text-xs font-mono font-bold text-slate-300 uppercase">Network Topology</span>
+                    <span className="text-xs font-mono font-bold text-slate-300 uppercase">Network Topology &amp; Mesh</span>
                   </div>
                   <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">
-                    ACTIVE
+                    ACTIVE • STABLE
                   </span>
                 </div>
 
-                {/* Animated Topology Nodes with full span 0% to 100% packet travel */}
-                <div className="h-28 relative flex items-center justify-between px-2 sm:px-4">
-                  {/* Gateway Node */}
-                  <div className="flex flex-col items-center gap-1.5 z-10">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                      <Radio className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-400">Gateway</span>
-                  </div>
-
-                  {/* Connecting Line with seamless flowing particle across entire line */}
-                  <div className="flex-1 h-1 bg-slate-800 rounded-full mx-3 relative overflow-visible">
-                    {/* Glowing progress rail */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/50 via-sky-400/40 to-emerald-400/50 rounded-full" />
+                {/* Animated SVG Circuit with full-span data pulses traveling from Gateway (L) to Server (R) */}
+                <div className="h-28 w-full relative flex items-center justify-center bg-slate-900/40 rounded-xl border border-slate-800/60 p-2 overflow-hidden">
+                  <svg className="w-full h-full" viewBox="0 0 320 100" fill="none">
+                    {/* Circuit Mesh Traces */}
+                    <path d="M 30 50 H 110 V 25 H 210 V 50 H 290" stroke="#334155" strokeWidth="2" strokeDasharray="3 3" />
+                    <path d="M 110 50 V 75 H 210 V 50" stroke="#334155" strokeWidth="2" strokeDasharray="3 3" />
+                    <path d="M 30 50 H 290" stroke="#1e293b" strokeWidth="2" />
                     
-                    {/* Moving Data Packet */}
-                    <motion.div
-                      animate={{ left: ["0%", "100%"] }}
-                      transition={{ 
-                        duration: 2.2, 
-                        repeat: Infinity, 
-                        ease: "easeInOut"
-                      }}
-                      style={{ position: "absolute", top: "-4px" }}
-                      className="w-3 h-3 rounded-full bg-cyan-300 -translate-x-1/2 shadow-[0_0_10px_#22d3ee,0_0_20px_#06b6d4]"
-                    />
-                  </div>
+                    {/* Fixed Topology Hardware Nodes */}
+                    {/* Gateway (Left) */}
+                    <rect x="18" y="38" width="24" height="24" rx="6" fill="#0f172a" stroke="#06b6d4" strokeWidth="2" />
+                    <text x="30" y="54" fill="#22d3ee" fontSize="9" fontWeight="bold" fontFamily="monospace" textAnchor="middle">GW</text>
 
-                  {/* Core Server Node */}
-                  <div className="flex flex-col items-center gap-1.5 z-10">
-                    <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300">
-                      <Cpu className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-400">Core Node</span>
-                  </div>
+                    {/* Intermediate Switch Nodes */}
+                    <circle cx="110" cy="25" r="7" fill="#0f172a" stroke="#64748b" strokeWidth="1.5" />
+                    <circle cx="110" cy="75" r="7" fill="#0f172a" stroke="#64748b" strokeWidth="1.5" />
+                    <circle cx="210" cy="25" r="7" fill="#0f172a" stroke="#64748b" strokeWidth="1.5" />
+                    <circle cx="210" cy="75" r="7" fill="#0f172a" stroke="#64748b" strokeWidth="1.5" />
+
+                    {/* Core Server (Right) */}
+                    <rect x="278" y="38" width="24" height="24" rx="6" fill="#0f172a" stroke="#10b981" strokeWidth="2" />
+                    <text x="290" y="54" fill="#34d399" fontSize="9" fontWeight="bold" fontFamily="monospace" textAnchor="middle">SRV</text>
+
+                    {/* Animated Traveling Data Signal 1 (Upper Circuit Path) */}
+                    <motion.circle
+                      r="4"
+                      fill="#22d3ee"
+                      animate={{
+                        cx: [30, 110, 210, 290],
+                        cy: [50, 25, 25, 50],
+                      }}
+                      transition={{
+                        duration: 2.8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+
+                    {/* Animated Traveling Data Signal 2 (Lower Circuit Path) */}
+                    <motion.circle
+                      r="4"
+                      fill="#34d399"
+                      animate={{
+                        cx: [30, 110, 210, 290],
+                        cy: [50, 75, 75, 50],
+                      }}
+                      transition={{
+                        duration: 3.2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 0.6,
+                      }}
+                    />
+
+                    {/* Animated Direct High-Speed Packet */}
+                    <motion.circle
+                      r="3.5"
+                      fill="#38bdf8"
+                      animate={{
+                        cx: [30, 290],
+                        cy: [50, 50],
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 1.2,
+                      }}
+                    />
+                  </svg>
                 </div>
 
                 {/* Metrics Footer */}
@@ -274,8 +309,8 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                     <span>next build (Turbopack)</span>
                     <span className="text-slate-500 tabular-nums">0.32s</span>
                   </div>
-                  <div className="text-emerald-400">Gemini 2.0 Flash Stream OK</div>
-                  <div className="text-slate-500">Serverless Edge Route /api/v1</div>
+                  <div className="text-emerald-400">Claude &amp; Gemini Multi-LLM OK</div>
+                  <div className="text-slate-500">Neon Serverless DB /pool OK</div>
                   <div className="text-cyan-300/80">Prerendered Static Routes (7/7)</div>
                 </div>
 
@@ -354,15 +389,15 @@ export default function Experience() {
       description: "Merancang, membangun, dan mendeploy aplikasi web full-stack modern dengan integrasi model kecerdasan buatan cerdas dan arsitektur database cloud terukur.",
       metrics: [
         { label: "Framework", value: "Next.js 16" },
-        { label: "Inference", value: "Gemini API" },
-        { label: "Response", value: "<100ms" },
+        { label: "Inference", value: "Claude & Gemini" },
+        { label: "Database", value: "Neon Serverless" },
       ],
       bullets: [
-        "Merancang dan mengembangkan aplikasi web reaktif full-stack berbasis Next.js, TypeScript, dan Supabase.",
-        "Mengintegrasikan Gemini AI API untuk otomatisasi analisis dokumen cerdas dan modeler skenario deterministik.",
+        "Merancang dan mengembangkan aplikasi web reaktif full-stack berbasis Next.js, TypeScript, Supabase, dan Neon DB.",
+        "Mengintegrasikan Claude AI dan Gemini API untuk analisis dokumen cerdas dan modeler skenario deterministik.",
         "Menerapkan arsitektur clean code, manajemen state reaktif, dan performa tinggi bebas hambatan.",
       ],
-      skills: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Gemini AI API", "Git"],
+      skills: ["Next.js", "TypeScript", "Tailwind CSS", "Neon DB", "Supabase", "Claude AI", "Gemini AI", "Git"],
     },
   ];
 
