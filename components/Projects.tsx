@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -14,6 +15,16 @@ import {
   Sparkles,
   ChevronRight
 } from "lucide-react";
+
+// Safe client-side mount hook for React 19 & Next.js 16 without cascading setState in useEffect
+const emptySubscribe = () => () => {};
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 
 // Data Proyek Unggulan Terurut dari Build Terbaru (Jastip, Klasim, TK Cahaya Hati, SenKuni, dst.)
 const projectsData = [
@@ -180,6 +191,7 @@ export default function Projects() {
   const [drawerMode, setDrawerMode] = useState<DrawerMode>("overview");
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoading, setIsIframeLoading] = useState(true);
+  const isMounted = useIsMounted();
   const isScrollingRef = useRef(false);
 
   const handleSelectProject = (project: typeof projectsData[0]) => {
@@ -406,341 +418,346 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* JENDELA DRAWER & DEVICE MOCKUP SIMULATOR MODAL */}
-      <AnimatePresence>
-        {selectedProject && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 bg-black/85 backdrop-blur-md z-[99] pointer-events-auto cursor-pointer"
-            />
+      {/* JENDELA DRAWER & DEVICE MOCKUP SIMULATOR MODAL (VIA CREATEPORTAL DI ATAS SELURUH HALAMAN & NAVBAR) */}
+      {isMounted && createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <>
+              {/* Backdrop Gelap Belakang yang Menutupi Seluruh Halaman termasuk Floating Navbar */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedProject(null)}
+                className="fixed inset-0 bg-black/85 backdrop-blur-md z-[99998] pointer-events-auto cursor-pointer"
+              />
 
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className={`fixed right-0 top-0 bottom-0 h-full w-full ${
-                drawerMode === "overview" 
-                  ? "sm:w-[540px] lg:w-[600px]" 
-                  : "sm:w-[780px] lg:w-[940px] xl:w-[1020px]"
-              } bg-[#0b0f19] border-l border-slate-800/90 z-[100] shadow-2xl flex flex-col justify-between pointer-events-auto font-sans transition-all duration-500`}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="drawer-title"
-            >
-              {/* Top Navigation Bar: Device Tabs & Close */}
-              <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-800/90 bg-slate-950/80 backdrop-blur-md z-20">
-                <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800">
-                  <button
-                    onClick={() => setDrawerMode("overview")}
-                    className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer ${
-                      drawerMode === "overview"
-                        ? "text-slate-950"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    {drawerMode === "overview" && (
-                      <motion.div
-                        layoutId="drawerTabPill"
-                        className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                        transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                      />
-                    )}
-                    <FileText className="w-3.5 h-3.5" />
-                    <span>Overview</span>
-                  </button>
+              {/* Panel Samping / Simulator Modal Meluncur dari Kanan (Di Atas Backdrop & Navbar) */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "tween", duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className={`fixed right-0 top-0 bottom-0 h-full w-full ${
+                  drawerMode === "overview" 
+                    ? "sm:w-[540px] lg:w-[600px]" 
+                    : "sm:w-[780px] lg:w-[940px] xl:w-[1020px]"
+                } bg-[#0b0f19] border-l border-slate-800/90 z-[99999] shadow-2xl flex flex-col justify-between pointer-events-auto font-sans transition-all duration-500`}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="drawer-title"
+              >
+                {/* Top Navigation Bar: Device Tabs & Close */}
+                <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-800/90 bg-slate-950/90 backdrop-blur-md z-20">
+                  <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800">
+                    <button
+                      onClick={() => setDrawerMode("overview")}
+                      className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer ${
+                        drawerMode === "overview"
+                          ? "text-slate-950"
+                          : "text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      {drawerMode === "overview" && (
+                        <motion.div
+                          layoutId="drawerTabPill"
+                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
+                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                        />
+                      )}
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>Overview</span>
+                    </button>
+
+                    <button
+                      onClick={() => setDrawerMode("desktop")}
+                      className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer ${
+                        drawerMode === "desktop"
+                          ? "text-slate-950"
+                          : "text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      {drawerMode === "desktop" && (
+                        <motion.div
+                          layoutId="drawerTabPill"
+                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
+                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                        />
+                      )}
+                      <Laptop className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Simulator Desktop</span>
+                      <span className="sm:hidden">Desktop</span>
+                    </button>
+
+                    <button
+                      onClick={() => setDrawerMode("mobile")}
+                      className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer ${
+                        drawerMode === "mobile"
+                          ? "text-slate-950"
+                          : "text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      {drawerMode === "mobile" && (
+                        <motion.div
+                          layoutId="drawerTabPill"
+                          className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
+                          transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                        />
+                      )}
+                      <Smartphone className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Simulator Mobile</span>
+                      <span className="sm:hidden">Mobile</span>
+                    </button>
+                  </div>
 
                   <button
-                    onClick={() => setDrawerMode("desktop")}
-                    className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer ${
-                      drawerMode === "desktop"
-                        ? "text-slate-950"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
+                    onClick={() => setSelectedProject(null)}
+                    className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all shadow-md cursor-pointer active:scale-95 flex-shrink-0"
+                    aria-label="Tutup jendela"
                   >
-                    {drawerMode === "desktop" && (
-                      <motion.div
-                        layoutId="drawerTabPill"
-                        className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                        transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                      />
-                    )}
-                    <Laptop className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Simulator Desktop</span>
-                    <span className="sm:hidden">Desktop</span>
-                  </button>
-
-                  <button
-                    onClick={() => setDrawerMode("mobile")}
-                    className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors duration-200 cursor-pointer ${
-                      drawerMode === "mobile"
-                        ? "text-slate-950"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    {drawerMode === "mobile" && (
-                      <motion.div
-                        layoutId="drawerTabPill"
-                        className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-emerald-400 -z-10 shadow-sm"
-                        transition={{ type: "spring", stiffness: 450, damping: 30 }}
-                      />
-                    )}
-                    <Smartphone className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Simulator Mobile</span>
-                    <span className="sm:hidden">Mobile</span>
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
 
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all shadow-md cursor-pointer active:scale-95 flex-shrink-0"
-                  aria-label="Tutup jendela"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Main Content Area */}
-              <div className="overflow-y-auto no-scrollbar flex-1 relative p-4 sm:p-6 space-y-6">
-                
-                {/* 1. OVERVIEW MODE */}
-                {drawerMode === "overview" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
-                    <div className="w-full aspect-[16/10] bg-slate-950 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl">
-                      <Image
-                        src={selectedProject.image}
-                        alt={selectedProject.title}
-                        fill
-                        unoptimized={selectedProject.image.endsWith(".svg")}
-                        sizes="(max-width: 640px) 100vw, 600px"
-                        className="object-cover object-center"
-                        priority
-                      />
-                    </div>
-
-                    <div className="space-y-3">
-                      <h3 id="drawer-title" className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
-                        {selectedProject.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                        {selectedProject.description}
-                      </p>
-                    </div>
-
-                    <div 
-                      onClick={() => setDrawerMode("desktop")}
-                      className="p-4 rounded-2xl bg-gradient-to-r from-cyan-950/60 via-slate-900 to-emerald-950/40 border border-cyan-500/30 hover:border-cyan-400/60 cursor-pointer transition-all flex items-center justify-between group"
+                {/* Main Content Area */}
+                <div className="overflow-y-auto no-scrollbar flex-1 relative p-4 sm:p-6 space-y-6">
+                  
+                  {/* 1. OVERVIEW MODE */}
+                  {drawerMode === "overview" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-6"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="p-2.5 rounded-xl bg-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform">
-                          <Laptop className="w-5 h-5" />
+                      <div className="w-full aspect-[16/10] bg-slate-950 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl">
+                        <Image
+                          src={selectedProject.image}
+                          alt={selectedProject.title}
+                          fill
+                          unoptimized={selectedProject.image.endsWith(".svg")}
+                          sizes="(max-width: 640px) 100vw, 600px"
+                          className="object-cover object-center"
+                          priority
+                        />
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 id="drawer-title" className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+                          {selectedProject.title}
+                        </h3>
+                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                          {selectedProject.description}
+                        </p>
+                      </div>
+
+                      <div 
+                        onClick={() => setDrawerMode("desktop")}
+                        className="p-4 rounded-2xl bg-gradient-to-r from-cyan-950/60 via-slate-900 to-emerald-950/40 border border-cyan-500/30 hover:border-cyan-400/60 cursor-pointer transition-all flex items-center justify-between group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="p-2.5 rounded-xl bg-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform">
+                            <Laptop className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                              Coba Langsung di Simulator Interaktif
+                            </h4>
+                            <p className="text-[11px] text-slate-400">
+                              Uji live demo di layar laptop &amp; smartphone virtual
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                            Coba Langsung di Simulator Interaktif
+                        <ChevronRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                      </div>
+
+                      {selectedProject.highlights && (
+                        <div className="space-y-3 pt-2">
+                          <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            <span>Arsitektur &amp; Fitur Unggulan</span>
                           </h4>
-                          <p className="text-[11px] text-slate-400">
-                            Uji live demo di layar laptop &amp; smartphone virtual
-                          </p>
+                          <ul className="space-y-2.5">
+                            {selectedProject.highlights.map((highlight, hIdx) => (
+                              <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                                <span className="leading-relaxed">{highlight}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                      )}
 
-                    {selectedProject.highlights && (
                       <div className="space-y-3 pt-2">
-                        <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          <span>Arsitektur &amp; Fitur Unggulan</span>
+                        <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase">
+                          Technologies &amp; Core Stack
                         </h4>
-                        <ul className="space-y-2.5">
-                          {selectedProject.highlights.map((highlight, hIdx) => (
-                            <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                              <span className="leading-relaxed">{highlight}</span>
-                            </li>
+                        <div className="flex flex-wrap gap-2.5">
+                          {selectedProject.tools.map((tool, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 hover:text-cyan-400 hover:border-cyan-400/40 shadow-md cursor-pointer transition-all duration-200"
+                            >
+                              <Image
+                                src={tool.logo}
+                                alt={tool.name}
+                                width={16}
+                                height={16}
+                                unoptimized
+                                className="w-4 h-4 object-contain"
+                              />
+                              <span>{tool.name}</span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
-                    )}
+                    </motion.div>
+                  )}
 
-                    <div className="space-y-3 pt-2">
-                      <h4 className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase">
-                        Technologies &amp; Core Stack
-                      </h4>
-                      <div className="flex flex-wrap gap-2.5">
-                        {selectedProject.tools.map((tool, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 hover:text-cyan-400 hover:border-cyan-400/40 shadow-md cursor-pointer transition-all duration-200"
+                  {/* 2. DESKTOP SIMULATOR MODE */}
+                  {drawerMode === "desktop" && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4"
+                    >
+                      <div className="w-full rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden flex flex-col">
+                        <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800 select-none">
+                          <div className="flex items-center gap-2">
+                            <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
+                            <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
+                            <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+                          </div>
+
+                          <div className="flex-1 max-w-md mx-4 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 flex items-center justify-between shadow-inner">
+                            <div className="flex items-center gap-1.5 truncate">
+                              <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                              <span className="truncate">{selectedProject.liveLink}</span>
+                            </div>
+                            <button
+                              onClick={handleReloadIframe}
+                              className="text-slate-400 hover:text-cyan-400 transition-colors p-0.5 cursor-pointer"
+                              title="Reload Simulator"
+                            >
+                              <RotateCw className="w-3 h-3" />
+                            </button>
+                          </div>
+
+                          <a
+                            href={selectedProject.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-slate-400 hover:text-cyan-400 transition-colors p-1 cursor-pointer"
+                            title="Buka di tab baru"
                           >
-                            <Image
-                              src={tool.logo}
-                              alt={tool.name}
-                              width={16}
-                              height={16}
-                              unoptimized
-                              className="w-4 h-4 object-contain"
-                            />
-                            <span>{tool.name}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        </div>
 
-                {/* 2. DESKTOP SIMULATOR MODE */}
-                {drawerMode === "desktop" && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-4"
+                        <div className="relative w-full h-[520px] sm:h-[580px] bg-slate-950 overflow-hidden">
+                          {isIframeLoading && (
+                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
+                              <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                              <span className="text-xs font-mono text-slate-400">Menghubungkan ke server aplikasi...</span>
+                            </div>
+                          )}
+
+                          <iframe
+                            key={`desktop-${iframeKey}`}
+                            src={selectedProject.liveLink}
+                            title={`${selectedProject.title} Desktop Simulator`}
+                            onLoad={() => setIsIframeLoading(false)}
+                            className="w-full h-full border-0 bg-slate-950"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* 3. MOBILE SIMULATOR MODE */}
+                  {drawerMode === "mobile" && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex flex-col items-center justify-center py-4 space-y-4"
+                    >
+                      <div className="w-[300px] sm:w-[340px] h-[580px] sm:h-[640px] rounded-[48px] border-[8px] border-slate-800/90 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
+                        <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-2 select-none z-20">
+                          <span className="text-[11px] font-bold text-slate-200">09:41</span>
+                          
+                          <div className="w-24 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
+                            <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
+                          </div>
+
+                          <div className="flex items-center gap-1.5 text-[10px] text-slate-300">
+                            <span>5G</span>
+                            <span className="w-4 h-2 rounded-xs border border-slate-400 inline-block p-0.5">
+                              <span className="w-full h-full bg-emerald-400 block" />
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="relative flex-1 w-full bg-slate-950 overflow-hidden">
+                          {isIframeLoading && (
+                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-sm p-4 text-center">
+                              <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                              <span className="text-[11px] font-mono text-slate-400">Memuat tampilan mobile...</span>
+                            </div>
+                          )}
+
+                          <iframe
+                            key={`mobile-${iframeKey}`}
+                            src={selectedProject.liveLink}
+                            title={`${selectedProject.title} Mobile Simulator`}
+                            onLoad={() => setIsIframeLoading(false)}
+                            className="w-full h-full border-0 bg-slate-950"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                          />
+                        </div>
+
+                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20">
+                          <div className="w-32 h-1 rounded-full bg-slate-600" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                </div>
+
+                {/* Footer Actions */}
+                <div className="p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 flex items-center gap-3 z-20">
+                  <a
+                    href={selectedProject.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(6,182,212,0.3)] transition-all transform active:scale-[0.98]"
                   >
-                    <div className="w-full rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden flex flex-col">
-                      <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800 select-none">
-                        <div className="flex items-center gap-2">
-                          <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                          <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                          <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                        </div>
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Buka Live Website</span>
+                  </a>
 
-                        <div className="flex-1 max-w-md mx-4 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 flex items-center justify-between shadow-inner">
-                          <div className="flex items-center gap-1.5 truncate">
-                            <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-                            <span className="truncate">{selectedProject.liveLink}</span>
-                          </div>
-                          <button
-                            onClick={handleReloadIframe}
-                            className="text-slate-400 hover:text-cyan-400 transition-colors p-0.5 cursor-pointer"
-                            title="Reload Simulator"
-                          >
-                            <RotateCw className="w-3 h-3" />
-                          </button>
-                        </div>
-
-                        <a
-                          href={selectedProject.liveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-slate-400 hover:text-cyan-400 transition-colors p-1 cursor-pointer"
-                          title="Buka di tab baru"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      </div>
-
-                      <div className="relative w-full h-[520px] sm:h-[580px] bg-slate-950 overflow-hidden">
-                        {isIframeLoading && (
-                          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
-                            <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                            <span className="text-xs font-mono text-slate-400">Menghubungkan ke server aplikasi...</span>
-                          </div>
-                        )}
-
-                        <iframe
-                          key={`desktop-${iframeKey}`}
-                          src={selectedProject.liveLink}
-                          title={`${selectedProject.title} Desktop Simulator`}
-                          onLoad={() => setIsIframeLoading(false)}
-                          className="w-full h-full border-0 bg-slate-950"
-                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* 3. MOBILE SIMULATOR MODE */}
-                {drawerMode === "mobile" && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex flex-col items-center justify-center py-4 space-y-4"
+                  <a
+                    href={selectedProject.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-600 transition-all shadow-md flex-shrink-0 active:scale-95 cursor-pointer"
+                    title="Lihat Source Code di GitHub"
+                    aria-label="Lihat Source Code di GitHub"
                   >
-                    <div className="w-[300px] sm:w-[340px] h-[580px] sm:h-[640px] rounded-[48px] border-[8px] border-slate-800/90 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
-                      <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-2 select-none z-20">
-                        <span className="text-[11px] font-bold text-slate-200">09:41</span>
-                        
-                        <div className="w-24 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
-                          <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
-                        </div>
-
-                        <div className="flex items-center gap-1.5 text-[10px] text-slate-300">
-                          <span>5G</span>
-                          <span className="w-4 h-2 rounded-xs border border-slate-400 inline-block p-0.5">
-                            <span className="w-full h-full bg-emerald-400 block" />
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="relative flex-1 w-full bg-slate-950 overflow-hidden">
-                        {isIframeLoading && (
-                          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-sm p-4 text-center">
-                            <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                            <span className="text-[11px] font-mono text-slate-400">Memuat tampilan mobile...</span>
-                          </div>
-                        )}
-
-                        <iframe
-                          key={`mobile-${iframeKey}`}
-                          src={selectedProject.liveLink}
-                          title={`${selectedProject.title} Mobile Simulator`}
-                          onLoad={() => setIsIframeLoading(false)}
-                          className="w-full h-full border-0 bg-slate-950"
-                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                        />
-                      </div>
-
-                      <div className="w-full py-2 bg-slate-950 flex justify-center z-20">
-                        <div className="w-32 h-1 rounded-full bg-slate-600" />
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-              </div>
-
-              {/* Footer Actions */}
-              <div className="p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 flex items-center gap-3 z-20">
-                <a
-                  href={selectedProject.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(6,182,212,0.3)] transition-all transform active:scale-[0.98]"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Buka Live Website</span>
-                </a>
-
-                <a
-                  href={selectedProject.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-600 transition-all shadow-md flex-shrink-0 active:scale-95 cursor-pointer"
-                  title="Lihat Source Code di GitHub"
-                  aria-label="Lihat Source Code di GitHub"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.008.069-.008 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.008.069-.008 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                    </svg>
+                  </a>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
