@@ -13,6 +13,14 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "2OB1T — Full-Stack Developer & AI Integrator",
   description: "Portofolio karya, sistem, dan proyek AI buatan 2OB1T.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
