@@ -1,4 +1,4 @@
-﻿/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
@@ -562,7 +562,7 @@ export default function Projects() {
                   {/* ── BODY ── */}
                   <div className="w-full flex-1 min-h-0 bg-slate-950 overflow-hidden relative flex flex-col">
                     {modalTab === "desktop" && (
-                      <div className="w-full h-full relative flex flex-col bg-slate-950">
+                      <div className="w-full flex-1 min-h-0 relative bg-slate-950">
                         {isIframeLoading && (
                           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
                             <div className="w-9 h-9 rounded-full border-[3px] border-cyan-400 border-t-transparent animate-spin" />
@@ -574,13 +574,13 @@ export default function Projects() {
                           src={selectedProject.liveLink}
                           title={`${selectedProject.title} Live Desktop`}
                           onLoad={() => setIsIframeLoading(false)}
-                          className="w-full h-full border-0 bg-slate-950 block"
+                          className="absolute inset-0 w-full h-full border-0 bg-slate-950"
                           sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                         />
                       </div>
                     )}
                     {modalTab === "mobile" && (
-                      <div className="w-full h-full flex items-center justify-center p-4 bg-slate-950/90 overflow-hidden">
+                      <div className="w-full flex-1 min-h-0 flex items-center justify-center p-4 bg-slate-950/90 overflow-hidden">
                         <div className="w-[360px] sm:w-[380px] h-full max-h-[96%] rounded-[48px] border-[8px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative flex-shrink-0">
                           <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-1.5 select-none z-20 flex-shrink-0 border-b border-slate-900">
                             <span className="text-xs font-bold text-slate-200 font-mono">09:41</span>
@@ -589,7 +589,7 @@ export default function Projects() {
                             </div>
                             <span className="text-xs text-slate-300 font-mono">5G</span>
                           </div>
-                          <div className="relative w-full flex-1 bg-slate-950 overflow-hidden">
+                          <div className="relative w-full flex-1 min-h-0 bg-slate-950 overflow-hidden">
                             {isIframeLoading && (
                               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
                                 <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
@@ -601,7 +601,7 @@ export default function Projects() {
                               src={selectedProject.liveLink}
                               title={`${selectedProject.title} Mobile View`}
                               onLoad={() => setIsIframeLoading(false)}
-                              className="w-full h-full border-0 bg-slate-950 block"
+                              className="absolute inset-0 w-full h-full border-0 bg-slate-950"
                               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                             />
                           </div>
@@ -612,7 +612,7 @@ export default function Projects() {
                       </div>
                     )}
                     {modalTab === "architecture" && (
-                      <div className="w-full h-full overflow-y-auto no-scrollbar p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
+                      <div className="w-full flex-1 min-h-0 overflow-y-auto no-scrollbar p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
                         <div className="w-full h-64 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
                           <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover object-center" />
                         </div>
