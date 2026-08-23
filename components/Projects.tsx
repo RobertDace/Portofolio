@@ -389,9 +389,8 @@ export default function Projects() {
                   </span>
                 </div>
 
-                {/* Banner Thumbnail Berukuran Pasti (Tidak Pernah Fullscreen/Pecah) */}
+                {/* Banner Thumbnail Berukuran Pasti */}
                 <div className="w-full h-44 rounded-xl overflow-hidden bg-slate-950 relative border border-slate-800 flex items-center justify-center">
-                  {/* Native image tag with guaranteed aspect ratio & instant loading */}
                   <img
                     src={project.image}
                     alt={project.title}
@@ -457,51 +456,51 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ANTIGRAVITY-STYLE EXPANSIVE LIGHTBOX MODAL (100% TAMPIL PENUH, TIDAK GEPENG / STRIP) */}
+      {/* ANTIGRAVITY LIGHTBOX MODAL THEATER (HAMPIR FULL LAYAR DI DESKTOP & FRAME NATURAL DI MOBILE) */}
       {isMounted && createPortal(
         <AnimatePresence>
           {selectedProject && (
-            <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 md:p-8 select-none font-sans">
+            <div className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 select-none font-sans">
               
-              {/* Backdrop Gelap Penutup Seluruh Layar Termasuk Navbar */}
+              {/* Backdrop Gelap Penutup Seluruh Halaman Termasuk Navbar */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedProject(null)}
-                className="fixed inset-0 bg-black/90 backdrop-blur-xl cursor-pointer"
+                className="fixed inset-0 bg-black/92 backdrop-blur-2xl cursor-pointer"
               />
 
               {/* Floating Emergency Close Button di Pojok Kanan Atas Viewport */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[100000] px-4 py-2.5 rounded-full bg-slate-900/95 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-200 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-2 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
+                className="fixed top-3 right-3 sm:top-5 sm:right-6 z-[100000] px-4 py-2 rounded-full bg-slate-900/95 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-200 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-2 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
                 aria-label="Tutup Preview"
               >
                 <X className="w-4 h-4 text-rose-400" />
                 <span>TUTUP [ESC]</span>
               </button>
 
-              {/* Main Popup Window Chassis (Ekspansif, Megah, dan Mengisi Viewport dengan Gagah) */}
+              {/* Main Popup Chassis: Hampir Full Layar (96vw x 92vh) dengan Flex-1 Min-H-0 */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.94, y: 15 }}
+                initial={{ opacity: 0, scale: 0.96, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.94, y: 15 }}
-                transition={{ type: "spring", stiffness: 350, damping: 28 }}
-                className="w-[94vw] max-w-5xl h-[85vh] max-h-[820px] bg-[#070a12] border border-slate-800 rounded-[24px] shadow-[0_30px_90px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col relative z-10"
+                exit={{ opacity: 0, scale: 0.96, y: 10 }}
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                className="w-[96vw] max-w-[1440px] h-[92vh] max-h-[920px] bg-[#070a12] border border-slate-800/90 rounded-[24px] shadow-[0_30px_90px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col relative z-10"
                 role="dialog"
                 aria-modal="true"
               >
                 {/* STICKY TOP CONTROL BAR */}
-                <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800 bg-[#0c111d] flex-shrink-0 gap-3">
+                <div className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3 border-b border-slate-800 bg-[#0c111d] flex-shrink-0 gap-3 z-30">
                   
                   {/* Left: Mode Switcher Tabs */}
-                  <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800/90">
+                  <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800/90">
                     <button
                       onClick={() => setModalTab("desktop")}
-                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         modalTab === "desktop"
-                          ? "bg-cyan-400 text-slate-950 shadow-sm"
+                          ? "bg-cyan-400 text-slate-950 shadow-md"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
@@ -511,9 +510,9 @@ export default function Projects() {
 
                     <button
                       onClick={() => setModalTab("mobile")}
-                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         modalTab === "mobile"
-                          ? "bg-cyan-400 text-slate-950 shadow-sm"
+                          ? "bg-cyan-400 text-slate-950 shadow-md"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
@@ -523,14 +522,15 @@ export default function Projects() {
 
                     <button
                       onClick={() => setModalTab("architecture")}
-                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         modalTab === "architecture"
-                          ? "bg-cyan-400 text-slate-950 shadow-sm"
+                          ? "bg-cyan-400 text-slate-950 shadow-md"
                           : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
                       <Layers className="w-3.5 h-3.5" />
-                      <span>Arsitektur &amp; Info</span>
+                      <span className="hidden sm:inline">Arsitektur &amp; Info</span>
+                      <span className="sm:hidden">Info</span>
                     </button>
                   </div>
 
@@ -547,7 +547,7 @@ export default function Projects() {
                     </button>
                   </div>
 
-                  {/* Right Actions: Buka Web & Tombol Tutup Merah */}
+                  {/* Right Actions: Buka Web & Tombol Tutup */}
                   <div className="flex items-center gap-2">
                     <a
                       href={selectedProject.liveLink}
@@ -571,12 +571,12 @@ export default function Projects() {
 
                 </div>
 
-                {/* AREA TAMPILAN KONTEN UTAMA (100% FULL-HEIGHT) */}
-                <div className="flex-1 w-full h-full bg-slate-950 overflow-hidden relative flex flex-col">
+                {/* MAIN EXPANSIVE BODY (FLEX-1 MIN-H-0 MENGISI 100% RUANG TANPA SQUEEZE/COLLAPSE) */}
+                <div className="w-full flex-1 min-h-0 bg-slate-950 overflow-hidden relative flex flex-col">
                   
-                  {/* 1. TAMPILAN DESKTOP (MENGISI 100% TINGGI & LEBAR MODAL TANPA GEPENG) */}
+                  {/* 1. TAMPILAN DESKTOP: HAMPIR FULL LAYAR 100% */}
                   {modalTab === "desktop" && (
-                    <div className="w-full h-full relative flex flex-col bg-slate-950">
+                    <div className="w-full h-full min-h-0 flex-1 relative flex flex-col bg-slate-950">
                       {isIframeLoading && (
                         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
                           <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
@@ -588,26 +588,27 @@ export default function Projects() {
                         src={selectedProject.liveLink}
                         title={`${selectedProject.title} Desktop View`}
                         onLoad={() => setIsIframeLoading(false)}
-                        className="w-full h-full border-0 bg-slate-950 flex-1"
+                        className="w-full h-full min-h-0 flex-1 border-0 bg-slate-950 block"
                         sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                       />
                     </div>
                   )}
 
-                  {/* 2. TAMPILAN MOBILE (IPHONE FRAME SCALED PROPORTIONALLY) */}
+                  {/* 2. TAMPILAN MOBILE: FRAME SMARTPHONE NATURAL & NYAMAN (TIDAK TERPOTONG) */}
                   {modalTab === "mobile" && (
-                    <div className="w-full h-full flex items-center justify-center p-4 bg-slate-950 overflow-y-auto">
-                      <div className="w-[300px] sm:w-[340px] h-[560px] sm:h-[620px] max-h-[78vh] rounded-[44px] border-[7px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative flex-shrink-0">
+                    <div className="w-full h-full min-h-0 flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-slate-950 overflow-hidden">
+                      <div className="w-[330px] sm:w-[375px] h-full max-h-[96%] rounded-[46px] border-[8px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative flex-shrink-0">
                         {/* Dynamic Island Status Bar */}
-                        <div className="w-full h-9 bg-slate-950 flex items-center justify-between px-6 pt-1.5 select-none z-20">
+                        <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-2 select-none z-20 flex-shrink-0">
                           <span className="text-[11px] font-bold text-slate-200 font-mono">09:41</span>
-                          <div className="w-20 h-4 rounded-full bg-black border border-slate-800 flex items-center justify-end px-1.5">
+                          <div className="w-24 h-4.5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
                             <div className="w-2 h-2 rounded-full bg-slate-900 border border-slate-800" />
                           </div>
                           <span className="text-[10px] text-slate-300 font-mono">5G</span>
                         </div>
 
-                        <div className="relative flex-1 w-full bg-slate-950 overflow-hidden">
+                        {/* Mobile Iframe with natural full scrolling */}
+                        <div className="relative w-full flex-1 min-h-0 bg-slate-950 overflow-hidden">
                           {isIframeLoading && (
                             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
                               <div className="w-6 h-6 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
@@ -619,13 +620,14 @@ export default function Projects() {
                             src={selectedProject.liveLink}
                             title={`${selectedProject.title} Mobile View`}
                             onLoad={() => setIsIframeLoading(false)}
-                            className="w-full h-full border-0 bg-slate-950"
+                            className="w-full h-full min-h-0 flex-1 border-0 bg-slate-950 block"
                             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                           />
                         </div>
 
-                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20">
-                          <div className="w-28 h-1 rounded-full bg-slate-600" />
+                        {/* iPhone Home Indicator Bar */}
+                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20 flex-shrink-0">
+                          <div className="w-32 h-1 rounded-full bg-slate-600" />
                         </div>
                       </div>
                     </div>
@@ -636,9 +638,9 @@ export default function Projects() {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="w-full h-full overflow-y-auto no-scrollbar p-6 sm:p-8 space-y-6 max-w-3xl mx-auto"
+                      className="w-full h-full min-h-0 flex-1 overflow-y-auto no-scrollbar p-6 sm:p-10 space-y-6 max-w-4xl mx-auto"
                     >
-                      <div className="w-full h-56 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
+                      <div className="w-full h-64 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
                         <img
                           src={selectedProject.image}
                           alt={selectedProject.title}
