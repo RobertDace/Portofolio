@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+﻿/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
@@ -456,274 +456,217 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* LIGHTBOX POP-UP MODAL DI TENGAH LAYAR DENGAN HEAVY BLURRED BACKGROUND */}
+      {/* LIGHTBOX POP-UP MODAL — BACKDROP BURAM DI BELAKANG, MODAL MELAYANG DI TENGAH */}
       {isMounted && createPortal(
         <AnimatePresence>
           {selectedProject && (
-            <div className="fixed inset-0 z-[999999] flex items-center justify-center p-3 sm:p-6 md:p-8 select-none font-sans overflow-hidden">
-              
-              {/* HEAVILY BLURRED BACKGROUND OVERLAY (MENUTUPI TOTAL SELURUH HALAMAN) */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+            // Root: fade wrapper, fixed fullscreen, NO overflow-hidden, NO -z-10
+            <motion.div
+              key="lightbox-root"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="fixed inset-0"
+              style={{ zIndex: 99998 }}
+            >
+              {/* ── LAYER 1: BACKDROP BURAM (klik untuk tutup) ── */}
+              <div
                 onClick={() => setSelectedProject(null)}
-                className="fixed inset-0 bg-black/85 backdrop-blur-2xl -z-10 cursor-pointer"
+                className="absolute inset-0 bg-black/80 backdrop-blur-2xl cursor-pointer"
               />
 
-              {/* Floating Emergency Close Button di Pojok Kanan Atas Viewport */}
+              {/* ── LAYER 2: TOMBOL TUTUP DARURAT ── */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="fixed top-4 right-4 sm:top-6 sm:right-8 z-[1000000] px-4 py-2 rounded-full bg-slate-900/90 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-200 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-2 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
+                className="absolute top-4 right-4 sm:top-6 sm:right-8 z-10 px-4 py-2 rounded-full bg-slate-900/90 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-200 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-2 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
                 aria-label="Tutup Preview"
               >
                 <X className="w-4 h-4 text-rose-400" />
                 <span>TUTUP [ESC]</span>
               </button>
 
-              {/* POP-UP MODAL WINDOW CHASSIS (MELAYANG DI TENGAH LAYAR DENGAN FRAME JELAS & SHADOW MEWAH) */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.94, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.94, y: 15 }}
-                transition={{ type: "spring", stiffness: 350, damping: 28 }}
-                className="w-[92vw] max-w-6xl h-[86vh] max-h-[860px] bg-[#070a12] border border-slate-700/80 rounded-[28px] shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col relative z-10"
-                role="dialog"
-                aria-modal="true"
-              >
-                {/* Pop-up Top Bar */}
-                <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800 bg-[#0c111d] flex-shrink-0 gap-3">
-                  
-                  {/* Left: Project title & category badge */}
-                  <div className="flex items-center gap-2.5">
-                    <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider hidden sm:inline-block">
-                      {selectedProject.category}
-                    </span>
-                    <span className="font-bold text-sm sm:text-base text-white truncate max-w-[180px] sm:max-w-xs">
-                      {selectedProject.title}
-                    </span>
-                  </div>
-
-                  {/* Center: Mode Tabs */}
-                  <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800">
-                    <button
-                      onClick={() => setModalTab("desktop")}
-                      className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                        modalTab === "desktop"
-                          ? "bg-cyan-400 text-slate-950 shadow-md"
-                          : "text-slate-400 hover:text-slate-200"
-                      }`}
-                    >
-                      <Laptop className="w-3.5 h-3.5" />
-                      <span>Tampilan Desktop</span>
-                    </button>
-
-                    <button
-                      onClick={() => setModalTab("mobile")}
-                      className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                        modalTab === "mobile"
-                          ? "bg-cyan-400 text-slate-950 shadow-md"
-                          : "text-slate-400 hover:text-slate-200"
-                      }`}
-                    >
-                      <Smartphone className="w-3.5 h-3.5" />
-                      <span>Tampilan Mobile</span>
-                    </button>
-
-                    <button
-                      onClick={() => setModalTab("architecture")}
-                      className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                        modalTab === "architecture"
-                          ? "bg-cyan-400 text-slate-950 shadow-md"
-                          : "text-slate-400 hover:text-slate-200"
-                      }`}
-                    >
-                      <Layers className="w-3.5 h-3.5" />
-                      <span className="hidden md:inline">Arsitektur &amp; Info</span>
-                      <span className="md:hidden">Info</span>
-                    </button>
-                  </div>
-
-                  {/* Right Actions: Buka Web & Close Button */}
-                  <div className="flex items-center gap-2">
-                    <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300 max-w-xs truncate">
-                      <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-                      <span className="truncate">{selectedProject.liveLink}</span>
+              {/* ── LAYER 3: POP-UP WINDOW MELAYANG DI TENGAH ── */}
+              <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 pointer-events-none">
+                <motion.div
+                  key="lightbox-window"
+                  initial={{ scale: 0.94, y: 20, opacity: 0 }}
+                  animate={{ scale: 1, y: 0, opacity: 1 }}
+                  exit={{ scale: 0.94, y: 20, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  className="w-[92vw] max-w-6xl h-[86vh] max-h-[860px] bg-[#070a12] border border-slate-700/80 rounded-[28px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col pointer-events-auto"
+                  role="dialog"
+                  aria-modal="true"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* ── TOP BAR ── */}
+                  <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800 bg-[#0c111d] flex-shrink-0 gap-3">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider hidden sm:inline-block flex-shrink-0">
+                        {selectedProject.category}
+                      </span>
+                      <span className="font-bold text-sm sm:text-base text-white truncate max-w-[140px] sm:max-w-xs">
+                        {selectedProject.title}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-950 border border-slate-800 flex-shrink-0">
                       <button
-                        onClick={handleReloadIframe}
-                        className="ml-1 text-slate-500 hover:text-cyan-400 p-0.5 cursor-pointer"
-                        title="Reload Iframe"
+                        onClick={() => setModalTab("desktop")}
+                        className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "desktop" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
-                        <RotateCw className="w-3 h-3" />
+                        <Laptop className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Desktop</span>
+                      </button>
+                      <button
+                        onClick={() => setModalTab("mobile")}
+                        className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "mobile" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
+                      >
+                        <Smartphone className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Mobile</span>
+                      </button>
+                      <button
+                        onClick={() => setModalTab("architecture")}
+                        className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "architecture" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
+                      >
+                        <Layers className="w-3.5 h-3.5" />
+                        <span className="hidden md:inline">Arsitektur</span>
                       </button>
                     </div>
-
-                    <a
-                      href={selectedProject.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors hidden sm:flex items-center gap-1.5 cursor-pointer"
-                    >
-                      <span>Buka Web</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-
-                    <button
-                      onClick={() => setSelectedProject(null)}
-                      className="w-8 h-8 rounded-xl bg-rose-500/10 hover:bg-rose-500 border border-rose-500/30 hover:border-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
-                      title="Tutup Jendela"
-                      aria-label="Tutup Jendela"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300 max-w-[220px] truncate">
+                        <Lock className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                        <span className="truncate">{selectedProject.liveLink}</span>
+                        <button onClick={handleReloadIframe} className="ml-1 text-slate-500 hover:text-cyan-400 p-0.5 cursor-pointer flex-shrink-0" title="Reload">
+                          <RotateCw className="w-3 h-3" />
+                        </button>
+                      </div>
+                      <a
+                        href={selectedProject.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors hidden sm:flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <span>Buka Web</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                      <button
+                        onClick={() => setSelectedProject(null)}
+                        className="w-8 h-8 rounded-xl bg-rose-500/10 hover:bg-rose-500 border border-rose-500/30 hover:border-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
+                        aria-label="Tutup Jendela"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
 
-                </div>
-
-                {/* Pop-up Body Content Area */}
-                <div className="w-full flex-1 min-h-0 bg-slate-950 overflow-hidden relative flex flex-col">
-                  
-                  {/* 1. TAMPILAN DESKTOP: Iframe Mengisi 100% Ruang Jendela Pop-up */}
-                  {modalTab === "desktop" && (
-                    <div className="w-full h-full relative flex flex-col bg-slate-950">
-                      {isIframeLoading && (
-                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
-                          <div className="w-9 h-9 rounded-full border-3 border-cyan-400 border-t-transparent animate-spin" />
-                          <span className="text-xs font-mono text-slate-400">Menghubungkan ke live server...</span>
-                        </div>
-                      )}
-                      <iframe
-                        key={`desktop-${iframeKey}`}
-                        src={selectedProject.liveLink}
-                        title={`${selectedProject.title} Live Desktop`}
-                        onLoad={() => setIsIframeLoading(false)}
-                        className="w-full h-full border-0 bg-slate-950 block"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                      />
-                    </div>
-                  )}
-
-                  {/* 2. TAMPILAN MOBILE: Frame Smartphone di Tengah Jendela Pop-up */}
-                  {modalTab === "mobile" && (
-                    <div className="w-full h-full flex items-center justify-center p-4 bg-slate-950/90 overflow-hidden">
-                      <div className="w-[360px] sm:w-[380px] h-full max-h-[96%] rounded-[48px] border-[8px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative flex-shrink-0">
-                        {/* Dynamic Island Status Bar */}
-                        <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-1.5 select-none z-20 flex-shrink-0 border-b border-slate-900">
-                          <span className="text-xs font-bold text-slate-200 font-mono">09:41</span>
-                          <div className="w-22 h-4.5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
-                            <div className="w-2 h-2 rounded-full bg-slate-900 border border-slate-800" />
+                  {/* ── BODY ── */}
+                  <div className="w-full flex-1 min-h-0 bg-slate-950 overflow-hidden relative flex flex-col">
+                    {modalTab === "desktop" && (
+                      <div className="w-full h-full relative flex flex-col bg-slate-950">
+                        {isIframeLoading && (
+                          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
+                            <div className="w-9 h-9 rounded-full border-[3px] border-cyan-400 border-t-transparent animate-spin" />
+                            <span className="text-xs font-mono text-slate-400">Menghubungkan ke live server...</span>
                           </div>
-                          <span className="text-xs text-slate-300 font-mono">5G</span>
-                        </div>
-
-                        {/* Mobile Iframe */}
-                        <div className="relative w-full flex-1 bg-slate-950 overflow-hidden">
-                          {isIframeLoading && (
-                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
-                              <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                              <span className="text-[11px] font-mono text-slate-400">Memuat tampilan mobile...</span>
-                            </div>
-                          )}
-                          <iframe
-                            key={`mobile-${iframeKey}`}
-                            src={selectedProject.liveLink}
-                            title={`${selectedProject.title} Mobile View`}
-                            onLoad={() => setIsIframeLoading(false)}
-                            className="w-full h-full border-0 bg-slate-950 block"
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                          />
-                        </div>
-
-                        {/* iPhone Home Indicator */}
-                        <div className="w-full py-2 bg-slate-950 flex justify-center z-20 flex-shrink-0">
-                          <div className="w-32 h-1 rounded-full bg-slate-600" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* 3. TAMPILAN ARSITEKTUR */}
-                  {modalTab === "architecture" && (
-                    <div className="w-full h-full overflow-y-auto no-scrollbar p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
-                      <div className="w-full h-64 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
-                        <img
-                          src={selectedProject.image}
-                          alt={selectedProject.title}
-                          className="w-full h-full object-cover object-center"
+                        )}
+                        <iframe
+                          key={`desktop-${iframeKey}`}
+                          src={selectedProject.liveLink}
+                          title={`${selectedProject.title} Live Desktop`}
+                          onLoad={() => setIsIframeLoading(false)}
+                          className="w-full h-full border-0 bg-slate-950 block"
+                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                         />
                       </div>
-
-                      <div className="space-y-2 text-left">
-                        <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
-                          {selectedProject.category}
-                        </div>
-                        <h3 className="text-2xl sm:text-3xl font-black text-white">
-                          {selectedProject.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                          {selectedProject.description}
-                        </p>
-                      </div>
-
-                      {/* Highlights */}
-                      <div className="space-y-3 pt-2 text-left">
-                        <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          <span>Arsitektur &amp; Fitur Unggulan</span>
-                        </h4>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {selectedProject.highlights.map((h, hIdx) => (
-                            <li key={hIdx} className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                              <span className="leading-relaxed">{h}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Tech Stack */}
-                      <div className="space-y-3 pt-2 text-left">
-                        <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">
-                          Deployed Core Technologies
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedProject.tools.map((tool, idx) => (
-                            <div
-                              key={idx}
-                              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200"
-                            >
-                              <img
-                                src={tool.logo}
-                                alt={tool.name}
-                                className="w-4 h-4 object-contain"
-                              />
-                              <span>{tool.name}</span>
+                    )}
+                    {modalTab === "mobile" && (
+                      <div className="w-full h-full flex items-center justify-center p-4 bg-slate-950/90 overflow-hidden">
+                        <div className="w-[360px] sm:w-[380px] h-full max-h-[96%] rounded-[48px] border-[8px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative flex-shrink-0">
+                          <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-1.5 select-none z-20 flex-shrink-0 border-b border-slate-900">
+                            <span className="text-xs font-bold text-slate-200 font-mono">09:41</span>
+                            <div className="w-20 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
+                              <div className="w-2 h-2 rounded-full bg-slate-900 border border-slate-800" />
                             </div>
-                          ))}
+                            <span className="text-xs text-slate-300 font-mono">5G</span>
+                          </div>
+                          <div className="relative w-full flex-1 bg-slate-950 overflow-hidden">
+                            {isIframeLoading && (
+                              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
+                                <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+                                <span className="text-[11px] font-mono text-slate-400">Memuat tampilan mobile...</span>
+                              </div>
+                            )}
+                            <iframe
+                              key={`mobile-${iframeKey}`}
+                              src={selectedProject.liveLink}
+                              title={`${selectedProject.title} Mobile View`}
+                              onLoad={() => setIsIframeLoading(false)}
+                              className="w-full h-full border-0 bg-slate-950 block"
+                              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                            />
+                          </div>
+                          <div className="w-full py-2 bg-slate-950 flex justify-center z-20 flex-shrink-0">
+                            <div className="w-32 h-1 rounded-full bg-slate-600" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                    {modalTab === "architecture" && (
+                      <div className="w-full h-full overflow-y-auto no-scrollbar p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
+                        <div className="w-full h-64 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
+                          <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover object-center" />
+                        </div>
+                        <div className="space-y-2 text-left">
+                          <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">{selectedProject.category}</div>
+                          <h3 className="text-2xl sm:text-3xl font-black text-white">{selectedProject.title}</h3>
+                          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">{selectedProject.description}</p>
+                        </div>
+                        <div className="space-y-3 pt-2 text-left">
+                          <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            <span>Arsitektur &amp; Fitur Unggulan</span>
+                          </h4>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {selectedProject.highlights.map((h, hIdx) => (
+                              <li key={hIdx} className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                                <span className="leading-relaxed">{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="space-y-3 pt-2 text-left">
+                          <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">Deployed Core Technologies</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedProject.tools.map((tool, tIdx) => (
+                              <div key={tIdx} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200">
+                                <img src={tool.logo} alt={tool.name} className="w-4 h-4 object-contain" />
+                                <span>{tool.name}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
-                </div>
+                  {/* ── FOOTER BAR ── */}
+                  <div className="px-5 py-2.5 bg-[#0c111d] border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono flex-shrink-0">
+                    <a
+                      href={selectedProject.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors flex items-center gap-1.5 text-[11px]"
+                    >
+                      <span>Source Code di GitHub</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <span className="text-slate-500 text-[10px] hidden sm:inline">Tekan ESC atau klik area blur untuk menutup</span>
+                  </div>
 
-                {/* Pop-up Footer Bar */}
-                <div className="px-5 py-2.5 bg-[#0c111d] border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono flex-shrink-0">
-                  <a
-                    href={selectedProject.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors flex items-center gap-1.5 text-[11px]"
-                  >
-                    <span>Source Code di GitHub</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                  <span className="text-slate-500 text-[10px] hidden sm:inline">Tekan ESC atau klik di area blur untuk menutup</span>
-                </div>
-
-              </motion.div>
-
-            </div>
+                </motion.div>
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>,
         document.body
