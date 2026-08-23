@@ -559,9 +559,8 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* ── BODY: relative positioning context, all tabs absolute inset-0 ── */}
-                  <div className="w-full flex-1 min-h-0 relative overflow-hidden bg-slate-950">
-
+                  {/* ── BODY: flexGrow+height:0 forces concrete computed height for absolute children ── */}
+                  <div className="w-full relative overflow-hidden bg-slate-950" style={{ flexGrow: 1, height: 0 }}>
                     {/* ── TAB 1: DESKTOP ── */}
                     {modalTab === "desktop" && (
                       <div className="absolute inset-0">
