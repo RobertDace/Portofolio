@@ -559,10 +559,12 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* ── BODY ── */}
-                  <div className="w-full flex-1 min-h-0 bg-slate-950 overflow-hidden relative flex flex-col">
+                  {/* ── BODY: relative positioning context, all tabs absolute inset-0 ── */}
+                  <div className="w-full flex-1 min-h-0 relative overflow-hidden bg-slate-950">
+
+                    {/* ── TAB 1: DESKTOP ── */}
                     {modalTab === "desktop" && (
-                      <div className="w-full flex-1 min-h-0 relative bg-slate-950">
+                      <div className="absolute inset-0">
                         {isIframeLoading && (
                           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
                             <div className="w-9 h-9 rounded-full border-[3px] border-cyan-400 border-t-transparent animate-spin" />
@@ -579,17 +581,21 @@ export default function Projects() {
                         />
                       </div>
                     )}
+
+                    {/* ── TAB 2: MOBILE SIMULATOR ── */}
                     {modalTab === "mobile" && (
-                      <div className="w-full flex-1 min-h-0 flex items-center justify-center p-4 bg-slate-950/90 overflow-hidden">
-                        <div className="w-[360px] sm:w-[380px] h-full max-h-[96%] rounded-[48px] border-[8px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative flex-shrink-0">
-                          <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-1.5 select-none z-20 flex-shrink-0 border-b border-slate-900">
+                      <div className="absolute inset-0 flex items-center justify-center p-4 bg-slate-950/90 overflow-hidden">
+                        <div className="w-[360px] sm:w-[380px] h-full max-h-full rounded-[48px] border-[8px] border-slate-800 bg-slate-950 shadow-2xl overflow-hidden flex flex-col relative">
+                          {/* Status bar */}
+                          <div className="w-full h-10 bg-slate-950 flex items-center justify-between px-6 pt-1.5 select-none flex-shrink-0 border-b border-slate-900">
                             <span className="text-xs font-bold text-slate-200 font-mono">09:41</span>
                             <div className="w-20 h-5 rounded-full bg-black border border-slate-800 flex items-center justify-end px-2">
                               <div className="w-2 h-2 rounded-full bg-slate-900 border border-slate-800" />
                             </div>
                             <span className="text-xs text-slate-300 font-mono">5G</span>
                           </div>
-                          <div className="relative w-full flex-1 min-h-0 bg-slate-950 overflow-hidden">
+                          {/* Iframe area */}
+                          <div className="relative w-full flex-1 min-h-0 overflow-hidden bg-slate-950">
                             {isIframeLoading && (
                               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
                                 <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
@@ -605,50 +611,57 @@ export default function Projects() {
                               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                             />
                           </div>
-                          <div className="w-full py-2 bg-slate-950 flex justify-center z-20 flex-shrink-0">
+                          {/* Home indicator */}
+                          <div className="w-full py-2 bg-slate-950 flex justify-center flex-shrink-0">
                             <div className="w-32 h-1 rounded-full bg-slate-600" />
                           </div>
                         </div>
                       </div>
                     )}
+
+                    {/* ── TAB 3: ARSITEKTUR (scrollable) ── */}
                     {modalTab === "architecture" && (
-                      <div className="w-full flex-1 min-h-0 overflow-y-auto no-scrollbar p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
-                        <div className="w-full h-64 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
-                          <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover object-center" />
-                        </div>
-                        <div className="space-y-2 text-left">
-                          <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">{selectedProject.category}</div>
-                          <h3 className="text-2xl sm:text-3xl font-black text-white">{selectedProject.title}</h3>
-                          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">{selectedProject.description}</p>
-                        </div>
-                        <div className="space-y-3 pt-2 text-left">
-                          <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            <span>Arsitektur &amp; Fitur Unggulan</span>
-                          </h4>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {selectedProject.highlights.map((h, hIdx) => (
-                              <li key={hIdx} className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                                <span className="leading-relaxed">{h}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div className="space-y-3 pt-2 text-left">
-                          <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">Deployed Core Technologies</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedProject.tools.map((tool, tIdx) => (
-                              <div key={tIdx} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200">
-                                <img src={tool.logo} alt={tool.name} className="w-4 h-4 object-contain" />
-                                <span>{tool.name}</span>
-                              </div>
-                            ))}
+                      <div className="absolute inset-0 overflow-y-auto">
+                        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-8 space-y-6">
+                          <div className="w-full h-64 rounded-2xl overflow-hidden relative border border-slate-800 shadow-xl bg-slate-950">
+                            <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover object-center" />
+                          </div>
+                          <div className="space-y-2 text-left">
+                            <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">{selectedProject.category}</div>
+                            <h3 className="text-2xl sm:text-3xl font-black text-white">{selectedProject.title}</h3>
+                            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">{selectedProject.description}</p>
+                          </div>
+                          <div className="space-y-3 text-left">
+                            <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
+                              <Sparkles className="w-3.5 h-3.5" />
+                              <span>Arsitektur &amp; Fitur Unggulan</span>
+                            </h4>
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {selectedProject.highlights.map((h, hIdx) => (
+                                <li key={hIdx} className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                                  <span className="leading-relaxed">{h}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="space-y-3 text-left">
+                            <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">Deployed Core Technologies</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedProject.tools.map((tool, tIdx) => (
+                                <div key={tIdx} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200">
+                                  <img src={tool.logo} alt={tool.name} className="w-4 h-4 object-contain" />
+                                  <span>{tool.name}</span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
                     )}
+
                   </div>
+
 
                   {/* ── FOOTER BAR ── */}
                   <div className="px-5 py-2.5 bg-[#0c111d] border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono flex-shrink-0">
