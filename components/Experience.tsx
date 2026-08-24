@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Calendar, MapPin, Activity, Radio, Cpu } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ExperienceItem {
   index: string;
@@ -335,71 +336,8 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
 }
 
 export default function Experience() {
-  const experiences: ExperienceItem[] = [
-    {
-      index: "01",
-      category: "Enterprise Infrastructure & Digital Operations",
-      role: "Administrative & IT Staff",
-      company: "PT. Noreen Surya Perdana",
-      period: "2025 – 2026",
-      location: "Samarinda, East Kalimantan",
-      type: "network",
-      description: "Mengoptimalkan ekosistem teknologi informasi kantor, memimpin digitalisasi dokumen kerja, serta merawat stabilitas jaringan lokal dan keamanan data operasional.",
-      metrics: [
-        { label: "Uptime", value: "99.9%" },
-        { label: "Latency", value: "12ms" },
-        { label: "Security", value: "Strict Vault" },
-      ],
-      bullets: [
-        "Mengelola dan mengoptimalkan infrastruktur jaringan lokal internal serta pemeliharaan hardware dan software.",
-        "Mendigitalisasi alur pendaftaran, rekrutmen, serta manajemen arsip dokumen kerja agar operasional lebih cepat.",
-        "Memberikan dukungan IT support reaktif berkala untuk efisiensi seluruh staf perusahaan.",
-      ],
-      skills: ["IT Support", "Network Management", "System Admin", "Data Security", "Digital Operations"],
-    },
-    {
-      index: "02",
-      category: "Digital Media & Video Direction",
-      role: "Digital Content Creator & Visual Editor",
-      company: "CEES GANK",
-      period: "2024 – Sekarang",
-      location: "Remote",
-      type: "media",
-      description: "Merancang konten multimedia berkualitas tinggi dengan alur cerita dinamis, visual modern, dan strategi keterikatan audiens yang terukur.",
-      metrics: [
-        { label: "Mastering", value: "4K 60fps" },
-        { label: "Timeline", value: "Multi-Track" },
-        { label: "Color Grading", value: "10-Bit Log" },
-      ],
-      bullets: [
-        "Memproduksi video kreatif bertempo dinamis dan grafis visual berkualitas tinggi untuk platform media digital.",
-        "Mengolah aset multimedia kompleks menggunakan Adobe Photoshop, Premiere Pro, dan After Effects.",
-        "Menggabungkan estetika visual modern dengan strategi retensi audiens yang konsisten.",
-      ],
-      skills: ["Adobe Photoshop", "Premiere Pro", "Alight Motion", "CapCut Pro", "Visual Design"],
-    },
-    {
-      index: "03",
-      category: "Full-Stack Systems & AI Engineering",
-      role: "Fullstack Web & System Engineer",
-      company: "Independent Projects & Freelance",
-      period: "2023 – Sekarang",
-      location: "Remote",
-      type: "code",
-      description: "Merancang, membangun, dan mendeploy aplikasi web full-stack modern dengan integrasi model kecerdasan buatan cerdas dan arsitektur database cloud terukur.",
-      metrics: [
-        { label: "Framework", value: "Next.js 16" },
-        { label: "Inference", value: "Claude & Gemini" },
-        { label: "Database", value: "Neon Serverless" },
-      ],
-      bullets: [
-        "Merancang dan mengembangkan aplikasi web reaktif full-stack berbasis Next.js, TypeScript, Supabase, dan Neon DB.",
-        "Mengintegrasikan Claude AI dan Gemini API untuk analisis dokumen cerdas dan modeler skenario deterministik.",
-        "Menerapkan arsitektur clean code, manajemen state reaktif, dan performa tinggi bebas hambatan.",
-      ],
-      skills: ["Next.js", "TypeScript", "Tailwind CSS", "Neon DB", "Supabase", "Claude AI", "Gemini AI", "Git"],
-    },
-  ];
+  const { t } = useLanguage();
+  const experiences = t.experience.items;
 
   return (
     <section id="experience" className="py-28 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto scroll-mt-20 relative z-10">
@@ -413,16 +351,16 @@ export default function Experience() {
         className="mb-20 text-left"
       >
         <span className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase block mb-3">
-          Career Trajectory
+          {t.experience.subHeader}
         </span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4">
-          Pengalaman{" "}
+          {t.experience.title}{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent animate-antigravity-shimmer inline-block">
-            Kerja.
+            {t.experience.titleHighlight}
           </span>
         </h2>
         <p className="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed font-normal">
-          Rekam jejak profesional dalam bidang rekayasa sistem web, otomatisasi operasional digital, dan produksi multimedia berstandar industri.
+          {t.experience.subtitle}
         </p>
       </motion.div>
 

@@ -17,6 +17,7 @@ import {
   ChevronRight, 
   Eye 
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Safe client-side mount hook for React 19 & Next.js 16
 const emptySubscribe = () => () => {};
@@ -29,13 +30,37 @@ function useIsMounted() {
 }
 
 // Data Proyek Unggulan Terurut dari Build Terbaru
-const projectsData = [
+const baseProjectsMetadata = [
   {
     index: "01",
+    category: "AGENTIC AI & HYBRID RAG",
+    title: "Agentic RAG – Autonomous Knowledge & Vector Engine",
+    description: "Pipeline Retrieval-Augmented Generation (RAG) agentik skala produksi dengan evaluasi intent dinamis, hybrid vector search via PostgreSQL pgvector & HNSW index, token-bucket rate limiter Upstash Redis, serta streaming jawaban sub-200ms TTFB.",
+    image: "/projects/agentic-rag.png",
+    liveLink: "https://agentic-rag-engine.vercel.app/",
+    githubLink: "https://github.com/RobertDace/agentic-rag-engine",
+    highlights: [
+      "Agentic Dynamic Routing: Evaluasi threshold kesamaan (≥ 0.70) untuk grounding vektor atau fallback web search real-time (Tavily)",
+      "Hybrid Relational & High-Dimensional Vector Embeddings (1536-dim via text-embedding-3-small & pgvector HNSW)",
+      "Keandalan produksi dengan validasi skema Zod ketat & rate-limiting token-bucket Upstash Redis",
+      "Streaming respon Markdown berkecepatan tinggi sub-200ms TTFB menggunakan Vercel AI SDK over SSE"
+    ],
+    tools: [
+      { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+      { name: "pgvector", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+      { name: "Prisma ORM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
+      { name: "Vercel AI SDK", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" },
+      { name: "Upstash Redis", logo: "/icons/upstash.svg" },
+    ],
+  },
+  {
+    index: "02",
     category: "LOGISTICS & MULTI-CURRENCY",
     title: "JastipPro – Overseas Personal Shopper & Logistic Suite",
     description: "Sistem manajemen logistik dan pembelanjaan jastip luar negeri terpadu dengan multi-trip currency converter (JPY, KRW, SGD, USD), live in-store shopping checklist, kalkulator laba bersih, invoice generator WhatsApp instan, serta monitoring kuota bagasi koper.",
-    image: "/projects/jastip.svg",
+    image: "/projects/jastip.png",
     liveLink: "https://jastip-beige.vercel.app/",
     githubLink: "https://github.com/RobertDace/jastip",
     highlights: [
@@ -53,11 +78,11 @@ const projectsData = [
     ],
   },
   {
-    index: "02",
+    index: "03",
     category: "DETERMINISTIC SIMULATION",
     title: "Klasim – Esports Telemetry & Scenario Modeler",
     description: "Simulator klasemen esports deterministik dan pemodel skenario probabilitas turnamen kompetitif (MPL ID, PMWC, VCT Pacific) dengan generator export instan PDF & Excel.",
-    image: "/projects/klasim.svg",
+    image: "/projects/klasim.png",
     liveLink: "https://klasim.vercel.app",
     githubLink: "https://github.com/RobertDace/klasim",
     highlights: [
@@ -69,17 +94,17 @@ const projectsData = [
     tools: [
       { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Neon DB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "Neon DB", logo: "/icons/neon.svg" },
       { name: "Prisma ORM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
     ],
   },
   {
-    index: "03",
+    index: "04",
     category: "ENTERPRISE ACADEMIC CLOUD",
     title: "TK Cahaya Hati – Integrated Academic Portal",
     description: "Portal sistem informasi akademik sekolah terpadu multi-perangkat untuk TK Cahaya Hati yang mencakup manajemen kesiswaan, monitoring absensi, tagihan SPP, dan otentikasi peran terintegrasi.",
-    image: "/projects/tk-cahaya-hati.svg",
+    image: "/projects/tk-cahaya-hati.png",
     liveLink: "https://tk-cahaya-hati.vercel.app",
     githubLink: "https://github.com/RobertDace/Multi-Device-Web-For-School",
     highlights: [
@@ -91,13 +116,13 @@ const projectsData = [
     tools: [
       { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Neon DB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "Neon DB", logo: "/icons/neon.svg" },
       { name: "Prisma ORM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
     ],
   },
   {
-    index: "04",
+    index: "05",
     category: "CHESS ENGINE & MULTI-LLM",
     title: "SenKuni – AI Chess Analyzer & Coach",
     description: "Platform analisis posisi catur reaktif yang mengintegrasikan mesin catur Stockfish dengan asisten pelatih berbasis Claude AI & Gemini AI untuk memberikan evaluasi real-time serta panduan strategi bidak secara akurat.",
@@ -113,13 +138,13 @@ const projectsData = [
     tools: [
       { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Claude AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anthropic/anthropic-original.svg" },
-      { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
+      { name: "Claude AI", logo: "/icons/claude.svg" },
+      { name: "Gemini AI", logo: "/icons/gemini.svg" },
       { name: "Stockfish 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
     ],
   },
   {
-    index: "05",
+    index: "06",
     category: "INTELLIGENT OCR AUTOMATION",
     title: "SheTI – Sakti HRD & Smart Document OCR",
     description: "Alat otomatisasi administrasi perkantoran dan HRD berbasis AI dengan fitur utama pengolah dokumen cerdas, Smart OCR untuk konversi kuitansi ke tabel otomatis, serta generator surat dinas instan.",
@@ -135,13 +160,13 @@ const projectsData = [
     tools: [
       { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-      { name: "Claude AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anthropic/anthropic-original.svg" },
-      { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
+      { name: "Claude AI", logo: "/icons/claude.svg" },
+      { name: "Gemini AI", logo: "/icons/gemini.svg" },
       { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
     ],
   },
   {
-    index: "06",
+    index: "07",
     category: "LEGAL AI & REPOSITORY",
     title: "SemarMaca – Smart Legal E-Catalog",
     description: "Platform smart e-catalog dan repositori hukum digital untuk FH UWGM yang dilengkapi dengan fitur AI legal assistant, sistem audit plagiarisme, pemetaan perpustakaan interaktif, dan QR ticketing.",
@@ -158,16 +183,16 @@ const projectsData = [
       { name: "Next.js 16", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
       { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
       { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
-      { name: "Gemini AI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" },
+      { name: "Gemini AI", logo: "/icons/gemini.svg" },
       { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
     ],
   },
   {
-    index: "07",
+    index: "08",
     category: "WEB AUDIO LAB & LO-FI",
     title: "Snacky – Interactive Lo-Fi Audio & Creative Room",
     description: "Ruang santai virtual dan pemutar audio lo-fi interaktif dengan rak vinyl berputar, kartu gacha kelinci koleksi, ambient soundscape generator, dan instrumen pad kreatif.",
-    image: "/projects/snacky.svg",
+    image: "/projects/snacky.png",
     liveLink: "https://snacky-pi.vercel.app",
     githubLink: "https://github.com/RobertDace/snacky",
     highlights: [
@@ -184,11 +209,11 @@ const projectsData = [
     ],
   },
   {
-    index: "08",
+    index: "09",
     category: "CREATIVE 3D EXPERIENCES",
     title: "My Orbit – Cosmic Memory Journey & Deck",
     description: "Pengalaman web interaktif bertema kosmik dan perjalanan memori personal dengan latar bintang live, modul countdown real-time, dek kartu interaktif, dan pemutar musik terintegrasi.",
-    image: "/projects/my-orbit.svg",
+    image: "/projects/my-orbit.png",
     liveLink: "https://myorbit-omega.vercel.app",
     githubLink: "https://github.com/RobertDace/The-Unmapped-Orbit",
     highlights: [
@@ -209,8 +234,9 @@ const projectsData = [
 type ModalTab = "desktop" | "mobile" | "architecture";
 
 export default function Projects() {
+  const { t } = useLanguage();
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [modalTab, setModalTab] = useState<ModalTab>("desktop");
   const [iframeKey, setIframeKey] = useState(0);
@@ -218,8 +244,35 @@ export default function Projects() {
   const isMounted = useIsMounted();
   const isScrollingRef = useRef(false);
 
-  const handleOpenModal = (project: typeof projectsData[0], initialTab: ModalTab = "desktop") => {
-    setSelectedProject(project);
+  const projectsData = baseProjectsMetadata.map((base, idx) => {
+    const item = t.projects.items[idx] || {};
+    return {
+      ...base,
+      index: item.index || base.index,
+      category: item.category || base.category,
+      title: item.title || base.title,
+      description: item.description || base.description,
+      highlights: item.highlights || base.highlights,
+    };
+  });
+
+  const duplicatedProjects = [...projectsData, ...projectsData, ...projectsData];
+
+  const selectedProject = selectedProjectIndex !== null ? projectsData[selectedProjectIndex] : null;
+
+  // Refs for 0-lag scroll math (zero DOM queries & zero layout reflow on scroll)
+  const cardWidthRef = useRef(350 + 24);
+  const activeIndexRef = useRef(0);
+  const settleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Mouse drag-to-scroll refs
+  const isMouseDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftStartRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  const handleOpenModal = (index: number, initialTab: ModalTab = "desktop") => {
+    setSelectedProjectIndex(index);
     setModalTab(initialTab);
     setIsIframeLoading(true);
     setIframeKey((prev) => prev + 1);
@@ -234,7 +287,7 @@ export default function Projects() {
     if (selectedProject) {
       document.body.style.overflow = "hidden";
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") setSelectedProject(null);
+        if (e.key === "Escape") setSelectedProjectIndex(null);
       };
       window.addEventListener("keydown", handleKeyDown);
       return () => {
@@ -246,56 +299,111 @@ export default function Projects() {
     }
   }, [selectedProject]);
 
-  const updateActiveCardIndex = useCallback(() => {
-    if (!carouselRef.current) return;
-    const container = carouselRef.current;
-    const scrollLeft = container.scrollLeft;
-    const cards = container.querySelectorAll<HTMLElement>(".carousel-card");
-    if (!cards.length) return;
-
-    let closestIdx = 0;
-    let minDiff = Infinity;
-
-    cards.forEach((card, idx) => {
-      const diff = Math.abs(card.offsetLeft - scrollLeft);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closestIdx = idx;
+  // Measure card width once and on resize (zero measurement during scrolling)
+  useEffect(() => {
+    const measureCard = () => {
+      if (!carouselRef.current) return;
+      const firstCard = carouselRef.current.querySelector<HTMLElement>(".carousel-card");
+      if (firstCard) {
+        cardWidthRef.current = firstCard.offsetWidth + 24; // 24px is gap-6
       }
-    });
-
-    setActiveIndex(closestIdx);
-    isScrollingRef.current = false;
+    };
+    measureCard();
+    window.addEventListener("resize", measureCard, { passive: true });
+    return () => window.removeEventListener("resize", measureCard);
   }, []);
 
-  const handleScroll = () => {
-    if (!isScrollingRef.current) {
-      isScrollingRef.current = true;
-      requestAnimationFrame(updateActiveCardIndex);
-    }
-  };
+  // Center initial view to middle set on mount
+  useEffect(() => {
+    if (!carouselRef.current || !projectsData.length) return;
+    const container = carouselRef.current;
+    const cardWidth = cardWidthRef.current;
+    const middleIndex = projectsData.length;
+    container.scrollLeft = middleIndex * cardWidth;
+    setActiveIndex(0);
+  }, [projectsData.length]);
 
-  const scrollToIndex = (index: number) => {
-    if (carouselRef.current) {
-      const cards = carouselRef.current.querySelectorAll<HTMLElement>(".carousel-card");
-      if (cards[index]) {
-        carouselRef.current.scrollTo({
-          left: cards[index].offsetLeft - 24,
-          behavior: "smooth",
-        });
-        setActiveIndex(index);
+  // 0-LAG Scroll Handler: Pure O(1) arithmetic, zero DOM queries & zero layout thrashing
+  const handleScroll = useCallback(() => {
+    if (!carouselRef.current || !projectsData.length) return;
+    const container = carouselRef.current;
+    const cardWidth = cardWidthRef.current;
+    const totalSetWidth = cardWidth * projectsData.length;
+
+    // Fast O(1) active index calculation without querying DOM elements
+    const currentCardIdx = Math.round(container.scrollLeft / cardWidth);
+    const realIdx = ((currentCardIdx % projectsData.length) + projectsData.length) % projectsData.length;
+
+    if (realIdx !== activeIndexRef.current) {
+      activeIndexRef.current = realIdx;
+      setActiveIndex(realIdx);
+    }
+
+    // Debounced boundary reset when idle to eliminate any visual stutter while scrolling
+    if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
+    settleTimeoutRef.current = setTimeout(() => {
+      if (!carouselRef.current) return;
+      const sl = carouselRef.current.scrollLeft;
+      if (sl < totalSetWidth * 0.4) {
+        carouselRef.current.scrollLeft = sl + totalSetWidth;
+      } else if (sl > totalSetWidth * 2.1) {
+        carouselRef.current.scrollLeft = sl - totalSetWidth;
       }
-    }
-  };
+    }, 120);
+  }, [projectsData.length]);
 
+  // Smooth next / prev actions
   const scrollPrev = () => {
-    const targetIdx = Math.max(activeIndex - 1, 0);
-    scrollToIndex(targetIdx);
+    if (!carouselRef.current) return;
+    const cardWidth = cardWidthRef.current;
+    carouselRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
   };
 
   const scrollNext = () => {
-    const targetIdx = Math.min(activeIndex + 1, projectsData.length - 1);
-    scrollToIndex(targetIdx);
+    if (!carouselRef.current) return;
+    const cardWidth = cardWidthRef.current;
+    carouselRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
+  };
+
+  const scrollToProject = (targetIdx: number) => {
+    if (!carouselRef.current || !projectsData.length) return;
+    const cardWidth = cardWidthRef.current;
+    const targetScrollLeft = (projectsData.length + targetIdx) * cardWidth;
+    carouselRef.current.scrollTo({
+      left: targetScrollLeft,
+      behavior: "smooth",
+    });
+    setActiveIndex(targetIdx);
+  };
+
+  // Mouse Drag-to-Scroll Physics (0 Lag on Desktop)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!carouselRef.current) return;
+    isMouseDownRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - carouselRef.current.offsetLeft;
+    scrollLeftStartRef.current = carouselRef.current.scrollLeft;
+    carouselRef.current.style.scrollSnapType = "none";
+    carouselRef.current.style.scrollBehavior = "auto";
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDownRef.current || !carouselRef.current) return;
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.3;
+    if (Math.abs(walk) > 5) {
+      hasDraggedRef.current = true;
+    }
+    carouselRef.current.scrollLeft = scrollLeftStartRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    if (!carouselRef.current) return;
+    if (isMouseDownRef.current) {
+      isMouseDownRef.current = false;
+      carouselRef.current.style.scrollSnapType = "x mandatory";
+      carouselRef.current.style.scrollBehavior = "smooth";
+    }
   };
 
   return (
@@ -314,28 +422,24 @@ export default function Projects() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div className="space-y-2 text-left">
             <span className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase block mb-1">
-              Selected Works ({projectsData.length})
+              {t.projects.subHeader}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-              Featured{" "}
+              {t.projects.title}{" "}
               <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent animate-antigravity-shimmer inline-block">
-                Works.
+                {t.projects.titleHighlight}
               </span>
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm max-w-xl leading-relaxed">
-              Kumpulan proyek full-stack, serverless architecture, multi-LLM AI systems, dan pengalaman interaktif.
+              {t.projects.subtitle}
             </p>
           </div>
 
+          {/* INFINITE CAROUSEL CONTROLS */}
           <div className="flex items-center gap-3 self-end md:self-auto flex-shrink-0">
             <button
               onClick={scrollPrev}
-              disabled={activeIndex === 0}
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
-                activeIndex === 0
-                  ? "border-slate-800/50 bg-slate-900/30 text-slate-600 cursor-not-allowed opacity-50"
-                  : "border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800"
-              }`}
+              className="w-10 h-10 rounded-full border border-slate-700/80 bg-[#0e1424] text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
               aria-label="Previous Project"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -343,12 +447,7 @@ export default function Projects() {
 
             <button
               onClick={scrollNext}
-              disabled={activeIndex === projectsData.length - 1}
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 backdrop-blur-md active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
-                activeIndex === projectsData.length - 1
-                  ? "border-slate-800/50 bg-slate-900/30 text-slate-600 cursor-not-allowed opacity-50"
-                  : "border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800"
-              }`}
+              className="w-10 h-10 rounded-full border border-slate-700/80 bg-[#0e1424] text-slate-300 hover:text-cyan-400 hover:border-cyan-400/60 hover:bg-slate-800 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none"
               aria-label="Next Project"
             >
               <ChevronRight className="w-4 h-4" />
@@ -357,52 +456,67 @@ export default function Projects() {
         </div>
       </motion.div>
 
-      {/* HORIZONTAL CAROUSEL - BERSIH, TERUKUR, DAN SEIMBANG (0 LAG) */}
+      {/* INFINITE HORIZONTAL CAROUSEL - 0 LAG GPU PIPELINE */}
       <div className="w-full space-y-6">
         <div
           ref={carouselRef}
           onScroll={handleScroll}
-          className="flex overflow-x-auto gap-6 pb-6 pt-2 no-scrollbar snap-x snap-mandatory px-6 sm:px-8 md:px-12 w-full touch-pan-x"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onMouseLeave={handleMouseUpOrLeave}
+          className="flex overflow-x-auto gap-6 pb-6 pt-2 no-scrollbar snap-x snap-mandatory px-6 sm:px-8 md:px-12 w-full touch-pan-x overscroll-x-contain cursor-grab active:cursor-grabbing transform-gpu will-change-scroll"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            scrollBehavior: "smooth",
+          }}
         >
-          {projectsData.map((project, idx) => (
+          {duplicatedProjects.map((project, idx) => (
             <div
               key={idx}
-              onClick={() => handleOpenModal(project, "desktop")}
-              className="carousel-card snap-start w-[300px] sm:w-[330px] md:w-[350px] flex-shrink-0 bg-slate-900/70 hover:bg-slate-900/95 border border-slate-800/90 hover:border-cyan-500/50 rounded-2xl p-4 flex flex-col justify-between shadow-xl cursor-pointer transition-all duration-200 transform-gpu hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(6,182,212,0.12)] group backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none select-none"
+              onClick={() => {
+                if (!hasDraggedRef.current) {
+                  handleOpenModal(idx % projectsData.length, "desktop");
+                }
+              }}
+              className="carousel-card snap-start w-[300px] sm:w-[330px] md:w-[350px] flex-shrink-0 bg-[#0e1424] hover:bg-[#131b2e] border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-4 flex flex-col justify-between shadow-xl cursor-pointer transition-all duration-200 transform-gpu hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(6,182,212,0.12)] group focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none select-none"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  handleOpenModal(project, "desktop");
+                  handleOpenModal(idx % projectsData.length, "desktop");
                 }
               }}
             >
               <div className="space-y-3.5">
-                {/* Header Card: Category & Number Identifier */}
+                {/* Header Card: Category & Live Indicator */}
                 <div className="flex items-center justify-between text-[10px] font-mono border-b border-slate-800/80 pb-2">
                   <span className="text-cyan-400 font-bold tracking-wider uppercase truncate max-w-[200px]">
                     {project.category}
                   </span>
-                  <span className="text-slate-500 font-bold tabular-nums flex-shrink-0">
-                    [{project.index} / 08]
+                  <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/25 text-cyan-300 font-mono text-[9px] font-medium flex-shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    LIVE
                   </span>
                 </div>
 
-                {/* Banner Thumbnail Berukuran Pasti */}
+                {/* Banner Thumbnail */}
                 <div className="w-full h-44 rounded-xl overflow-hidden bg-slate-950 relative border border-slate-800 flex items-center justify-center">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-300 will-change-transform block"
+                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-300 will-change-transform block"
                     loading="lazy"
+                    decoding="async"
                   />
                   
                   {/* Subtle hover overlay button */}
                   <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center backdrop-blur-[2px]">
                     <div className="px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 text-xs font-bold shadow-lg flex items-center gap-1.5 transform scale-90 group-hover:scale-100 transition-transform">
                       <Eye className="w-4 h-4" />
-                      <span>Live Preview</span>
+                      <span>{t.projects.livePreview}</span>
                     </div>
                   </div>
                 </div>
@@ -444,7 +558,7 @@ export default function Projects() {
           {projectsData.map((_, dotIdx) => (
             <button
               key={dotIdx}
-              onClick={() => scrollToIndex(dotIdx)}
+              onClick={() => scrollToProject(dotIdx)}
               className={`h-2 rounded-full transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
                 activeIndex === dotIdx
                   ? "w-8 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]"
@@ -472,18 +586,18 @@ export default function Projects() {
             >
               {/* ── LAYER 1: BACKDROP BURAM (klik untuk tutup) ── */}
               <div
-                onClick={() => setSelectedProject(null)}
+                onClick={() => setSelectedProjectIndex(null)}
                 className="absolute inset-0 bg-black/80 backdrop-blur-2xl cursor-pointer"
               />
 
               {/* ── LAYER 2: TOMBOL TUTUP DARURAT ── */}
               <button
-                onClick={() => setSelectedProject(null)}
+                onClick={() => setSelectedProjectIndex(null)}
                 className="absolute top-4 right-4 sm:top-6 sm:right-8 z-10 px-4 py-2 rounded-full bg-slate-900/90 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-200 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-2 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
                 aria-label="Tutup Preview"
               >
                 <X className="w-4 h-4 text-rose-400" />
-                <span>TUTUP [ESC]</span>
+                <span>{t.projects.modal.closeBtn}</span>
               </button>
 
               {/* ── LAYER 3: POP-UP WINDOW MELAYANG DI TENGAH ── */}
@@ -515,21 +629,21 @@ export default function Projects() {
                         className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "desktop" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
                         <Laptop className="w-3.5 h-3.5" />
-                        <span className="hidden sm:inline">Desktop</span>
+                        <span className="hidden sm:inline">{t.projects.modal.desktopTab}</span>
                       </button>
                       <button
                         onClick={() => setModalTab("mobile")}
                         className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "mobile" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
                         <Smartphone className="w-3.5 h-3.5" />
-                        <span className="hidden sm:inline">Mobile</span>
+                        <span className="hidden sm:inline">{t.projects.modal.mobileTab}</span>
                       </button>
                       <button
                         onClick={() => setModalTab("architecture")}
                         className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "architecture" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
                         <Layers className="w-3.5 h-3.5" />
-                        <span className="hidden md:inline">Arsitektur</span>
+                        <span className="hidden md:inline">{t.projects.modal.archTab}</span>
                       </button>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -546,11 +660,11 @@ export default function Projects() {
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors hidden sm:flex items-center gap-1.5 cursor-pointer"
                       >
-                        <span>Buka Web</span>
+                        <span>{t.projects.modal.openWeb}</span>
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                       <button
-                        onClick={() => setSelectedProject(null)}
+                        onClick={() => setSelectedProjectIndex(null)}
                         className="w-8 h-8 rounded-xl bg-rose-500/10 hover:bg-rose-500 border border-rose-500/30 hover:border-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
                         aria-label="Tutup Jendela"
                       >
@@ -567,7 +681,7 @@ export default function Projects() {
                         {isIframeLoading && (
                           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950/90 backdrop-blur-sm">
                             <div className="w-9 h-9 rounded-full border-[3px] border-cyan-400 border-t-transparent animate-spin" />
-                            <span className="text-xs font-mono text-slate-400">Menghubungkan ke live server...</span>
+                            <span className="text-xs font-mono text-slate-400">{t.projects.modal.connecting}</span>
                           </div>
                         )}
                         <iframe
@@ -598,7 +712,7 @@ export default function Projects() {
                             {isIframeLoading && (
                               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-950/90 backdrop-blur-sm">
                                 <div className="w-7 h-7 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-                                <span className="text-[11px] font-mono text-slate-400">Memuat tampilan mobile...</span>
+                                <span className="text-[11px] font-mono text-slate-400">{t.projects.modal.loadingMobile}</span>
                               </div>
                             )}
                             <iframe
@@ -633,7 +747,7 @@ export default function Projects() {
                           <div className="space-y-3 text-left">
                             <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase flex items-center gap-1.5">
                               <Sparkles className="w-3.5 h-3.5" />
-                              <span>Arsitektur &amp; Fitur Unggulan</span>
+                              <span>{t.projects.modal.archHighlights}</span>
                             </h4>
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {selectedProject.highlights.map((h, hIdx) => (
@@ -645,7 +759,7 @@ export default function Projects() {
                             </ul>
                           </div>
                           <div className="space-y-3 text-left">
-                            <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">Deployed Core Technologies</h4>
+                            <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">{t.projects.modal.deployedTech}</h4>
                             <div className="flex flex-wrap gap-2">
                               {selectedProject.tools.map((tool, tIdx) => (
                                 <div key={tIdx} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200">
@@ -670,10 +784,10 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="hover:text-white transition-colors flex items-center gap-1.5 text-[11px]"
                     >
-                      <span>Source Code di GitHub</span>
+                      <span>{t.projects.modal.sourceCode}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
-                    <span className="text-slate-500 text-[10px] hidden sm:inline">Tekan ESC atau klik area blur untuk menutup</span>
+                    <span className="text-slate-500 text-[10px] hidden sm:inline">{t.projects.modal.escHint}</span>
                   </div>
 
                 </motion.div>

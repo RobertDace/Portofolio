@@ -3,40 +3,20 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-// Custom SVG Icons for stacks that need crisp high-resolution rendering
-const ClaudeIcon = () => (
-  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+// Official SVG Icons for stacks that need crisp high-resolution original rendering
+const PgVectorIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M16.5 4.5C15.8 4.1 14.8 4 13.7 4.2C12.4 4.5 11.3 5.4 10.8 6.6L4.5 19.5H8.2L9.6 16.5H16.4L17.8 19.5H21.5L16.5 4.5ZM11.1 13.5L13.5 8.2L15.9 13.5H11.1Z"
-      fill="#D97706"
-    />
-    <path
-      d="M13.5 8.2L15.9 13.5H11.1L13.5 8.2Z"
-      fill="#F59E0B"
-    />
-  </svg>
-);
-
-const NeonIcon = () => (
-  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
-    <path
-      d="M12 2L3 7V17L12 22L21 17V7L12 2Z"
-      stroke="#00E599"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 6L7 9V15L12 18L17 15V9L12 6Z"
-      fill="#00E599"
-      fillOpacity="0.25"
-      stroke="#00E599"
+      d="M12 2L3 7v10l9 5 9-5V7l-9-5z"
+      stroke="#336791"
       strokeWidth="1.5"
+      fill="#336791"
+      fillOpacity="0.25"
     />
-    <path
-      d="M12 10L9.5 11.5V14.5L12 16L14.5 14.5V11.5L12 10Z"
-      fill="#00E599"
-    />
+    <circle cx="12" cy="7" r="2.2" fill="#06B6D4" />
+    <circle cx="7" cy="14.5" r="2.2" fill="#06B6D4" />
+    <circle cx="17" cy="14.5" r="2.2" fill="#06B6D4" />
+    <path d="M12 7L7 14.5M12 7l5 7.5M7 14.5h10" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 );
 
@@ -62,7 +42,7 @@ interface SkillItem {
   customIcon?: React.ReactNode;
 }
 
-// Tech stack yang dianalisis dari seluruh proyek nyata (Jastip, Klasim, TK Cahaya Hati, SenKuni, SheTI, SemarMaca, Snacky, My Orbit)
+// Tech stack komprehensif dari seluruh portfolio riil (Agentic RAG, Jastip, Klasim, TK Cahaya Hati, SenKuni, SheTI, SemarMaca, Snacky, My Orbit)
 const skillsRow1: SkillItem[] = [
   {
     name: "Next.js 16",
@@ -77,43 +57,63 @@ const skillsRow1: SkillItem[] = [
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
   },
   {
+    name: "Google Antigravity",
+    logo: "/icons/antigravity.png",
+  },
+  {
     name: "Claude AI",
-    customIcon: <ClaudeIcon />,
+    logo: "/icons/claude.svg",
   },
   {
     name: "Gemini AI",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg",
+    logo: "/icons/gemini.svg",
+  },
+  {
+    name: "Vercel AI SDK",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
+  },
+  {
+    name: "pgvector",
+    customIcon: <PgVectorIcon />,
+  },
+  {
+    name: "Tailwind CSS",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+  },
+  {
+    name: "Python",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+];
+
+const skillsRow2: SkillItem[] = [
+  {
+    name: "VS Code",
+    logo: "/icons/vscode.svg",
   },
   {
     name: "Neon DB",
-    customIcon: <NeonIcon />,
+    logo: "/icons/neon.svg",
   },
   {
     name: "Supabase",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
   },
   {
-    name: "Tailwind CSS",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    name: "PostgreSQL",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
   },
-];
-
-const skillsRow2: SkillItem[] = [
+  {
+    name: "Upstash Redis",
+    logo: "/icons/upstash.svg",
+  },
   {
     name: "Prisma ORM",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
   },
   {
-    name: "PostgreSQL",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-  },
-  {
     name: "Clerk Auth",
     customIcon: <ClerkIcon />,
-  },
-  {
-    name: "Python",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
   },
   {
     name: "Node.js",
@@ -133,7 +133,10 @@ const skillsRow2: SkillItem[] = [
   },
 ];
 
+import { useLanguage } from "@/context/LanguageContext";
+
 export default function Skills() {
+  const { t } = useLanguage();
   const doubleRow1 = [...skillsRow1, ...skillsRow1];
   const doubleRow2 = [...skillsRow2, ...skillsRow2];
 
@@ -150,18 +153,18 @@ export default function Skills() {
         className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 mb-16 text-center"
       >
         <span className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase block mb-3">
-          Core Capabilities
+          {t.skills.subHeader}
         </span>
 
         {/* Judul & Deskripsi */}
         <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-4">
-          Tech Stack &amp;{" "}
+          {t.skills.title}{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent animate-antigravity-shimmer inline-block">
-            Expertise.
+            {t.skills.titleHighlight}
           </span>
         </h2>
         <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Teknologi, serverless database, dan ekosistem AI modern yang saya gunakan untuk merancang dan mendeploy aplikasi web berperforma tinggi.
+          {t.skills.subtitle}
         </p>
       </motion.div>
 

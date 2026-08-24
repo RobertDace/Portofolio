@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface TiltPhotoCardProps {
   src: string;
@@ -22,6 +23,7 @@ export default function TiltPhotoCard({
   location = "Samarinda / Probolinggo",
   caption = "Building scalable fullstack systems & AI experiences.",
 }: TiltPhotoCardProps) {
+  const { t } = useLanguage();
   const cardRef = useRef<HTMLDivElement>(null);
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(128);
@@ -90,6 +92,7 @@ export default function TiltPhotoCard({
     setSaved((prev) => {
       const next = !prev;
       setToastMessage(next ? "Post tersimpan di koleksi" : "Post dihapus dari koleksi");
+      setToastMessage(next ? t.tiltCard.savedToast : t.tiltCard.removedToast);
       setTimeout(() => setToastMessage(null), 2000);
       return next;
     });
@@ -133,7 +136,7 @@ export default function TiltPhotoCard({
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 group/user cursor-pointer"
-              title="Lihat Profil Instagram @alfrbtt"
+              title={t.tiltCard.viewProfile}
             >
               {/* Instagram Story Gradient Ring */}
               <div className="p-[2px] rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 flex-shrink-0 group-hover/user:scale-105 transition-transform">
@@ -167,7 +170,7 @@ export default function TiltPhotoCard({
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-slate-200 transition-colors p-1"
               aria-label="More options"
-              title="Kunjungi Instagram @alfrbtt"
+              title={t.tiltCard.viewProfile}
             >
               <MoreHorizontal className="w-4 h-4" />
             </a>
@@ -176,8 +179,8 @@ export default function TiltPhotoCard({
           {/* 2. Main Photo Feed (Double Tap to Like) */}
           <div
             onDoubleClick={handleDoubleTap}
-            className="relative aspect-[4/4.5] sm:aspect-[4/4.8] w-full overflow-hidden bg-slate-950 flex items-center justify-center cursor-pointer relative"
-            title="Ketuk 2x untuk Like!"
+            className="relative aspect-[4/4.5] sm:aspect-[4/4.8] w-full overflow-hidden bg-slate-950 flex items-center justify-center cursor-pointer"
+            title={t.tiltCard.doubleTapHint}
           >
             <div className="relative w-full h-full [transform:translateZ(20px)] transition-transform duration-300">
               <Image
@@ -240,7 +243,7 @@ export default function TiltPhotoCard({
                   onClick={handleCommentClick}
                   className="text-slate-300 hover:text-cyan-400 transition-colors cursor-pointer"
                   aria-label="Comment & Message"
-                  title="Tinggalkan pesan di contact form"
+                  title={t.tiltCard.commentTitle}
                 >
                   <MessageCircle className="w-5 h-5" />
                 </button>
@@ -252,7 +255,7 @@ export default function TiltPhotoCard({
                   rel="noopener noreferrer"
                   className="text-slate-300 hover:text-emerald-400 transition-all hover:scale-110 active:scale-95 cursor-pointer block"
                   aria-label="Direct Message Instagram"
-                  title="Kirim DM langsung ke Instagram @alfrbtt"
+                  title={t.tiltCard.dmTitle}
                 >
                   <Send className="w-4 h-4 -rotate-12" />
                 </a>
@@ -267,7 +270,7 @@ export default function TiltPhotoCard({
                   saved ? "text-amber-400 fill-amber-400" : "text-slate-300 hover:text-amber-400"
                 }`}
                 aria-label="Simpan Post"
-                title="Simpan Post"
+                title={t.tiltCard.saveTitle}
               >
                 <Bookmark className={`w-5 h-5 ${saved ? "fill-amber-400" : ""}`} />
               </button>

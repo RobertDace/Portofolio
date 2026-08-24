@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FolderGit2, Mail } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import TiltPhotoCard from "./TiltPhotoCard";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Inline SVG untuk Ikon Sosmed
 const GithubIcon = () => (
@@ -22,19 +23,21 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const roles = [
-  "Full-Stack Web Developer",
-  "AI Systems & Model Integrator",
-  "Deterministic Scenario Modeler",
-  "Interactive Experience Crafter",
-];
-
 export default function Hero() {
+  const { t } = useLanguage();
+  const roles = t.hero.roles;
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Cyber Glitch Scramble Text on ROBIT hover (same font family, identical height & baseline)
+  // Reset typewriter when roles/language changes
+  useEffect(() => {
+    setRoleIndex(0);
+    setDisplayText("");
+    setIsDeleting(false);
+  }, [roles]);
+
+  // Cyber Glitch Scramble Text on ROBIT hover
   const [robitText, setRobitText] = useState("ROBIT");
 
   const handleRobitHover = () => {
@@ -115,7 +118,7 @@ export default function Hero() {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, roleIndex]);
+  }, [displayText, isDeleting, roleIndex, roles]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -143,7 +146,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="text-xs font-mono font-semibold tracking-widest text-cyan-400 uppercase"
           >
-            Hi, Saya
+            {t.hero.greeting}
           </motion.div>
 
           {/* Heading Nama Besar Berkarakter Tinggi */}
@@ -218,7 +221,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-prose font-normal"
           >
-            Membangun aplikasi web reaktif yang presisi, interaktif, dan berpusat pada pengalaman pengguna modern serta integrasi sistem kecerdasan buatan cerdas.
+            {t.hero.bio}
           </motion.p>
 
           {/* Tombol CTA (Magnetik + Smooth Jump) */}
@@ -231,14 +234,14 @@ export default function Hero() {
             <MagneticButton onClick={() => scrollToSection("projects")}>
               <div className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-300 text-slate-950 flex items-center gap-2 shadow-lg shadow-cyan-950/40 hover:opacity-95 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none">
                 <FolderGit2 className="w-4 h-4" />
-                <span>Lihat Proyek</span>
+                <span>{t.hero.viewProjects}</span>
               </div>
             </MagneticButton>
 
             <MagneticButton onClick={() => scrollToSection("contact")}>
               <div className="px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900/80 border border-slate-800 text-slate-200 flex items-center gap-2 hover:border-slate-700 hover:text-cyan-400 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none">
                 <Mail className="w-4 h-4 text-cyan-400" />
-                <span>Hubungi Saya</span>
+                <span>{t.hero.contactMe}</span>
               </div>
             </MagneticButton>
           </motion.div>
@@ -257,8 +260,8 @@ export default function Hero() {
               alt="2OB1T Profile Post"
               priority
               username="alfrbtt"
-              location="Samarinda, East Kalimantan"
-              caption="Full-Stack Developer & AI Systems Engineer. Building future-proof digital tools."
+              location={t.hero.photoCard.location}
+              caption={t.hero.photoCard.caption}
             />
           </motion.div>
         </div>

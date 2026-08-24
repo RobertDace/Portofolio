@@ -9,35 +9,38 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0b0f19] text-slate-100 relative overflow-x-hidden">
-      <ParticleBackground />
-      <CustomCursor />
-      <Preloader />
+    <LanguageProvider>
+      <main className="min-h-screen bg-[#0b0f19] text-slate-100 relative overflow-x-hidden">
+        <ParticleBackground />
+        <CustomCursor />
+        <Preloader />
 
-      <Navbar />
+        <Navbar />
 
-      {/* 1. Beranda */}
-      <Hero />
+        {/* 1. Beranda */}
+        <Hero />
 
-      {/* 2. Tentang Saya */}
-      <About />
+        {/* 2. Tentang Saya */}
+        <About />
 
-      {/* 3. Pengalaman Kerja */}
-      <Experience />
+        {/* 3. Pengalaman Kerja */}
+        <Experience />
 
-      {/* 4. Proyek AI */}
-      <Projects />
+        {/* 4. Proyek AI */}
+        <Projects />
 
-      {/* 5. Keahlian */}
-      <Skills />
+        {/* 5. Keahlian */}
+        <Skills />
 
-      {/* 6. Kontak */}
-      <Contact />
+        {/* 6. Kontak */}
+        <Contact />
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </LanguageProvider>
   );
 }
