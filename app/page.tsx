@@ -2,7 +2,6 @@ import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
 import ParticleBackground from "@/components/ParticleBackground";
 import Navbar from "@/components/Navbar";
-import CommandPalette from "@/components/CommandPalette";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
@@ -19,7 +18,6 @@ export default function Home() {
         <ParticleBackground />
         <CustomCursor />
         <Preloader />
-        <CommandPalette />
 
         <Navbar />
 

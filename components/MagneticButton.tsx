@@ -2,7 +2,6 @@
 
 import { useRef, MouseEvent, ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { sound } from "@/utils/sound";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -41,20 +40,12 @@ export default function MagneticButton({
     y.set(0);
   };
 
-  const handleClick = () => {
-    sound.playClick();
-    if (onClick) {
-      onClick();
-    }
-  };
-
   return (
     <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => sound.playHover()}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
+      onClick={onClick}
       style={{ x: springX, y: springY }}
       whileTap={{ scale: 0.96 }}
       className={`inline-block cursor-pointer ${className}`}

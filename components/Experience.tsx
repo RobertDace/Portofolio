@@ -297,7 +297,7 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                 <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
                   <div className="flex items-center gap-2">
                     <Cpu className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-mono font-bold text-slate-300 uppercase">Architecture Telemetry</span>
+                    <span className="text-xs font-mono font-bold text-slate-300 uppercase">System Architecture</span>
                   </div>
                   <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">
                     READY

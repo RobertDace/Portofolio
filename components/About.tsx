@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import TiltPhotoCard from "./TiltPhotoCard";
-import CyberTerminal from "./CyberTerminal";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function About() {
@@ -93,22 +92,6 @@ export default function About() {
           </div>
         </motion.div>
 
-      </div>
-
-      {/* Cybernetic Interactive Terminal Section */}
-      <div className="mt-16 sm:mt-20 w-full">
-        <div className="flex items-center justify-between mb-3 px-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">
-              INTERACTIVE AGENTIC TERMINAL
-            </span>
-          </div>
-          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
-            Commands: &apos;projects&apos;, &apos;skills&apos;, &apos;ai&apos;, &apos;cv&apos;, &apos;matrix&apos;
-          </span>
-        </div>
-        <CyberTerminal />
       </div>
     </section>
   );
