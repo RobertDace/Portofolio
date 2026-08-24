@@ -15,9 +15,12 @@ import {
   Sparkles, 
   ChevronLeft, 
   ChevronRight, 
-  Eye 
+  Eye,
+  Copy,
+  Check
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { sound } from "@/utils/sound";
 
 // Safe client-side mount hook for React 19 & Next.js 16
 const emptySubscribe = () => () => {};
@@ -270,15 +273,31 @@ export default function Projects() {
   const startXRef = useRef(0);
   const scrollLeftStartRef = useRef(0);
   const hasDraggedRef = useRef(false);
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const handleOpenModal = (index: number, initialTab: ModalTab = "desktop") => {
+    sound.playModalOpen();
     setSelectedProjectIndex(index);
     setModalTab(initialTab);
     setIsIframeLoading(true);
     setIframeKey((prev) => prev + 1);
   };
 
+  const handleCloseModal = () => {
+    sound.playClick();
+    setSelectedProjectIndex(null);
+  };
+
+  const handleCopyProjectLink = () => {
+    if (!selectedProject) return;
+    navigator.clipboard.writeText(selectedProject.liveLink);
+    sound.playSuccess();
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
   const handleReloadIframe = () => {
+    sound.playClick();
     setIsIframeLoading(true);
     setIframeKey((prev) => prev + 1);
   };
@@ -586,13 +605,13 @@ export default function Projects() {
             >
               {/* ── LAYER 1: BACKDROP BURAM (klik untuk tutup) ── */}
               <div
-                onClick={() => setSelectedProjectIndex(null)}
+                onClick={handleCloseModal}
                 className="absolute inset-0 bg-black/80 backdrop-blur-2xl cursor-pointer"
               />
 
               {/* ── LAYER 2: TOMBOL TUTUP DARURAT ── */}
               <button
-                onClick={() => setSelectedProjectIndex(null)}
+                onClick={handleCloseModal}
                 className="absolute top-4 right-4 sm:top-6 sm:right-8 z-10 px-4 py-2 rounded-full bg-slate-900/90 hover:bg-rose-500/20 border border-slate-700 hover:border-rose-400 text-slate-200 hover:text-rose-300 font-mono text-xs font-bold flex items-center gap-2 shadow-2xl cursor-pointer transition-all active:scale-95 backdrop-blur-md"
                 aria-label="Tutup Preview"
               >
@@ -625,21 +644,30 @@ export default function Projects() {
                     </div>
                     <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-950 border border-slate-800 flex-shrink-0">
                       <button
-                        onClick={() => setModalTab("desktop")}
+                        onClick={() => {
+                          sound.playClick();
+                          setModalTab("desktop");
+                        }}
                         className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "desktop" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
                         <Laptop className="w-3.5 h-3.5" />
                         <span className="hidden sm:inline">{t.projects.modal.desktopTab}</span>
                       </button>
                       <button
-                        onClick={() => setModalTab("mobile")}
+                        onClick={() => {
+                          sound.playClick();
+                          setModalTab("mobile");
+                        }}
                         className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "mobile" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
                         <Smartphone className="w-3.5 h-3.5" />
                         <span className="hidden sm:inline">{t.projects.modal.mobileTab}</span>
                       </button>
                       <button
-                        onClick={() => setModalTab("architecture")}
+                        onClick={() => {
+                          sound.playClick();
+                          setModalTab("architecture");
+                        }}
                         className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${modalTab === "architecture" ? "bg-cyan-400 text-slate-950 shadow-md" : "text-slate-400 hover:text-slate-200"}`}
                       >
                         <Layers className="w-3.5 h-3.5" />
@@ -654,6 +682,26 @@ export default function Projects() {
                           <RotateCw className="w-3 h-3" />
                         </button>
                       </div>
+
+                      {/* Copy Project Link Button */}
+                      <button
+                        onClick={handleCopyProjectLink}
+                        className="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 text-xs font-mono font-bold text-slate-300 hover:text-cyan-300 transition-colors flex items-center gap-1.5 cursor-pointer"
+                        title="Copy Project Link"
+                      >
+                        {copiedLink ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-400" />
+                            <span className="text-emerald-400 text-[11px]">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5 text-slate-400" />
+                            <span className="hidden sm:inline text-[11px]">Share</span>
+                          </>
+                        )}
+                      </button>
+
                       <a
                         href={selectedProject.liveLink}
                         target="_blank"
@@ -661,12 +709,12 @@ export default function Projects() {
                         className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 text-xs font-bold text-slate-200 hover:text-cyan-300 transition-colors hidden sm:flex items-center gap-1.5 cursor-pointer"
                       >
                         <span>{t.projects.modal.openWeb}</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
                       </a>
                       <button
-                        onClick={() => setSelectedProjectIndex(null)}
-                        className="w-8 h-8 rounded-xl bg-rose-500/10 hover:bg-rose-500 border border-rose-500/30 hover:border-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
-                        aria-label="Tutup Jendela"
+                        onClick={handleCloseModal}
+                        className="p-1.5 rounded-xl bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors cursor-pointer border border-slate-800"
+                        title="Close"
                       >
                         <X className="w-4 h-4" />
                       </button>

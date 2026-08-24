@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Search } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { sound } from "@/utils/sound";
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -97,6 +99,7 @@ export default function Navbar() {
   }, []);
 
   const scrollTo = (id: string) => {
+    sound.playClick();
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
@@ -104,6 +107,11 @@ export default function Navbar() {
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
+  };
+
+  const openSearch = () => {
+    sound.playModalOpen();
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }));
   };
 
   return (
@@ -118,13 +126,14 @@ export default function Navbar() {
         {/* Brand Logo */}
         <button
           onClick={() => scrollTo("hero")}
+          onMouseEnter={() => sound.playHover()}
           className="flex items-center pl-2.5 pr-2 py-1 text-cyan-400 font-black text-xs sm:text-sm tracking-wider border-r border-slate-800 mr-1 cursor-pointer transition-transform active:scale-95 flex-shrink-0 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none rounded-lg"
           aria-label={t.nav.backToTop}
         >
           2OB1T
         </button>
 
-        {/* Navigation Items (Stable Fixed Touch Targets on Mobile) */}
+        {/* Navigation Items */}
         <div className="flex items-center gap-1">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
@@ -133,6 +142,7 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
+                onMouseEnter={() => sound.playHover()}
                 className={`relative w-8 h-8 sm:w-9 sm:h-9 md:w-auto md:h-auto flex items-center justify-center gap-1.5 md:px-3 md:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-90 flex-shrink-0 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none ${
                   isActive
                     ? "text-slate-950 font-bold"
@@ -160,11 +170,26 @@ export default function Navbar() {
           })}
         </div>
 
+        {/* Quick Search Shortcut Trigger */}
+        <button
+          onClick={openSearch}
+          onMouseEnter={() => sound.playHover()}
+          className="p-2 rounded-full text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 transition-colors cursor-pointer flex items-center justify-center"
+          title="Search / Command Palette (Ctrl+K)"
+          aria-label="Open Command Palette"
+        >
+          <Search className="w-3.5 h-3.5" />
+        </button>
+
         {/* Language Switcher Segmented Control */}
-        <div className="pl-1.5 ml-1 border-l border-slate-800 flex items-center">
+        <div className="pl-1.5 ml-0.5 border-l border-slate-800 flex items-center">
           <div className="flex items-center p-0.5 rounded-full bg-slate-950 border border-slate-800 relative">
             <button
-              onClick={() => setLanguage("id")}
+              onClick={() => {
+                sound.playClick();
+                setLanguage("id");
+              }}
+              onMouseEnter={() => sound.playHover()}
               className={`relative px-2 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold transition-colors cursor-pointer z-10 ${
                 language === "id" ? "text-slate-950" : "text-slate-400 hover:text-slate-200"
               }`}
@@ -181,7 +206,11 @@ export default function Navbar() {
               ID
             </button>
             <button
-              onClick={() => setLanguage("en")}
+              onClick={() => {
+                sound.playClick();
+                setLanguage("en");
+              }}
+              onMouseEnter={() => sound.playHover()}
               className={`relative px-2 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold transition-colors cursor-pointer z-10 ${
                 language === "en" ? "text-slate-950" : "text-slate-400 hover:text-slate-200"
               }`}

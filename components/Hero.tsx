@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FolderGit2, Mail } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import TiltPhotoCard from "./TiltPhotoCard";
+import LiveStatus from "./LiveStatus";
 import { useLanguage } from "@/context/LanguageContext";
 
 // Inline SVG untuk Ikon Sosmed
@@ -267,6 +268,16 @@ export default function Hero() {
         </div>
 
       </div>
+
+      {/* Real-Time Telemetry & Availability Status Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-12 sm:mt-16 w-full"
+      >
+        <LiveStatus />
+      </motion.div>
     </section>
   );
 }
